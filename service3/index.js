@@ -35,10 +35,10 @@ app.use(zipkinMiddleware({ tracer }));
 
 // Example routes
 app.get('/some-route', (req, res) => {
-  res.send('Hello from traced route!');
+  res.send('Service 3...........');
 });
 
 // Start the server
-app.listen(3000, () => {
+app.listen(3002, () => {
   console.log('Server running on http://localhost:3000');
 });

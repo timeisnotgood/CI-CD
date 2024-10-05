@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  Dsa:
+    image: bhoopathi1/two:0.0.3
+    ports:
+      - 3000:3000
+    networks:
+      - back-tier
+  services2:
+    image: bhoopathi1/one:0.0.1
+    ports:
+      - 3001:3001
+    networks:
+      - back-tier
+  service3:
+    build:
+      context: ./service3
+      dockerfile: Dockerfile
+    image: bhoopathi1/three:0.0.1
+    ports:
+      - 3002:3002
+    networks:
+      - back-tier
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    ports:
+      - "9411:9411"
+    networks:
+      - back-tier
+
+networks:
+  front-tier: {}
+  back-tier: {}
