@@ -54,6 +54,9 @@ public class Linkedlist{
         return 0;
     }
 
+
+    //  Deleteion in linked list
+
     public static Node DeleteHead(Node head){
         if (head == null) return head;
         head = head.next;
@@ -73,11 +76,15 @@ public class Linkedlist{
         return head;
     }
 
-    public static Node anyPosition(Node head, int key){
+    public static Node DeleteanyValue(Node head, int key){
         Node temp = head;
 
         while (temp != null) {
             if (temp == null || temp.next == null) return head;
+            if (temp.data == key) {
+                head = head.next;
+                return head;
+            }
             if (temp.next.data == key){
                 temp.next = temp.next.next;
             }
@@ -86,6 +93,37 @@ public class Linkedlist{
 
         return head;
     }
+
+    public static Node DeleteanyPosition(Node head, int k){
+
+        if (head == null) return head;
+
+        Node temp = head;
+        Node prev = null;
+        
+        int cnt = 0;
+        while (temp != null) {
+            cnt ++;
+            if (k == 1 && cnt == 1) {
+                head = head.next;
+                return head;
+            }
+            if (cnt == k) {
+             prev.next = prev.next.next;   
+            }
+            prev = temp;
+            temp = temp.next;
+        }
+        return head;
+    }
+
+
+    //------------------------------------------------------------------
+
+
+
+    // Insertion in LiknedList
+
 
 
     public static void main(String[] args) {

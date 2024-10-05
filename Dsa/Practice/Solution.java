@@ -146,7 +146,7 @@ public class Solution {
         return head;
     }
 
-    public static Node anyPosition(Node head, int key){
+    public static Node anyvalue(Node head, int key){
         Node temp = head;
 
         while (temp != null) {
@@ -176,14 +176,54 @@ public class Solution {
         return head;
     }
 
+    public static Node anyPosition(Node head, int k){
+
+        if (head == null) return head;
+
+        Node temp = head;
+        Node prev = null;
+        
+        int cnt = 0;
+
+
+
+        while (temp != null) {
+            cnt ++;
+            if (k == 1 && cnt == 1) {
+                head = head.next;
+                return head;
+            }
+            if (cnt == k) {
+             prev.next = prev.next.next;   
+            }
+            prev = temp;
+            temp = temp.next;
+        }
+        return head;
+    }
+
+
+    public static Node insertHead(Node head, int val){
+        if (head == null)  return head;
+
+        Node temp = head;
+        Node prev = new Node(val);
+        head = prev;
+        head.next = temp;
+        // while (temp != null) {
+        //     prev = prev.next;
+        // }
+
+        return head;
+    }
+
     public static void main(String[] args) {
         
         int[] arr = {3,5,1,7,2};
 
         Node head = conver(arr);
-        // head = anyPosition(head, 3);
-        // head = anyPosition(head, 5);
-        // head = anyPosition(head, 7);
+        head = insertHead(head, 0);
+        head = anyvalue(head, 5);
         Node temp = head;
 
         while (temp != null) {
