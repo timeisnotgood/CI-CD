@@ -122,9 +122,78 @@ public class Linkedlist{
 
 
 
-    // Insertion in LiknedList
+    // Insertion in LinkedList---------------------------
+
+    // Insertion in Head
+
+    public static Node insertHead(Node head, int val){
+        if (head == null) return head;
+        return new Node(val, head);
+    }
+
+    // Insertion in Tail
+
+    public static Node InsertTail(Node head, int val){
+        Node temp = head;
+
+        while (temp.next != null) {
+            if (temp.next.next == null) {
+                Node newval = new Node(val);
+                temp.next.next = newval;
+                return head;
+            }
+            temp = temp.next;
+        }
+        return head;
+    }
+
+    // Insert in any key
+
+    public static Node insertAnyKey(Node head, int key, int val){
+        if (head == null)  return head;
+
+        Node temp = head;
+        int cnt = 0;
+
+        while (temp != null) {
+            cnt ++;
+            if (cnt == key-1) {
+                Node newNode = new Node(val, temp.next);
+                temp.next = newNode;
+                break;
+            }
+            temp = temp.next;
+        }
+
+        return head;
+    }
+
+    // Insert in any key
+
+    public static Node insertAnyValue(Node head, int val, int el){
+        if (head == null) {
+            return head;
+        }
+
+        Node temp = head;
+
+        while (temp != null) {
+            
+            if (temp.next.data == val) {
+                Node newNode = new Node(el, temp.next);
+                temp.next = newNode;
+                break;
+            }
+            temp = temp.next;
+        }
+
+        return head;
+    }
+
+    //----------------------------------------------------
 
 
+    // Main Function 
 
     public static void main(String[] args) {
         int[] arr = {3,7,1,8};
