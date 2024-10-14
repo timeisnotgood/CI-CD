@@ -82,34 +82,31 @@ public class DoubleLinkedList {
     // Delete Key
 
     public static Node DeleteAnyKey(Node head, int k){
-        if (head == null) return head;
 
-        if (k == 1) {
-            Node prev = head;
-            Node nextNode = head.next;
-            nextNode.prev = null;
-            prev.next = null;
-            return nextNode;
-        }
-
-        Node temp = head;
+        Node kNode = head;
         int cnt = 0;
-        while (temp != null) {
+
+        while (kNode != null) {
             cnt ++;
-            if (cnt == k-1) {
-                if (temp.next.next == null) {
-                    Node prev = temp;
-                    Node nex = temp.
-                    prev.next = null;
-                    break;
-                }
-                temp.next = temp.next.next;
-                temp.next.next.prev = temp;
-                break;
-            }
-            temp = temp.next;
+            if (cnt == k) break;
+            kNode = kNode.next;
         }
 
+        Node prev = kNode.prev;
+        Node next = kNode.next;
+
+        if (prev == null && next == null) {
+            return null;
+        }else if (prev == null) {
+            return DeleteHead(head);
+        }else if (next == null) {
+            return DeleteTail(head);
+        }
+
+        prev.next = next;
+        next.prev = prev;
+        kNode.prev = null;
+        kNode.next = null;
         return head;
     }
 
