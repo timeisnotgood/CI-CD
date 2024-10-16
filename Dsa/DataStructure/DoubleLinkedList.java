@@ -154,11 +154,49 @@ public class DoubleLinkedList {
         }
         return head;
     }
+
+    // Insertion Before Head
+
+    public static Node InsertBHead(Node head, int val){
+        Node prev = head;
+        Node next = head.next;
+        Node newNode = new Node(val);
+
+        prev.next = newNode;
+        newNode.prev = prev;
+
+        next.prev = newNode;
+        newNode.next = next;
+
+        return head;
+    }
+
+    // Insertion Before Tail
+
+    public static Node InsertBTail(Node head, int val){
+        Node newNode = new Node(val);
+        Node temp = head;
+
+        while (temp.next != null) {
+            temp = temp.next;
+        }
+
+        Node prev = temp.prev;
+        Node next = temp;
+
+        prev.next = newNode;
+        newNode.prev = prev;
+
+        next.prev = newNode;
+        newNode.next = next;
+
+        return head;
+    }
     
     public static void main(String[] args) {
         int[] arr = {3,6,2,7,1};
         Node head = convertArrtoDll(arr);
-        head = InsertTail(head, 9);
+        head = InsertBTail(head, 9);
 
         // Iteration
         print(head);
