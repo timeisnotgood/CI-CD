@@ -110,12 +110,28 @@ public class DoubleLinkedList {
         return head;
     }
 
+    // Delete Node
+
+    public static void DeleteNode(Node temp){
+        Node prev = temp.prev;
+        Node next = temp.next;
+        if (next == null) {
+            prev.next = null;
+            temp.prev = null;
+        }
+
+        prev.next = next;
+        next.prev = prev;
+        temp.prev = null;
+        temp.next = null;
+    }
+
     //------------------------------------------------------------------
     
     public static void main(String[] args) {
         int[] arr = {3,6,2,7,1};
         Node head = convertArrtoDll(arr);
-        head = DeleteAnyKey(head, 4);
+        DeleteNode(head.next.next);
 
         // Iteration
         print(head);
