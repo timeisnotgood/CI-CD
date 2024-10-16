@@ -127,11 +127,38 @@ public class DoubleLinkedList {
     }
 
     //------------------------------------------------------------------
+
+    // Insertion Head
+
+    public static Node InsertHead(Node head, int val){
+
+        Node newNode = new Node(val, head, null);
+        head.prev = newNode;
+        return newNode;
+    }
+
+    // Insertion Tail
+
+    public static Node InsertTail(Node head, int val){
+
+        Node newNode = new Node(val);
+        Node temp = head;
+
+        while (temp != null) {
+            if (temp.next == null) {
+                temp.next = newNode;
+                newNode.prev = temp;
+                return head;
+            }
+            temp = temp.next;
+        }
+        return head;
+    }
     
     public static void main(String[] args) {
         int[] arr = {3,6,2,7,1};
         Node head = convertArrtoDll(arr);
-        DeleteNode(head.next.next);
+        head = InsertTail(head, 9);
 
         // Iteration
         print(head);
