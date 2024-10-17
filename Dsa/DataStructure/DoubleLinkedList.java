@@ -192,11 +192,74 @@ public class DoubleLinkedList {
 
         return head;
     }
+
+    // Insert Before k Th element
+
+    public static Node InsertBkEle(Node head, int k, int val){
+
+        if (k == 1) {
+            return InsertBHead(head, val);
+        }
+
+        Node temp = head;
+        int cnt = 0;
+
+        while (temp != null) {
+            cnt++;
+            if (cnt == k) {
+                break;
+            }
+            temp = temp.next;
+        }
+
+        Node prev = temp.prev;
+
+        Node newNode = new Node(val);
+
+        prev.next = newNode;
+        newNode.prev = prev;
+
+        newNode.next = temp;
+        temp.prev = newNode;
+
+        return head;
+    }
+
+        // Insert Before Node element
+
+        public static Node InsertBNodeEle(Node head, int k, int val){
+    
+            Node temp = head;
+    
+            while (temp != null) {
+                if (temp.data == k) {
+                    break;
+                }
+                temp = temp.next;
+            }
+    
+            if (temp.prev == null) {
+                return InsertBHead(head, val);
+            }
+            Node prev = temp.prev;
+    
+            Node newNode = new Node(val);
+    
+            prev.next = newNode;
+            newNode.prev = prev;
+    
+            newNode.next = temp;
+            temp.prev = newNode;
+    
+            return head;
+        }
+
+
     
     public static void main(String[] args) {
         int[] arr = {3,6,2,7,1};
         Node head = convertArrtoDll(arr);
-        head = InsertBTail(head, 9);
+        head = InsertBNodeEle(head,1, 9);
 
         // Iteration
         print(head);
