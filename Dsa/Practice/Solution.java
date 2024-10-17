@@ -85,6 +85,10 @@
 
 package Practice;
 
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Map;
+
 class Node{
     int num;
     Node next;
@@ -274,19 +278,69 @@ public class Solution {
     //----------------------------------------------------
 
 
+    public static String isSubset( int a1[], int a2[], int n, int m) {
+        
+        Hashtable<Integer, Integer> mainArr = new Hashtable<Integer, Integer>();
+    
+            for (int i = 0; i < n; i++) {
+                mainArr.put(i, a1[i]);
+            }
+    
+            Hashtable<Integer, Integer> two = new Hashtable<Integer, Integer>();
+    
+            for (int i = 0; i < m; i++) {
+                if (two.containsKey(a2[i])) {
+                    two.put(a2[i], two.get(a2[i]) + 1);
+                }else{
+                    two.put(a2[i], 1);
+                }
+
+                if (!mainArr.containsValue(a2[i])) {
+                    return "No";
+                }
+            }
+            return "Yes";
+    }
+
+
     // Main function--------------------------------------
 
     public static void main(String[] args) {
         
-        int[] arr = {3,5,1,7,2};
+        // int[] arr = {3,5,1,7,2};
 
-        Node head = conver(arr);
-        head = insertAnyValue(head, 1, 9);
-        Node temp = head;
+        // Node head = conver(arr);
+        // head = insertAnyValue(head, 1, 9);
+        // Node temp = head;
 
-        while (temp != null) {
-            System.out.println("--> " + temp.num);
-            temp = temp.next;
-        }
+        // while (temp != null) {
+        //     System.out.println("--> " + temp.num);
+        //     temp = temp.next;
+        // }
+
+        int a1[] = {11, 7, 1, 13, 21, 3, 7, 3};
+        int a2[] = {11, 3, 7, 1, 7};
+        System.out.println(
+            isSubset(a1, a2, a1.length, a2.length)
+        );
     }
+
+    // public static void main(String[] args) {
+    //     int arr[] = {3,5,7,2,3,5};
+
+    //     HashMap<Integer, Integer> val = new HashMap<Integer, Integer>();
+
+    //     for (int i = 0; i < arr.length; i++) {
+    //          if (val.containsKey(arr[i])) {
+    //             System.out.println("yes " + arr[i]);
+    //             val.put(arr[i], val.get(arr[i]) + 1);
+    //         } else {
+    //             val.put(arr[i], 1);
+    //         }
+    //     }
+
+    //     for (Map.Entry<Integer, Integer> entry : val.entrySet()) {
+    //         System.out.println(entry.getKey() + ": " + entry.getValue());
+    //     }
+    // }
 }
