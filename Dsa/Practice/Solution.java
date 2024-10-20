@@ -305,6 +305,22 @@ public class Solution {
 
     // Main function--------------------------------------
 
+    public static int peakElement(int[] arr,int n)
+    {
+        int cnt = 0;
+        for (int i = 0; i < arr.length; i++) {
+            cnt = cnt+1;
+
+            if (cnt == n) {
+                System.out.println(i-1 + " " +i);
+                if (arr[i-1] < arr[i]) {
+                    return 1;
+                }
+            }
+        }
+        return 0;
+    }
+
     public static void main(String[] args) {
         
         // int[] arr = {3,5,1,7,2};
@@ -318,11 +334,17 @@ public class Solution {
         //     temp = temp.next;
         // }
 
-        int a1[] = {11, 7, 1, 13, 21, 3, 7, 3};
-        int a2[] = {11, 3, 7, 1, 7};
+        // int a1[] = {11, 7, 1, 13, 21, 3, 7, 3};
+        int a2[] = {1,2,3};
+        // System.out.println(
+        //     isSubset(a1, a2, a1.length, a2.length)
+        // );
+
         System.out.println(
-            isSubset(a1, a2, a1.length, a2.length)
+            peakElement(a2, 3)
+
         );
+
     }
 
     // public static void main(String[] args) {
