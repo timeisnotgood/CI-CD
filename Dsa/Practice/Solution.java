@@ -104,6 +104,93 @@ class Node{
     }
 }
 
+/**
+ * InnerSolution
+ */
+class Stack {
+    int top = -1;
+    int[] arr = new int[10];
+
+    // Insert in Stach
+
+    void push(int x){
+        if (top == 10) System.out.println("memory is full");
+
+        top = top+1;
+        arr[top] = x;
+    }
+
+    int top(){
+        return arr[top];
+    }
+
+    void pop(){
+        if (top == -1){
+            System.out.println("no value in stack");
+            return;
+        }
+        top = top-1;
+    }
+
+    int size(){
+        if (top == -1) return 0;
+
+        return top + 1;
+    }
+}
+
+/**
+ * Queue
+ */
+class Queue {
+
+    int currentsiz = -1;
+    int arr[] = new int[10];
+    int start = -1;
+    int end = -1;
+    int size = 10;
+
+    void push(int x){
+        currentsiz = currentsiz +1;
+        if (currentsiz == size) {
+            System.out.println("Memory out of size");
+            return;
+        }else if (currentsiz == 0) {
+            start = 0; end = 0;
+
+        }else{
+            end = (end+1)% size;
+        }
+
+        arr[end] = x;
+    }
+
+    void pop(){
+        if (currentsiz == -1) {
+            System.out.println("no elements in memory to delete");
+            return;
+        }
+
+        int element = arr[start];
+
+        if (currentsiz == 0) {
+            currentsiz = -1; start = -1; end =-1;
+        }
+
+        start = start+1;
+        currentsiz = currentsiz-1;
+    }
+
+    int top(){
+        return arr[start];
+    }
+
+    int size(){
+        return currentsiz +1;
+    }
+    
+}
+
 public class Solution {
 
     
@@ -323,46 +410,20 @@ public class Solution {
 
     public static void main(String[] args) {
         
-        // int[] arr = {3,5,1,7,2};
+        Queue stk = new Queue();
 
-        // Node head = conver(arr);
-        // head = insertAnyValue(head, 1, 9);
-        // Node temp = head;
+        stk.push(5);
+        stk.push(8);
+        stk.push(2);
+        stk.push(7);
 
-        // while (temp != null) {
-        //     System.out.println("--> " + temp.num);
-        //     temp = temp.next;
-        // }
+        stk.pop();
+        stk.pop();
+        stk.push(1);
+        stk.pop();
+        stk.pop();
 
-        // int a1[] = {11, 7, 1, 13, 21, 3, 7, 3};
-        int a2[] = {1,2,3};
-        // System.out.println(
-        //     isSubset(a1, a2, a1.length, a2.length)
-        // );
-
-        System.out.println(
-            peakElement(a2, 3)
-
-        );
-
+        
+        System.out.println(stk.top() + "-----" + stk.size());
     }
-
-    // public static void main(String[] args) {
-    //     int arr[] = {3,5,7,2,3,5};
-
-    //     HashMap<Integer, Integer> val = new HashMap<Integer, Integer>();
-
-    //     for (int i = 0; i < arr.length; i++) {
-    //          if (val.containsKey(arr[i])) {
-    //             System.out.println("yes " + arr[i]);
-    //             val.put(arr[i], val.get(arr[i]) + 1);
-    //         } else {
-    //             val.put(arr[i], 1);
-    //         }
-    //     }
-
-    //     for (Map.Entry<Integer, Integer> entry : val.entrySet()) {
-    //         System.out.println(entry.getKey() + ": " + entry.getValue());
-    //     }
-    // }
 }

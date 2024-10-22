@@ -1,54 +1,90 @@
 package DataStructure;
 
-// /**
-//  * Stack
-//  */
-// class Stack {
+/**
+ * InnerSolution
+ */
+class Stack {
+    int top = -1;
+    int[] arr = new int[10];
 
-//     int top = -1;
-//     int[] val = new int[10];
+    // Insert in Stach
 
-//     void push(int x){
-//         if (top >= 10) return;
+    void push(int x){
+        if (top == 10) System.out.println("memory is full");
 
-//         top = top+1;
-//         val[top] = x; 
-//     }
+        top = top+1;
+        arr[top] = x;
+    }
 
-//     int top(){
-//         if (top == -1) return 0;
+    int top(){
+        return arr[top];
+    }
 
-//         return val[top];
-//     }
+    void pop(){
+        if (top == -1){
+            System.out.println("no value in stack");
+            return;
+        }
+        top = top-1;
+    }
 
-//     void pop(){
-//         if (top == -1) return ;
+    int size(){
+        if (top == -1) return 0;
 
-//         top = top-1;
-//     }
-// }
+        return top + 1;
+    }
+}
 
 /**
  * Queue
  */
 class Queue {
-    int current = -1;
-    int[] arr = new int[10];
+
+    int currentsiz = -1;
+    int arr[] = new int[10];
     int start = -1;
     int end = -1;
+    int size = 10;
 
     void push(int x){
-        this.current = this.current+1;
-        if (this.start == -1) {
-            this.start = this.start+1;
+        currentsiz = currentsiz +1;
+        if (currentsiz == size) {
+            System.out.println("Memory out of size");
+            return;
+        }else if (currentsiz == 0) {
+            start = 0; end = 0;
+
+        }else{
+            end = (end+1)% size;
         }
-        this.end = this.end+1;
-        this.arr[this.current] = x;
+
+        arr[end] = x;
+    }
+
+    void pop(){
+        if (currentsiz == -1) {
+            System.out.println("no elements in memory to delete");
+            return;
+        }
+
+        int element = arr[start];
+
+        if (currentsiz == 0) {
+            currentsiz = -1; start = -1; end =-1;
+        }
+
+        start = start+1;
+        currentsiz = currentsiz-1;
     }
 
     int top(){
-        return this.arr[this.start];
+        return arr[start];
     }
+
+    int size(){
+        return currentsiz +1;
+    }
+    
 }
 
 public class StackNQueue {
