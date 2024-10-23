@@ -1,6 +1,46 @@
 package DataStructure;
 
 /**
+ * InnerStackNQueue
+ */
+class LinkedLst {
+    int data;
+    LinkedLst next;
+
+    LinkedLst(int dat){
+        this.data = dat;
+        this.next = null;
+    }
+
+    LinkedLst(int dat, LinkedLst nxt){
+        this.data = dat;
+        this.next = nxt;
+    }
+
+
+}
+
+/**
+ * InnerStackNQueue
+ */
+class InnerStackNQueue {
+    LinkedLst top;
+    int size = 0;
+
+    void push(int x){
+        LinkedLst newnode = new LinkedLst(x);
+        newnode.next = top;
+        top = newnode;
+        size = size +1;
+    }
+
+    int top(){
+        return top.data;
+    }
+    
+}
+
+/**
  * InnerSolution
  */
 class Stack {
@@ -89,7 +129,7 @@ class Queue {
 
 public class StackNQueue {
     public static void main(String[] args) {
-        Queue arr = new Queue();
+        InnerStackNQueue arr = new InnerStackNQueue();
 
         arr.push(5);
         arr.push(4);
