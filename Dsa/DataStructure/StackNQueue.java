@@ -1,7 +1,7 @@
 package DataStructure;
 
 /**
- * InnerStackNQueue
+ * LinkedList
  */
 class LinkedLst {
     int data;
@@ -20,28 +20,9 @@ class LinkedLst {
 
 }
 
-/**
- * InnerStackNQueue
- */
-class InnerStackNQueue {
-    LinkedLst top;
-    int size = 0;
-
-    void push(int x){
-        LinkedLst newnode = new LinkedLst(x);
-        newnode.next = top;
-        top = newnode;
-        size = size +1;
-    }
-
-    int top(){
-        return top.data;
-    }
-    
-}
 
 /**
- * InnerSolution
+ * Stack
  */
 class Stack {
     int top = -1;
@@ -127,9 +108,110 @@ class Queue {
     
 }
 
+/**
+ * StackInLL
+**/
+class StackInLL {
+    LinkedLst top;
+    int size = 0;
+
+    void push(int x){
+        LinkedLst newnode = new LinkedLst(x);
+        newnode.next = top;
+        top = newnode;
+        size = size +1;
+    }
+
+    int top(){
+        return top.data;
+    }
+
+    void pop(){
+        if (top == null) {
+            System.out.println("No element found");
+            return;
+        }
+        LinkedLst temp = this.top;
+        this.top = this.top.next;
+        this.size = this.size -1;
+    }
+
+    int size(){
+        return size;
+    }
+    
+}
+
+
+/**
+ * QueueInLL
+ */
+class QueueInLL {
+
+    LinkedLst start, end;
+    int size = 0;
+
+    void push(int x){
+        LinkedLst newnOde = new LinkedLst(x);
+        if (this.start == null) {
+            start = end = newnOde;
+        }
+        end.next = newnOde;
+        end = newnOde;
+        this.size = this.size+1;
+    }
+
+    int top(){
+        return start.data;
+    }
+
+    void pop(){
+        start = start.next;
+        this.size = this.size -1;
+    }
+    int size(){
+        return size;
+    }
+}
+
+class St{
+    Queue q;
+
+    void push(int x){
+        int s = q.size;
+        q.push(x);
+
+        for (int i = 1; i < s; i++) {
+            q.push(q.top());
+            q.pop();
+        }
+    }
+
+    void pop(){
+        q.pop();
+    }
+
+    int top(){
+        return q.top()
+    }
+
+    int size(){
+        return q.size();
+    }
+}
+
+class qu{
+    Stack st;
+
+    push(x){
+        
+    }
+}
+
+
 public class StackNQueue {
     public static void main(String[] args) {
-        InnerStackNQueue arr = new InnerStackNQueue();
+        QueueInLL arr = new QueueInLL();
 
         arr.push(5);
         arr.push(4);
@@ -137,6 +219,8 @@ public class StackNQueue {
         arr.push(2);
         arr.push(1);
 
-        System.out.println("sdf -->  "+ arr.top());
+        // arr.pop();
+
+        System.out.println("sdf -->  "+ arr.size());
     }
 }
