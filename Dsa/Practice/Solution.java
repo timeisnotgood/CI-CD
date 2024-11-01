@@ -191,6 +191,45 @@ class Queue {
     
 }
 
+
+/**
+ * dinner
+ */
+class dinner {
+    int current = -1;
+    int start = -1;
+    int end = -1;
+    int[] arr = new int[10];
+    int size = arr.length;
+
+    void push(int x){
+        current = current + 1;
+        if (current+1 > arr.length) {
+            System.out.println("Memory full");
+            return;
+        }
+
+        if (current == 0) {
+            start = 0; end =0;
+        }else{
+            end = (end +1) % size;
+        }
+        arr[end] = x;
+    }
+
+    int top(){
+        return arr[start];
+    }
+
+    int size(){
+        return current+1;
+    }
+
+    void pop(){
+        start = start + 1;
+    }
+}
+
 public class Solution {
 
     
@@ -409,21 +448,12 @@ public class Solution {
     }
 
     public static void main(String[] args) {
-        
-        Queue stk = new Queue();
 
-        stk.push(5);
-        stk.push(8);
+        dinner stk = new dinner();
+        stk.push(9);
         stk.push(2);
-        stk.push(7);
-
-        stk.pop();
-        stk.pop();
-        stk.push(1);
-        stk.pop();
-        stk.pop();
-
-        
-        System.out.println(stk.top() + "-----" + stk.size());
+        stk.push(3);
+        stk.push(4);
+        System.out.println(stk.top());
     }
 }
