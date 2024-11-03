@@ -200,13 +200,13 @@ class St{
     }
 }
 
-class qu{
-    Stack st;
+// class qu{
+//     Stack st;
 
-    push(x){
+//     push(x){
         
-    }
-}
+//     }
+// }
 
 
 public class StackNQueue {
