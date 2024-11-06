@@ -447,13 +447,23 @@ public class Solution {
         return 0;
     }
 
-    public static void main(String[] args) {
+    public static int adder(int[] arr, int n){
+        if (n == 1) return arr[0];
+        return Math.min(arr[n-1], adder(arr, n-1));
+    }
 
-        dinner stk = new dinner();
-        stk.push(9);
-        stk.push(2);
-        stk.push(3);
-        stk.push(4);
-        System.out.println(stk.top());
+    public static void recursion(int x, int n){
+       if (x < 1) return;
+
+       System.out.println(x);
+       recursion(x -1, n);
+    }
+
+    public static void main(String[] args) {
+        // int[] arr = {3,6,2,7,1,9,7};
+        // System.out.println(
+        //     adder(arr, arr.length)
+        // );
+        recursion(20, 20);
     }
 }
