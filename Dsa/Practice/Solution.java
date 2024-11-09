@@ -452,18 +452,21 @@ public class Solution {
         return Math.min(arr[n-1], adder(arr, n-1));
     }
 
-    public static void recursion(int x, int n){
-       if (x < 1) return;
+    public static int recursion(int x){
+      if (x < 10) return x;
+      return x % 10 + recursion(x / 10);
+    }
 
-       System.out.println(x);
-       recursion(x -1, n);
+    public static int powerCcal(int x, int n){
+        if (n == 1) return x;
+        return x*powerCcal(x, n-1);
     }
 
     public static void main(String[] args) {
         // int[] arr = {3,6,2,7,1,9,7};
-        // System.out.println(
-        //     adder(arr, arr.length)
-        // );
-        recursion(20, 20);
+        System.out.println(
+            // adder(arr, arr.length)
+            powerCcal(2,10)
+        );
     }
 }
