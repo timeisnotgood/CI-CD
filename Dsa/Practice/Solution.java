@@ -85,6 +85,7 @@
 
 package Practice;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
@@ -102,6 +103,17 @@ class Node{
         this.num = num;
         this.next = null;
     }
+}
+
+class TreeNode {
+    int val;
+    TreeNode left, right;
+
+    TreeNode(int value){
+        val = this.val;
+        this.left = this.right = null;
+    }
+    
 }
 
 /**
@@ -462,11 +474,41 @@ public class Solution {
         return x*powerCcal(x, n-1);
     }
 
+    public static void gfSeries(int x){
+        System.out.println("fdfg--->" + x);
+        if (x == 0) return;
+        gfSeries((int)(Math.pow(x-2, 2)-(x-1)));
+    }
+
+    public static int recession(TreeNode number){
+        if (number.val % 2 == 0) {
+            if (number.left != null) {
+                recession(number);
+                return number.val;
+            }else if (number.right != null) {
+                recession(number);
+                return number.val;
+            }
+            return number.val;
+        }
+        return 0;
+    }
+
+    public static ArrayList<Integer> SpiralOrderTraversal(TreeNode treee){
+
+        ArrayList result = new ArrayList<>();
+        result.add(recession(treee));
+        return result;
+    }
+
+
     public static void main(String[] args) {
-        // int[] arr = {3,6,2,7,1,9,7};
+        TreeNode treee = new TreeNode(1);
+        treee.left = new TreeNode(2);
+        treee.right = new TreeNode(3);
+
         System.out.println(
-            // adder(arr, arr.length)
-            powerCcal(2,10)
+            SpiralOrderTraversal(treee)
         );
     }
 }
