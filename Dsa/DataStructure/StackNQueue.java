@@ -209,16 +209,25 @@ class St{
 
 public class StackNQueue {
     public static void main(String[] args) {
-        QueueInLL arr = new QueueInLL();
+        // QueueInLL arr = new QueueInLL();
 
-        arr.push(5);
-        arr.push(4);
-        arr.push(3);
-        arr.push(2);
-        arr.push(1);
+        // arr.push(5);
+        // arr.push(4);
+        // arr.push(3);
+        // arr.push(2);
+        // arr.push(1);
 
-        // arr.pop();
+        // // arr.pop();
 
-        System.out.println("sdf -->  "+ arr.size());
+        // System.out.println("sdf -->  "+ arr.size());
+
+        Stack st = new Stack();
+        int arr[] = {4,7,2,9,1,0,4};
+
+        for (int i = 0; i < arr.length; i++) {
+            st.push(arr[i]);
+        }
+
+        System.out.println("here" + st.top());
     }
 }
