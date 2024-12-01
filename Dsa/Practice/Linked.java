@@ -37,6 +37,27 @@ class LinkedList{
             temp = temp.next;
         }
     }
+
+    Node insertVal(Node root, int data, int val){
+        if (root == null) {
+            return root;
+        }
+
+        Node temp = root;
+
+        while (temp != null) {
+            Node newVal = new Node(data);
+            if (temp.data == val ) {
+                Node prev = temp;
+                Node next = temp.next;
+                prev.next = newVal;
+                newVal.next = next;
+            }
+            temp = temp.next;
+        }
+
+        return root;
+    }
 }
 
 public class Linked {
@@ -46,7 +67,7 @@ public class Linked {
         Node head = list.convertArrtoLL(arr);
 
         System.out.println("Print List"+ head);
-
+        head = list.insertVal(head, 4, 3);
         list.getList(head);
     }
 }

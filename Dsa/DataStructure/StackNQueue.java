@@ -16,8 +16,6 @@ class LinkedLst {
         this.data = dat;
         this.next = nxt;
     }
-
-
 }
 
 
@@ -192,7 +190,7 @@ class St{
     }
 
     int top(){
-        return q.top()
+        return q.top();
     }
 
     int size(){
