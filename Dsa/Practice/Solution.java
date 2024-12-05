@@ -85,6 +85,7 @@
 
 package Practice;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
@@ -462,11 +463,22 @@ public class Solution {
         return x*powerCcal(x, n-1);
     }
 
+    public static int series(int N){
+        if(N == 0) return 0;
+        if(N == 1) return 1;
+
+        return (int)Math.pow( N-2, 2) - series(N -1);
+    }
+
+    // public static ArrayList<Integer> recamanSequence(int n){
+    //     if (n == 0) return 0;
+    // }
+
     public static void main(String[] args) {
-        // int[] arr = {3,6,2,7,1,9,7};
-        System.out.println(
-            // adder(arr, arr.length)
-            powerCcal(2,10)
-        );
+       int n = 5;
+        // ArrayList<Integer> result = seq(n);
+        
+        // Print the result
+        // System.out.println(result);
     }
 }
