@@ -105,6 +105,17 @@ class Node{
     }
 }
 
+class TreeNode {
+    int val;
+    TreeNode left, right;
+
+    TreeNode(int value){
+        val = this.val;
+        this.left = this.right = null;
+    }
+    
+}
+
 /**
  * InnerSolution
  */
@@ -463,22 +474,41 @@ public class Solution {
         return x*powerCcal(x, n-1);
     }
 
-    public static int series(int N){
-        if(N == 0) return 0;
-        if(N == 1) return 1;
-
-        return (int)Math.pow( N-2, 2) - series(N -1);
+    public static void gfSeries(int x){
+        System.out.println("fdfg--->" + x);
+        if (x == 0) return;
+        gfSeries((int)(Math.pow(x-2, 2)-(x-1)));
     }
 
-    // public static ArrayList<Integer> recamanSequence(int n){
-    //     if (n == 0) return 0;
-    // }
+    public static int recession(TreeNode number){
+        if (number.val % 2 == 0) {
+            if (number.left != null) {
+                recession(number);
+                return number.val;
+            }else if (number.right != null) {
+                recession(number);
+                return number.val;
+            }
+            return number.val;
+        }
+        return 0;
+    }
+
+    public static ArrayList<Integer> SpiralOrderTraversal(TreeNode treee){
+
+        ArrayList result = new ArrayList<>();
+        result.add(recession(treee));
+        return result;
+    }
+
 
     public static void main(String[] args) {
-       int n = 5;
-        // ArrayList<Integer> result = seq(n);
-        
-        // Print the result
-        // System.out.println(result);
+        TreeNode treee = new TreeNode(1);
+        treee.left = new TreeNode(2);
+        treee.right = new TreeNode(3);
+
+        System.out.println(
+            SpiralOrderTraversal(treee)
+        );
     }
 }
