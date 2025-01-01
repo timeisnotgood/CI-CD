@@ -1,82 +1,64 @@
 package Practice;
 
+import java.util.LinkedList;
+
 public class Solution {
 
-    static class Tree {
-        int data;
-        Tree left, right;
-
-        Tree(int data){
-            this.data = data;
-            this.left = this.right = null;
-        }
-    }
-
-    Tree root;
-
-    Solution(){
-        this.root = null;
-    }
-
-    void insert(int val){
-        root = insertRec(root, val);
-    }
-
-    Tree insertRec(Tree root, int val){
-        if (root == null) {
-            root = new Tree(val);
-            return root;
+    static class HashTable<K, V> {
+        class Entry<K, V> {
+            K key;
+            V value;
+            Entry(K key, V value){
+                this.key = key;
+                this.value = value;
+            }
         }
 
-        if (val < root.data) {
-            root.left = insertRec(root.left, val);
-        }else if (val > root.data) {
-            root.right = insertRec(root.right, val);
+        LinkedList<Entry<K,V>>[] table;
+        int cap;
+
+        HashTable(int capacity){
+            this.cap = capacity;
+            this.table = new LinkedList[cap];
+
+            for (int i = 0; i < cap; i++) {
+                table[i] = new LinkedList<>();
+            }
         }
 
-        return root;
-    }
-
-    void preOrderTraversal(Tree root){
-        if (root != null) {
-            System.out.println(root.data);
-            preOrderTraversal(root.left);
-            preOrderTraversal(root.right);
+        int getHash(K key){
+            return Math.abs(key.hashCode()) % cap;
         }
-    }
 
-    void inOrderTraversal(Tree root){
-        if (root != null) {
-            preOrderTraversal(root.left);
-            System.out.println(root.data);
-            preOrderTraversal(root.right);
+        void push(K key, V value){
+            int index = getHash(key);
+            for (Entry<K,V> linkedList : table[index]) {
+                if (linkedList.key.equals(key)) {
+                    linkedList.value = value;
+                }
+            }
+            table[index].add(new Entry(key, value));
         }
-    }
 
-    Boolean search(Tree root, int val ){
-        if (root == null) {
-            return false;
-        }else if (root.data == val) {
-            return true;
+        public V get(K key){
+            int index = getHash(key);
+            for (Entry<K,V> list : table[index]) {
+                if (list.key.equals(key)) {
+                    return list.value;
+                }
+            }
+            return null;
         }
-        
-        return val < root.data ? 
-        search(root.left, val) : search(root.right, val);
-    }
 
+
+
+    }
     public static void main(String[] args) {
+        HashTable object = new HashTable<>(5);
 
-        Solution bineTree = new Solution();
+        object.push("1", 1);
 
-        bineTree.insert(1);
-        bineTree.insert(2);
-        bineTree.insert(3);
-        bineTree.insert(4);
+        System.out.println("--->  " + object.get("1"));
 
-        System.out.println("Traversal ---->");
-        bineTree.preOrderTraversal(bineTree.root);
-
-        System.out.println("Search ---> ");
-        System.out.println("Key " + 3 + "--> " + bineTree.search(bineTree.root, 2));
-    }
+    }   
 }
