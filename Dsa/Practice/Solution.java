@@ -12,6 +12,11 @@ public class Solution {
                 this.key = key;
                 this.value = value;
             }
+
+            @Override
+            public String toString() {
+                return key + "=" + value;
+            }
         }
 
         LinkedList<Entry<K,V>>[] table;
@@ -51,6 +56,13 @@ public class Solution {
         }
 
 
+        public void entireVal(){
+            for (int i = 0; i < cap; i++) {
+                System.out.println("Bucket " + i + ": " + table[i]);
+            }
+        }
+
+
 
     }
     public static void main(String[] args) {
@@ -58,7 +70,11 @@ public class Solution {
 
         object.push("1", 1);
 
-        System.out.println("--->  " + object.get("1"));
+        object.push("2", 2);
+
+        object.entireVal();
+
+        // System.out.println("--->  " + object.get("2"));
 
     }   
 }
