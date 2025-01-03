@@ -54,16 +54,6 @@ public class Solution {
             }
             return null;
         }
-
-
-        public void entireVal(){
-            for (int i = 0; i < cap; i++) {
-                System.out.println("Bucket " + i + ": " + table[i]);
-            }
-        }
-
-
-
     }
     public static void main(String[] args) {
         HashTable object = new HashTable<>(5);
@@ -72,9 +62,7 @@ public class Solution {
 
         object.push("2", 2);
 
-        object.entireVal();
-
-        // System.out.println("--->  " + object.get("2"));
+        System.out.println("--->  " + object.get("2"));
 
     }   
 }
