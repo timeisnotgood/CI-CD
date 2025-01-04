@@ -40,6 +40,7 @@ public class Solution {
             for (Entry<K,V> linkedList : table[index]) {
                 if (linkedList.key.equals(key)) {
                     linkedList.value = value;
+                    return;
                 }
             }
             table[index].add(new Entry(key, value));
@@ -54,15 +55,34 @@ public class Solution {
             }
             return null;
         }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            sb.append("{");
+            boolean first = true;
+            for (LinkedList<Entry<K, V>> bucket : table) {
+                for (Entry<K, V> entry : bucket) {
+                    if (!first) {
+                        sb.append(", ");
+                    }
+                    sb.append(entry.toString());
+                    first = false;
+                }
+            }
+            sb.append("}");
+            return sb.toString();
+        }
     }
     public static void main(String[] args) {
-        HashTable object = new HashTable<>(5);
 
-        object.push("1", 1);
+        HashTable obj = new HashTable<>(10);
 
-        object.push("2", 2);
+        obj.push(1, 1);
+        obj.push(2, 2);
+        obj.push(3, 3);
+        obj.push(4, 4);
 
-        System.out.println("--->  " + object.get("2"));
-
+        System.out.println("--->" + obj.toString());
     }   
 }
