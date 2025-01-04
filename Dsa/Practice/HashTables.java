@@ -6,61 +6,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-// class InnerHashTables<K, V> {
-
-//     private class Entry<K,V> {
-//         K key;
-//         V value;
-
-//         Entry(K key, V value){
-//             this.key = key;
-//             this.value = value;
-//         }
-//     }
-
-//     private LinkedList<Entry<K, V>>[] buckets;
-//     private int capacity;
-
-//     public InnerHashTables(int capacity){
-//         this.capacity = capacity;
-//         buckets = new LinkedList[capacity];
-//         for (int i = 0; i < capacity; i++) {
-//             buckets[i] = new LinkedList<>();
-//         }
-//     }
-
-//     public int getHash(K key){  // Function to generate HashCode to key
-//         return Math.abs(key.hashCode()) % capacity ;
-//     }
-
-//     public void put(K key, V value){
-
-//         int index  = getHash(key);  // Get the converted key
-
-//         for (Entry<K,V> linkedList : buckets[index]) { // find's the key in table
-//             if (linkedList.key.equals(key)) {
-//                 linkedList.value = value;
-//                 return;
-//             }
-//         }
-
-//         buckets[index].add(new Entry(key, value));
-//     }
-
-//     public V get(K key){
-
-//         int index  = getHash(key);
-
-//         for (Entry<K,V> linkedList : buckets[index]) {
-//             if (linkedList.key.equals(key)) {
-//                 return linkedList.value;
-//             }
-//         }
-//         return null;
-//     }
-// }
-
-
 class Tables<K, V>{
 
     private class Entry<K,V>{
