@@ -51,6 +51,17 @@ public class HashTable<K, V> {
         }
     }
 
+        // Method to print the entire HashTable
+        void printTable() {
+            for (int i = 0; i < capacity; i++) {
+                System.out.print("Index " + i + ": ");
+                for (Entry<K, V> entry : table[i]) {
+                    System.out.print("{" + entry.key + "=" + entry.value + "} ");
+                }
+                System.out.println();
+            }
+        }
+
     public static void main(String[] args) {
         HashTable users = new HashTable<>(5);
 
@@ -60,5 +71,8 @@ public class HashTable<K, V> {
         users.push(4, "Kishore");
 
         users.getValue(2);
+
+                // Print the entire HashTable
+                users.printTable();
     }
 }
