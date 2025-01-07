@@ -42,6 +42,8 @@ public class HashTable<K, V> {
         table[index].add(new Entry(key, value));
     }
 
+    
+
     void getValue(K key){
         int index = getIndex(key);
         for (Entry<K,V> linkedList : table[index]) {
@@ -52,15 +54,15 @@ public class HashTable<K, V> {
     }
 
         // Method to print the entire HashTable
-        void printTable() {
-            for (int i = 0; i < capacity; i++) {
-                System.out.print("Index " + i + ": ");
-                for (Entry<K, V> entry : table[i]) {
-                    System.out.print("{" + entry.key + "=" + entry.value + "} ");
-                }
-                System.out.println();
-            }
-        }
+        // void printTable() {
+        //     for (int i = 0; i < capacity; i++) {
+        //         System.out.print("Index " + i + ": ");
+        //         for (Entry<K, V> entry : table[i]) {
+        //             System.out.print("{" + entry.key + "=" + entry.value + "} ");
+        //         }
+        //         System.out.println();
+        //     }
+        // }
 
     public static void main(String[] args) {
         HashTable users = new HashTable<>(5);
