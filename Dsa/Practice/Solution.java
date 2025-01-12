@@ -56,23 +56,23 @@ public class Solution {
             return null;
         }
 
-        // @Override
-        // public String toString() {
-        //     StringBuilder sb = new StringBuilder();
-        //     sb.append("{");
-        //     boolean first = true;
-        //     for (LinkedList<Entry<K, V>> bucket : table) {
-        //         for (Entry<K, V> entry : bucket) {
-        //             if (!first) {
-        //                 sb.append(", ");
-        //             }
-        //             sb.append(entry.toString());
-        //             first = false;
-        //         }
-        //     }
-        //     sb.append("}");
-        //     return sb.toString();
-        // }
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            sb.append("{");
+            boolean first = true;
+            for (LinkedList<Entry<K, V>> bucket : table) {
+                for (Entry<K, V> entry : bucket) {
+                    if (!first) {
+                        sb.append(", ");
+                    }
+                    sb.append(entry.toString());
+                    first = false;
+                }
+            }
+            sb.append("}");
+            return sb.toString();
+        }
     }
     public static void main(String[] args) {
 
