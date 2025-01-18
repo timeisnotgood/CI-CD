@@ -18,6 +18,18 @@ public class Solution {
             root = insertRec(data, root);
         }
 
+        int parent(int index){
+            return (index - 1) / 2;
+        }
+
+        int leftChild(int index){
+            return 2 * index + 1;
+        }
+
+        int rightChild(int index){
+            return 2 * index + 2;
+        }
+
         Tree insertRec(int data, Tree root){
             if (root == null) {
                 root = new Tree(data);
@@ -51,7 +63,10 @@ public class Solution {
         rt.insert(1);
 
 
-        rt.PostOrderTraversal(rt.root);
+        // rt.PostOrderTraversal(rt.root);
+
+        // System.out.println("----> " + rt.parent(6));
+        System.out.println("----> " + rt.rightChild(0));
     }
 
 
