@@ -82,13 +82,13 @@ public class Heap {
         heapifyUp();
     }
 
-    // Print the heap
-    public void printHeap() {
-        for (int i = 0; i < size; i++) {
-            System.out.print(heap[i] + " ");
-        }
-        System.out.println();
-    }
+    // // Print the heap
+    // public void printHeap() {
+    //     for (int i = 0; i < size; i++) {
+    //         System.out.print(heap[i] + " ");
+    //     }
+    //     System.out.println();
+    // }
 
 
     public static void main(String[] args) {
@@ -100,12 +100,9 @@ public class Heap {
         minHeap.insert(20);
         minHeap.insert(8);
 
-        System.out.println("Heap:");
-        minHeap.printHeap();
-
         // Extract the minimum element
         System.out.println("Extracted Min: " + minHeap.extractMin());
-        System.out.println("Heap after extraction:");
+        System.out.println("Heap after ---->");
         minHeap.printHeap();
     }
 }
