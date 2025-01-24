@@ -82,13 +82,13 @@ public class Heap {
         heapifyUp();
     }
 
-    // // Print the heap
-    // public void printHeap() {
-    //     for (int i = 0; i < size; i++) {
-    //         System.out.print(heap[i] + " ");
-    //     }
-    //     System.out.println();
-    // }
+    // Print the heap
+    public void printHeap() {
+        for (int i = 0; i < size; i++) {
+            System.out.print(heap[i] + " ");
+        }
+        System.out.println();
+    }
 
 
     public static void main(String[] args) {
