@@ -66,29 +66,29 @@ public class Heap {
         }
     }
 
-    int extractMin(){
-        if (size == 0) throw new IllegalStateException("Heap is Empty");
-        int min = heap[0];
-        heap[0] = heap[size -1];
-        size--;
-        heapifyDown();
-        return min;
-    }
+    // int extractMin(){
+    //     if (size == 0) throw new IllegalStateException("Heap is Empty");
+    //     int min = heap[0];
+    //     heap[0] = heap[size -1];
+    //     size--;
+    //     heapifyDown();
+    //     return min;
+    // }
 
-    void insert(int value){
-        hasCapacity();
-        heap[size] = value;
-        size ++;
-        heapifyUp();
-    }
+    // void insert(int value){
+    //     hasCapacity();
+    //     heap[size] = value;
+    //     size ++;
+    //     heapifyUp();
+    // }
 
-    // Print the heap
-    public void printHeap() {
-        for (int i = 0; i < size; i++) {
-            System.out.print(heap[i] + " ");
-        }
-        System.out.println();
-    }
+    // // Print the heap
+    // public void printHeap() {
+    //     for (int i = 0; i < size; i++) {
+    //         System.out.print(heap[i] + " ");
+    //     }
+    //     System.out.println();
+    // }
 
 
     public static void main(String[] args) {
