@@ -5,91 +5,86 @@ import java.util.Arrays;
 public class Solution {
 
     int heap[];
-    int size;
-    int capacity;
+    int size, capacity;
 
     Solution(int cap){
         this.capacity = cap;
         this.size = 0;
-        this.heap = new int[cap];
+        this.heap = new int[capacity];
     }
 
-    // get Index's
+    int getParentIndex(int index){ return (index - 1) / 2;};
+    int getLeftIndex(int index){ return 2 * index + 1;};
+    int getRightIndex(int index){ return 2* index + 2;};
 
-    int getPrentIndex(int index){ return (index - 1) / 2; }
-    int getLeftIndex(int index){ return 2 * index + 1;}
-    int getRightIndex(int index){ return 2 * index + 2;}
+    int Parent(int index) { return heap[getParentIndex(index)];}
+    int Right(int index) { return heap[getLeftIndex(index)];}
+    int Left(int index) { return heap[getRightIndex(index)];}
 
-    // Check Element Exist
+    Boolean hasParent(int index) { return getParentIndex(index) >= 0;}
+    Boolean hasRight(int index) { return getLeftIndex(index) < size;}
+    Boolean hasLeft(int index) { return getRightIndex(index) < size;}
 
-    Boolean hasParent(int index){ return getPrentIndex(index) >= 0;}
-    Boolean hasLeftChild(int index){ return getLeftIndex(index) < size;}
-    Boolean hasRightChild(int index){ return getRightIndex(index) < size;}
-
-    // get Element's
-
-    int Parent(int index){return heap[getPrentIndex(index)];}
-    int Left(int index){return heap[getLeftIndex(index)];}
-    int Right(int index){return heap[getRightIndex(index)];}
-
-    void swap(int left, int right){
-        int temp = heap[left];
-        heap[left] = heap[right];
-        heap[right] = temp; 
+    void Swap(int parent, int child){
+        int temp = heap[parent];
+        heap[parent] = heap[child];
+        heap[child] = temp;
     }
 
-    void hasCapacity(){
-        this.heap = Arrays.copyOf(heap, capacity * 2);
-        this.capacity *= 2;
-    }
-
-    void heapfyUp(){
+    void heapifyUp(){
         int index = size - 1;
-        while(hasParent(index) && Parent(index) > heap[index]) {
-            swap(getPrentIndex(index), index);
-            index = getPrentIndex(index);
+        while (hasParent(index) && Parent(index) > heap[index]) {
+            Swap(getParentIndex(index), index);
+            index = getParentIndex(index);
         }
     }
 
-    void heaphyDown(){
+    void heapifyDown(){
         int index = 0;
-        while (hasLeftChild(index)) {
-            int smallestChildIndex  = getLeftIndex(index);
-            if (hasRightChild(index) && Right(index) < Left(index)) {
-                smallestChildIndex = getRightIndex(index);
+        while (hasLeft(index)) {
+            int smallestValue = getLeftIndex(index);
+            if (hasRight(index) && Right(index) < Left(index)) {
+                smallestValue = getRightIndex(index);
             }
-            if (heap[index] < heap[smallestChildIndex]) {
+            if (heap[index] > heap[smallestValue]) {
                 break;
-            }else {
-                swap(index, smallestChildIndex);
-                index  = smallestChildIndex;
             }
+            else{
+                Swap(index, smallestValue);
+            }
+            index = smallestValue;
+        }
+    }
+
+    void hasSpace(){
+        if (size == capacity) {
+            heap = Arrays.copyOf(heap, capacity * 2);
+            capacity *= 2;
         }
     }
 
     void insert(int val){
-        hasCapacity();
-        this.heap[size] = val;
-        this.size += 1;
-        heapfyUp();
+        hasSpace();
+        heap[size] = val;
+        size ++;
+        heapifyUp();
     }
 
     int extractMin(){
         if (size == 0) {
-            throw new IllegalStateException("Heap is empty");
+            System.out.println("Heap is Empty");
         }
-
-        int min = heap[0];
-        heap[0] = heap[size - 1];
+        int index = 0;
+        int min = heap[index];
+        heap[index] = heap[size-1];
         size --;
-        heaphyDown();
+        heapifyDown();
         return min;
     }
 
-    // Print the heap
-    public void printHeap() {
+    void printHeap(){
         for (int i = 0; i < size; i++) {
-            System.out.print(heap[i] + " ");
+            System.out.println(heap[i]+ " ");
         }
         System.out.println();
     }
@@ -103,12 +98,10 @@ public class Solution {
         Heap.insert(20);
         Heap.insert(8);
 
-        System.out.println("Heap before insertions:");
+        System.out.println("Befor Extraction : ");
         Heap.printHeap();
-
-        System.out.println("Extraction :  " + Heap.extractMin());
-
-        System.out.println("Heap after insertions:");
+        Heap.extractMin();
+        System.out.println("After Extraction : ");
         Heap.printHeap();
     }
 }
