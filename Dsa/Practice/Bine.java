@@ -33,8 +33,9 @@ class BinaryTree{
     void preOrderTraversal(Tree root){
         if (root != null) {
             System.out.println(root.data);
-            preOrderTraversal(root.left);
             preOrderTraversal(root.right);
+            System.out.println(root.data);
+
         }
     }
 
@@ -42,6 +43,9 @@ class BinaryTree{
         if (root != null) {
             inOrderTraversal(root.left);
             System.out.println(root.data);
+
+            System.out.println(root.data);
+
             inOrderTraversal(root.right);
         }
     }
