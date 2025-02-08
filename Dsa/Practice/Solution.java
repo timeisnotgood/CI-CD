@@ -1,57 +1,46 @@
 package Practice;
 
-import java.util.Arrays;
+class Node{
+    int data;
+    Node next;
+
+    Node(int data){
+        this.data = data;
+        this.next = null;
+    }
+
+    Node(int data, Node next){
+        this.data = data;
+        this.next = next;
+    }
+}
 
 public class Solution {
 
-    int size;
-    int capacity = 10;
-    int[] data;
+    Node convertToArr(int arr[]){
+        Node head = new Node(arr[0]);
+        Node mover = head;
 
-    Solution(){
-        this.data = new int[capacity];
-    }
-    Solution(int cap){
-        this.capacity = cap;
-        this.data = new int[capacity];
-    }
-
-    int getValueByIndex(int index){
-        if (size == 0) {
-            System.out.println("Array is Empty");
+        for (int i = 1; i < arr.length; i++) {
+            Node newNode = new Node(arr[i]);
+            mover.next = newNode;
+            mover = newNode;
         }
-        return data[index];
+        return head;
     }
 
-    void extendCapacity(){
-        data = Arrays.copyOf(data, capacity * 2);
-        capacity *= 2;
-    }
 
-    int push(int val){
-        if (size == capacity) {
-            extendCapacity();
-        }
-        data[size] = val;
-        size ++;
-        return size;
-    }
-
-    @Override
-    public String toString() {
-        return Arrays.toString(Arrays.copyOf(data, size));
-    }
 
     public static void main(String[] args) {
-        Solution Array = new Solution();
+        Solution Lint = new Solution();
 
-        Array.push(16);
-        Array.push(2);
-        Array.push(3);
-        Array.push(4);
-        Array.push(5);
+        int data[] = {3,7,8,9,2};
+        Node head = Lint.convertToArr(data);
 
-        System.out.println(Array);
+        Node temp = head;
+        while (temp != null) {
+            System.out.println(temp.data);
+            temp = temp.next;
+        }
     }
-
 }
