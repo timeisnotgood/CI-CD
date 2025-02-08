@@ -1,46 +1,58 @@
 package Practice;
 
-class Node{
-    int data;
-    Node next;
-
-    Node(int data){
-        this.data = data;
-        this.next = null;
-    }
-
-    Node(int data, Node next){
-        this.data = data;
-        this.next = next;
-    }
-}
-
 public class Solution {
 
-    Node convertToArr(int arr[]){
-        Node head = new Node(arr[0]);
-        Node mover = head;
+    int data[];
+    int capacity = 10;
+    int size ;
 
-        for (int i = 1; i < arr.length; i++) {
-            Node newNode = new Node(arr[i]);
-            mover.next = newNode;
-            mover = newNode;
-        }
-        return head;
+    Solution(int cap){
+        this.capacity = cap;
+        this.data = new int[capacity];
     }
 
+    void push(int val){
+        if (size == capacity) {
+            System.out.println("Array is BUll --->");
+        }
 
+        data[size] = val;
+        size ++;
+    }
+
+    void Pop(){
+        if (size == 0) {
+            System.out.println("Arrau is Empty");
+        }
+        size --;
+    }
+
+    void Update(int prevVal, int val){
+        if (size == 0) {
+            System.out.println("Arrau is Empty");
+        }
+
+        for (int i = 0; i < data.length; i++) {
+            if (data[i] == prevVal) {
+                data[i] = val;
+            }
+        }
+    }
+
+    
 
     public static void main(String[] args) {
-        Solution Lint = new Solution();
+        
 
-        int data[] = {3,7,8,9,2};
-        Node head = Lint.convertToArr(data);
+        Solution Array = new Solution(10);
 
-        Node temp = head;
-        while (temp != null) {
-            System.out.println(temp.data);
-            temp = temp.next;
-        }
+        Array.push(1);
+        Array.push(2);
+        Array.push(5);
+        Array.push(6);
+
+        Array.Pop();
+
+
     }
 }
