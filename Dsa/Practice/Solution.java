@@ -27,18 +27,6 @@ public class Solution {
         size --;
     }
 
-    void Update(int prevVal, int val){
-        if (size == 0) {
-            System.out.println("Arrau is Empty");
-        }
-
-        for (int i = 0; i < data.length; i++) {
-            if (data[i] == prevVal) {
-                data[i] = val;
-            }
-        }
-    }
-
     
 
     public static void main(String[] args) {
