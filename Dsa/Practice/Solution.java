@@ -27,11 +27,26 @@ class Stack {
         size --;
     }
 
-    
+    void GetData(){
+        for (int i = 0; i < size; i++) {
+            System.out.println(data[i]);
+        }
+    }
 
 
 }
 public class Solution {
+
+    public static void main(String[] args) {
+        Stack stack = new Stack(10);
+
+        stack.Push(4);
+        stack.Push(5);
+        stack.Push(6);
+        stack.Push(7);
+
+        stack.GetData();
+    }
 
     
 }
