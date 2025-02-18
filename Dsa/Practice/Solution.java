@@ -32,8 +32,14 @@ class Stack {
             System.out.println(data[i]);
         }
     }
+}
 
-
+class Queue{
+    int start;
+    int end;
+    int[] data;
+    int current;
+    int size = 0;
 }
 public class Solution {
 
