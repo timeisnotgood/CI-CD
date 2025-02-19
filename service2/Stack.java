@@ -1,6 +1,6 @@
 package Practice;
 
-class Stack {
+public class Stack {
 
     private class Node{
         int data;
@@ -44,26 +44,12 @@ class Stack {
         }
 
         Node temp = Top;
-        while (temp != null) {
+
+        while (temp == null) {
             System.out.println(" -->" + temp.data);
             temp = temp.next;
         }
         System.out.println();
     }
 
-}
-
-public class Solution {
-
-    public static void main(String[] args) {
-        Stack stack = new Stack();
-
-        stack.push(9);
-        stack.push(5);
-        stack.push(7);
-        stack.push(8);
-
-        System.out.println("Before Pop : ");
-        stack.printStack();
-    }
 }
