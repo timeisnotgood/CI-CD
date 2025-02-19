@@ -35,23 +35,90 @@ class Stack {
 }
 
 class Queue{
-    int start;
-    int end;
+    int front = -1;
+    int rear = -1;
     int[] data;
-    int current;
-    int size = 0;
+    int size;
+    int capacity;
+
+    Queue(int cap){
+        this.capacity = cap;
+        this.size = 0;
+        this.data = new int[capacity];
+    }
+
+    Boolean isEmpty() {return size == 0;};
+    Boolean isFull() {return size == capacity;}
+
+
+
+
+    void enqueue(int val){
+        if (isFull()) {
+            System.out.println("Queue if Bull");
+        }else if (rear == -1) {
+            front = rear = 0;
+        }else{
+            rear = (rear +1) % capacity;
+        }
+
+        data[rear] = val;
+        size ++;
+    }
+
+    int dequeue(){
+        if (isEmpty()) {
+            System.out.println("No element to Delete");
+        }
+        int deletedVal = data[front];
+        front++;
+        size --;
+        return deletedVal;
+    }
+
+    int front(){
+        if(isEmpty()){
+            System.out.println("No element to Delete");
+            return -1;
+        }
+        return data[front];
+    }
+
+    int rear(){
+        if(isEmpty()){
+            System.out.println("No element to Delete");
+            return -1;
+        }
+        return data[rear];
+    }
+
+     // Print queue elements
+     public void printQueue() {
+        if (isEmpty()) {
+            System.out.println("Queue is Empty!");
+            return;
+        }
+        for (int i = 0; i < size; i++) {
+            System.out.print(data[(front + i) % capacity] + " ");
+        }
+        System.out.println();
+    }
+
 }
 public class Solution {
 
     public static void main(String[] args) {
-        Stack stack = new Stack(10);
+        System.out.println("\nQueue using Array:");
+        Queue queueArray = new Queue(5);
+        queueArray.enqueue(10);
+        queueArray.enqueue(20);
+        queueArray.enqueue(30);
+        queueArray.printQueue();
+        System.out.println("Dequeued: " + queueArray.dequeue());
 
-        stack.Push(4);
-        stack.Push(5);
-        stack.Push(6);
-        stack.Push(7);
+        System.out.println("After Dequeue :");
+        queueArray.printQueue();
 
-        stack.GetData();
     }
 
     
