@@ -1,63 +1,62 @@
 package Practice;
 
-class Stack {
-
-    private class Node{
+class Stack{
+    class Node{
         int data;
         Node next;
 
         Node(int data){
             this.data = data;
+            this.next = null;
         }
     }
 
-    private Node Top;
+    Node Top;
 
-    void push(int val){
+    Boolean isEmpty(){return Top == null;};
+
+    void Push(int val){
         Node newNode = new Node(val);
         newNode.next = Top;
         Top = newNode;
     }
 
-    Boolean isEmpty(){return Top == null;};
-
-    int pop(){
-        if (isEmpty()) {
-            System.out.println("Stack UnderFlow");
+    int Pop(){
+        if(isEmpty()){
+            System.out.println("No element to delete");
         }
-        int deleted = Top.data; 
+
+        int deleted = Top.data;
         Top = Top.next;
         return deleted;
     }
 
     int Peak(){
-        if (isEmpty()) {
-            System.out.println("Stack UnderFlow");
+        if(isEmpty()){
+            System.out.println("No element to delete");
         }
-
         return Top.data;
     }
 
     void printStack(){
-        if (isEmpty()) {
-            System.out.println("Stack UnderFlow");
+        if(isEmpty()){
+            System.out.println("No element to delete");
         }
 
         Node temp = Top;
         while (temp != null) {
-            System.out.println(" -->" + temp.data);
+            System.out.println(temp.data + " ");
             temp = temp.next;
         }
         System.out.println();
     }
-
 }
 
 class Queue {
-    private class Node {
+    class Node{
         int data;
         Node next;
-        
+
         Node(int data){
             this.data = data;
             this.next = null;
@@ -65,7 +64,10 @@ class Queue {
     }
 
     Node front, rear;
-    void enqueue(int val){
+
+    Boolean isEmpty(){return rear == null;};
+
+    void Push(int val){
         Node newNode = new Node(val);
         if (rear == null) {
             front = rear = newNode;
@@ -75,26 +77,26 @@ class Queue {
         }
     }
 
-    Boolean isEmpty(){ return rear == null;};
-
-    int Dequeue(){
+    int Pop(){
         if (isEmpty()) {
-            System.out.println("queue is empty !!");
+            System.out.println("No element to delete");
         }
         int Deleted = front.data;
         front = front.next;
         return Deleted;
     }
 
-    void printQueue(){
-        if (isEmpty()) {
-            System.out.println("queue is empty !!");
+    void printStack(){
+        if(isEmpty()){
+            System.out.println("No element to delete");
         }
+
         Node temp = front;
         while (temp != null) {
-            System.out.println(temp.data);
+            System.out.println(temp.data + " ");
             temp = temp.next;
         }
+        System.out.println();
     }
 }
 
@@ -102,22 +104,15 @@ public class Solution {
 
     public static void main(String[] args) {
         // Stack stack = new Stack();
+        Queue queue  = new Queue();
 
-        // stack.push(9);
-        // stack.push(5);
-        // stack.push(7);
-        // stack.push(8);
+        queue.Push(9);
+        queue.Push(5);
+        queue.Push(7);
+        queue.Push(8);
 
-        // System.out.println("Before Pop : ");
-        // stack.printStack();
+        queue.Pop();
 
-        Queue queue = new Queue();
-
-        queue.enqueue(5);
-        queue.enqueue(4);
-        queue.enqueue(7);
-        queue.enqueue(2);
-
-        queue.printQueue();
+        queue.printStack();
     }
 }
