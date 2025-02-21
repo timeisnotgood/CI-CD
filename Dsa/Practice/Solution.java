@@ -53,17 +53,71 @@ class Stack {
 
 }
 
+class Queue {
+    private class Node {
+        int data;
+        Node next;
+        
+        Node(int data){
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+    Node front, rear;
+    void enqueue(int val){
+        Node newNode = new Node(val);
+        if (rear == null) {
+            front = rear = newNode;
+        }else{
+            rear.next = newNode;
+            rear = newNode;
+        }
+    }
+
+    Boolean isEmpty(){ return rear == null;};
+
+    int Dequeue(){
+        if (isEmpty()) {
+            System.out.println("queue is empty !!");
+        }
+        int Deleted = front.data;
+        front = front.next;
+        return Deleted;
+    }
+
+    void printQueue(){
+        if (isEmpty()) {
+            System.out.println("queue is empty !!");
+        }
+        Node temp = front;
+        while (temp != null) {
+            System.out.println(temp.data);
+            temp = temp.next;
+        }
+    }
+}
+
 public class Solution {
 
     public static void main(String[] args) {
-        Stack stack = new Stack();
+        // Stack stack = new Stack();
 
-        stack.push(9);
-        stack.push(5);
-        stack.push(7);
-        stack.push(8);
+        // stack.push(9);
+        // stack.push(5);
+        // stack.push(7);
+        // stack.push(8);
 
-        System.out.println("Before Pop : ");
-        stack.printStack();
+        // System.out.println("Before Pop : ");
+        // stack.printStack();
+
+        Queue queue = new Queue();
+
+        queue.enqueue(5);
+        queue.enqueue(4);
+        queue.enqueue(7);
+        queue.enqueue(2);
+
+        queue.printQueue();
     }
 }
