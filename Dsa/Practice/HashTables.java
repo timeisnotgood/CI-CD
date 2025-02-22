@@ -1,83 +1,177 @@
+// package Practice;
+
+// import java.util.LinkedList;
+// import java.util.Scanner;
+
+// class Tables<K, V> {
+
+//     private class Entry<K, V> {
+//         K key;
+//         V value;
+
+//         Entry(K key, V value) {
+//             this.key = key;
+//             this.value = value;
+//         }
+
+//         @Override
+//         public String toString() {
+//             return "(" + key + " : " + value + ")";
+//         }
+//     }
+
+//     private LinkedList<Entry<K, V>>[] Bucket;
+//     private int Capacity;
+
+//     Tables(int capacity) {
+//         this.Capacity = capacity;
+//         Bucket = new LinkedList[capacity];
+
+//         for (int i = 0; i < capacity; i++) {
+//             Bucket[i] = new LinkedList<>();
+//         }
+//     }
+
+//     public int getHash(K key) {
+//         return Math.abs(key.hashCode()) % Capacity;
+//     }
+
+//     public void put(K key, V value) {
+//         int index = getHash(key);
+//         for (Entry<K, V> list : Bucket[index]) {
+//             if (list.key.equals(key)) {
+//                 list.value = value;
+//                 return;
+//             }
+//         }
+//         Bucket[index].add(new Entry<>(key, value));
+//     }
+
+//     public V get(K key) {
+//         int index = getHash(key);
+//         for (Entry<K, V> list : Bucket[index]) {
+//             if (list.key.equals(key)) {
+//                 return list.value;
+//             }
+//         }
+//         return null;
+//     }
+
+//     // **Method to print the entire hash table**
+//     public void printTable() {
+//         System.out.println("\nHash Table Structure:");
+//         for (int i = 0; i < Capacity; i++) {
+//             System.out.print("Bucket " + i + " -> ");
+//             if (Bucket[i].isEmpty()) {
+//                 System.out.println("Empty");
+//             } else {
+//                 for (Entry<K, V> entry : Bucket[i]) {
+//                     System.out.print(entry + "  ");
+//                 }
+//                 System.out.println();
+//             }
+//         }
+//     }
+// }
+
+
+// public class HashTables<T> {
+
+//     T vals;
+
+//     public static void main(String[] args) {
+//         Tables<String, String> Users = new Tables<>(10);
+//         HashTables<String> ownClass = new HashTables<>();
+
+//         Users.put("One", "Bhoopathi");
+//         Users.put("Two", "Lissan");
+//         Users.put("Three", "Gokul");
+//         Users.put("Four", "Achu");
+//         Users.put("Five", "Sajar");
+
+//         // **Print the entire table**
+//         Users.printTable();
+
+//         Scanner UserValue = new Scanner(System.in);
+//         System.out.println("\nEnter Id: ");
+//         ownClass.vals = UserValue.nextLine();
+
+//         if (Users.get(ownClass.vals) != null) {
+//             System.out.println("--->  " + Users.get(ownClass.vals));
+//         } else {
+//             System.out.println("No element Found");
+//         }
+
+//         UserValue.close();
+//     }
+// }
+
+
+
 package Practice;
 
-import java.security.KeyStore.Entry;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Scanner;
 
-class Tables<K, V>{
 
-    private class Entry<K,V>{
-        K key; V value;
+class Table<K, V> {
 
-        Entry(K key, V value){
+    
+    public class Entry<K, V> {
+
+        K key;
+        V val;
+
+        Entry(K key,V val){
             this.key = key;
-            this.value = value;
+            this.val = val;
         }
     }
 
     private LinkedList<Entry<K, V>>[] Bucket;
-    private int Capacity;
+    private int capacity;
 
-    Tables(int capacity){
-        this.Capacity = capacity;
-        Bucket = new LinkedList[capacity];
+    Table(int cap){
+        this.capacity = cap;
+        this.Bucket = new LinkedList[capacity];
 
         for (int i = 0; i < capacity; i++) {
-            Bucket[i] = new LinkedList<>();
+            this.Bucket[i] = new LinkedList<>();
         }
     }
 
-    public int getHash(K key){
-        return Math.abs(key.hashCode()) % Capacity;
+    int getIndex(K key){
+        return Math.abs(key.hashCode()) % capacity;
     }
 
-    public void put(K key, V value){
-        int index = getHash(key);
+    void put(K key, V val){
+        int index = getIndex(key);
+
         for (Entry<K,V> list : Bucket[index]) {
-            if (list.key.equals(key)) {
-                list.value = value;
+            if (list.key == key) {
+                list.val = val;
                 return;
             }
         }
 
-        Bucket[index].add(new Entry(key, value));
+        Bucket[index].add(new Entry(key, val));
     }
 
-    public V get(K key){
-        int index = getHash(key);
+
+    V getValue(K key){
+        int index = getIndex(key);
+
         for (Entry<K,V> list : Bucket[index]) {
-            if (list.key.equals(key)) {
-                return list.value;
+            if (list.key == key) {
+                return list.val;
             }
         }
+
         return null;
     }
-    
 }
-public class HashTables<T> {
 
-    T vals;
-    public static void main(String[] args) {
-        Tables Users = new Tables(10);
-        HashTables ownClass = new HashTables<>();
+public class HashTables<K, V> {
 
-        Users.put("One", "Bhoopathi");
-        Users.put("Two", "Lissan");
-        Users.put("Three", "Gokul");
-        Users.put("Four", "Achu");
-        Users.put("Five", "Sajar");
+    Table<String, String> hash = new Table<>(10);
 
-        Scanner UserValue = new Scanner(System.in);
-        System.out.println("Entre Id : ");
-        ownClass.vals = UserValue.nextLine();
-
-        if (Users.get(ownClass.vals) != null) {
-            System.out.println("--->  " + Users.get(ownClass.vals));
-        }else{
-            System.out.println("No element Found");
-        }
-        
-    }
 }
