@@ -1,99 +1,56 @@
 package Practice;
 
-class Stack{
-    class Node{
-        int data;
-        Node next;
+class Nod {
+    int data;
+    Nod next;
 
-        Node(int data){
-            this.data = data;
-            this.next = null;
-        }
-    }
-
-    Node Top;
-
-    Boolean isEmpty(){return Top == null;};
-
-    void Push(int val){
-        Node newNode = new Node(val);
-        newNode.next = Top;
-        Top = newNode;
-    }
-
-    int Pop(){
-        if(isEmpty()){
-            System.out.println("No element to delete");
-        }
-
-        int deleted = Top.data;
-        Top = Top.next;
-        return deleted;
-    }
-
-    int Peak(){
-        if(isEmpty()){
-            System.out.println("No element to delete");
-        }
-        return Top.data;
-    }
-
-    void printStack(){
-        if(isEmpty()){
-            System.out.println("No element to delete");
-        }
-
-        Node temp = Top;
-        while (temp != null) {
-            System.out.println(temp.data + " ");
-            temp = temp.next;
-        }
-        System.out.println();
+    Nod(int data) {
+        this.data = data;
+        this.next = null;
     }
 }
+class MyLinkedList {
 
-class Queue {
-    class Node{
-        int data;
-        Node next;
+    Nod convertArrtoLL(int[] arr) {
+        if (arr.length == 0) return null;
 
-        Node(int data){
-            this.data = data;
-            this.next = null;
+        Nod head = new Nod(arr[0]);
+        Nod mover = head;
+
+        for (int i = 1; i < arr.length; i++) {
+            Nod newNod = new Nod(arr[i]);
+            mover.next = newNod;
+            mover = newNod;
         }
+
+        return head;
     }
 
-    Node front, rear;
-
-    Boolean isEmpty(){return rear == null;};
-
-    void Push(int val){
-        Node newNode = new Node(val);
-        if (rear == null) {
-            front = rear = newNode;
-        }else{
-            rear.next = newNode;
-            rear = newNode;
-        }
-    }
-
-    int Pop(){
-        if (isEmpty()) {
-            System.out.println("No element to delete");
-        }
-        int Deleted = front.data;
-        front = front.next;
-        return Deleted;
-    }
-
-    void printStack(){
-        if(isEmpty()){
-            System.out.println("No element to delete");
+    Nod UpdateLL(Nod head, int prev, int newval) {
+        if (head == null) {
+            return new Nod(newval);
         }
 
-        Node temp = front;
+        Nod temp = head;
         while (temp != null) {
-            System.out.println(temp.data + " ");
+            if (temp.data == prev) {
+                temp.data = newval;
+            }
+            temp = temp.next;
+        }
+
+        return head;
+    }
+
+    void printLL(Nod head) {
+        if (head == null) {
+            System.out.println("No element to print");
+            return;
+        }
+
+        Nod temp = head;
+        while (temp != null) {
+            System.out.print("--> " + temp.data + " ");
             temp = temp.next;
         }
         System.out.println();
@@ -101,18 +58,13 @@ class Queue {
 }
 
 public class Solution {
-
     public static void main(String[] args) {
-        // Stack stack = new Stack();
-        Queue queue  = new Queue();
+        MyLinkedList linkedlist = new MyLinkedList();
+        int[] arr = {2, 3, 4, 5, 6, 7};
 
-        queue.Push(9);
-        queue.Push(5);
-        queue.Push(7);
-        queue.Push(8);
+        Nod head = linkedlist.convertArrtoLL(arr);
+        head = linkedlist.UpdateLL(head, 5, 15);
 
-        queue.Pop();
-
-        queue.printStack();
+        linkedlist.printLL(head);
     }
 }
