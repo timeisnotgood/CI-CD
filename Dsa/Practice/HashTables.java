@@ -125,6 +125,11 @@ class Table<K, V> {
             this.key = key;
             this.val = val;
         }
+
+        @Override
+        public String toString(){
+            return "(" + key + " - " + val + ")";
+        }
     }
 
     private LinkedList<Entry<K, V>>[] Bucket;
@@ -168,10 +173,46 @@ class Table<K, V> {
 
         return null;
     }
+
+    public void printTable() {
+        System.out.println("\nHash Table Structure:");
+        for (int i = 0; i < capacity; i++) {
+            System.out.print("Bucket " + i + " -> ");
+            if (Bucket[i].isEmpty()) {
+                System.out.println("Empty");
+            } else {
+                for (Entry<K, V> entry : Bucket[i]) {
+                    System.out.print(entry + "  ");
+                }
+                System.out.println();
+            }
+        }
+    }
+
+    public void printAll(){
+        for (int i  = 0; i < capacity; i++) {
+            if (Bucket[i].isEmpty()) {
+                System.out.println("Tabe is empty");
+            }else{
+                for(Entry<K, V> entry : Bucket[i]){
+                    System.out.println(entry + "");
+                }
+                System.out.println();
+            }
+        }
+    }
 }
 
 public class HashTables<K, V> {
+    public static void main(String[] args) {
+        Table<String, String> hashTable = new Table<>(10);
+        hashTable.put("One", "Bhoopathi");
+        hashTable.put("Two", "Hari");
+        hashTable.put("Three", "Lissan");
+        hashTable.put("Four", "Achu");
+        hashTable.put("Five", "Kishore");
 
-    Table<String, String> hash = new Table<>(10);
+        hashTable.printAll();
+    }
 
 }
