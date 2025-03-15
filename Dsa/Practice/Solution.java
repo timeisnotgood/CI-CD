@@ -1,69 +1,78 @@
 package Practice;
 
-
-class BinTree {
+class Linkedl{
     int data;
-    BinTree left, right;
-    
-    BinTree(int val){
-        this.data = val;
-        this.left=this.right = null;
+    Linkedl next;
+    Linkedl(int data){
+        this.data = data;
+        this.next = null;
     }
 }
 
+class stack {
+    Linkedl top;
+
+    void push(int data){
+        Linkedl newval = new Linkedl(data);
+       newval.next = top;
+       top = newval;
+    }
+
+    void startQueue(){
+        Linkedl temp = top;
+
+        while (temp != null) {
+            System.out.println("---->" + temp.data);
+            temp = temp.next;
+        }
+    }
+}
+class Queue{
+    Linkedl start, end;
+
+    void push(int val){
+        Linkedl newVal = new Linkedl(val);
+        if (start == null) {
+            start = end = newVal;
+        }
+
+        end.next = newVal;
+        end = newVal;
+    }
+
+    void startQueue(){
+        Linkedl temp = start;
+
+        while (temp != null) {
+            System.out.println("---->" + temp.data);
+            temp = temp.next;
+        }
+    }
+
+    void endQueue(){
+        Linkedl temp = end;
+
+        while (temp != null) {
+            System.out.println("---->" + temp.data);
+            temp = temp.next;
+        }
+    }
+
+}
+
 public class Solution {
-    BinTree root;
-
-    void insert(int val){
-        root = insertRec(root, val);
-    }
-
-    BinTree insertRec(BinTree root, int val){
-        if (root == null) {
-            return new BinTree(val);
-        }
-
-        if (val < root.data) {
-            root.left = insertRec(root.left, val);
-        }else if (val > root.data) {
-            root.right = insertRec(root.right, val);
-        }
-
-        return root;
-    }
-
-    void preOrderTraversal(BinTree root){
-        if (root != null) {
-            System.out.println(" Pre-Order------> "+ root.data);
-            preOrderTraversal(root.left);
-            preOrderTraversal(root.right);
-        }
-    }
-
-    void inOrderTraversal(BinTree root){
-        if (root != null) {
-            inOrderTraversal(root.left);
-            System.out.println(" In-Order------> "+ root.data);
-            inOrderTraversal(root.right);
-        }
-    }
-
-    void postOrderTraversal(BinTree root){
-        if (root != null) {
-            postOrderTraversal(root.left);
-            postOrderTraversal(root.right);
-            System.out.println(" Post-Order------> "+ root.data);
-        }
-    }
 
     public static void main(String[] args) {
-        Solution tree = new Solution();
+        stack ss = new stack();
 
-        tree.insert(3);
-        tree.insert(1);
-        tree.insert(4);
-        tree.insert(2);
+        ss.push(1);
+        ss.push(2);
+        ss.push(3);
+        ss.push(4);
+        ss.push(5);
 
-        tree.preOrderTraversal(tree.root);
+        ss.startQueue();
     }
+
+    
 }
