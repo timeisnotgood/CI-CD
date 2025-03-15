@@ -1,70 +1,69 @@
 package Practice;
 
-class Nod {
+
+class BinTree {
     int data;
-    Nod next;
-
-    Nod(int data) {
-        this.data = data;
-        this.next = null;
-    }
-}
-class MyLinkedList {
-
-    Nod convertArrtoLL(int[] arr) {
-        if (arr.length == 0) return null;
-
-        Nod head = new Nod(arr[0]);
-        Nod mover = head;
-
-        for (int i = 1; i < arr.length; i++) {
-            Nod newNod = new Nod(arr[i]);
-            mover.next = newNod;
-            mover = newNod;
-        }
-
-        return head;
-    }
-
-    Nod UpdateLL(Nod head, int prev, int newval) {
-        if (head == null) {
-            return new Nod(newval);
-        }
-
-        Nod temp = head;
-        while (temp != null) {
-            if (temp.data == prev) {
-                temp.data = newval;
-            }
-            temp = temp.next;
-        }
-
-        return head;
-    }
-
-    void printLL(Nod head) {
-        if (head == null) {
-            System.out.println("No element to print");
-            return;
-        }
-
-        Nod temp = head;
-        while (temp != null) {
-            System.out.print("--> " + temp.data + " ");
-            temp = temp.next;
-        }
-        System.out.println();
+    BinTree left, right;
+    
+    BinTree(int val){
+        this.data = val;
+        this.left=this.right = null;
     }
 }
 
 public class Solution {
+    BinTree root;
+
+    void insert(int val){
+        root = insertRec(root, val);
+    }
+
+    BinTree insertRec(BinTree root, int val){
+        if (root == null) {
+            return new BinTree(val);
+        }
+
+        if (val < root.data) {
+            root.left = insertRec(root.left, val);
+        }else if (val > root.data) {
+            root.right = insertRec(root.right, val);
+        }
+
+        return root;
+    }
+
+    void preOrderTraversal(BinTree root){
+        if (root != null) {
+            System.out.println(" Pre-Order------> "+ root.data);
+            preOrderTraversal(root.left);
+            preOrderTraversal(root.right);
+        }
+    }
+
+    void inOrderTraversal(BinTree root){
+        if (root != null) {
+            inOrderTraversal(root.left);
+            System.out.println(" In-Order------> "+ root.data);
+            inOrderTraversal(root.right);
+        }
+    }
+
+    void postOrderTraversal(BinTree root){
+        if (root != null) {
+            postOrderTraversal(root.left);
+            postOrderTraversal(root.right);
+            System.out.println(" Post-Order------> "+ root.data);
+        }
+    }
+
     public static void main(String[] args) {
-        MyLinkedList linkedlist = new MyLinkedList();
-        int[] arr = {2, 3, 4, 5, 6, 7};
+        Solution tree = new Solution();
 
-        Nod head = linkedlist.convertArrtoLL(arr);
-        head = linkedlist.UpdateLL(head, 5, 15);
+        tree.insert(3);
+        tree.insert(1);
+        tree.insert(4);
+        tree.insert(2);
 
-        linkedlist.printLL(head);
+        tree.preOrderTraversal(tree.root);
     }
 }
