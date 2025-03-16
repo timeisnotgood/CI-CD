@@ -1,74 +1,78 @@
 package Practice;
 
-class Treeee{
-    int data;
-    Treeee left, right;
+import java.util.Arrays;
 
-    Treeee(int data){
-        this.data = data;
-        this.left = this.right = null;
+class Heaps{
+    int[] heap;
+    int capacity, size;
+
+    Heaps(int cap){
+        this.capacity = cap;
+        this.size = 0;
+        this.heap = new int[capacity];
     }
-}
 
-class BinaryTr {
+    int getparentIndex(int i) {return (i-1)/2;}
+    int getleftIndex(int i) {return 2*i + 1;}
+    int getrightIndex(int i) {return 2*i + 2;}
 
-    Treeee root;
+    Boolean hasParent(int i){ return getparentIndex(i) >= 0;}
+    Boolean hasLeft(int i){ return getleftIndex(i) < size;}
+    Boolean hasRight(int i){ return getrightIndex(i) < size;}
+
+    int parent(int i ){ return heap[getparentIndex(i)];}
+    int left(int i ){ return heap[getleftIndex(i)];}
+    int right(int i ){ return heap[getrightIndex(i)];}
+
+    void hasCapacity(){
+        if (size == capacity) {
+            heap = Arrays.copyOf(heap, capacity * 2);
+            capacity = capacity * 2;
+        }
+    }
+
+    void swap(int parent, int child){
+        int temp = heap[parent];
+        heap[child] = heap[parent];
+        heap[parent] = temp;
+    }
+
+    void heapifyUp(){
+        int index = size - 1;
+
+        while (hasParent(index) && parent(index) > heap[index]) {
+            swap(getparentIndex(index), index);
+            index = getparentIndex(index);
+        }
+    }
 
     void insert(int val){
-        root = insertRec(root, val);
+        hasCapacity();
+        heap[size] = val;
+        size++;
+        heapifyUp();
     }
 
-    Treeee insertRec(Treeee root, int val){
-        if (root == null) {
-            return new Treeee(val);
+    // Print the heap
+    public void printHeap() {
+        for (int i = 0; i < size; i++) {
+            System.out.print(heap[i] + " ");
         }
-
-        if (val < root.data) {
-            root.left = insertRec(root.left, val);
-        }else if (val > root.data) {
-            root.right = insertRec(root.right, val);
-        }
-
-        return root;
-    }
-
-    void preOrderTraversal(Treeee root){
-        if (root != null) {
-            System.out.println("preOrderTraversal -->" + root.data);
-            preOrderTraversal(root.left);
-            preOrderTraversal(root.right);
-        }
-    }
-
-    void inOrderTraversal(Treeee root){
-        if (root != null) {
-            inOrderTraversal(root.left);
-            System.out.println("inOrderTraversal -->" + root.data);
-            inOrderTraversal(root.right);
-        }
-    }
-
-    void postOrderTraversal(Treeee root){
-        if (root != null) {
-            postOrderTraversal(root.left);
-            postOrderTraversal(root.right);
-            System.out.println("postOrderTraversal -->" + root.data);
-        }
+        System.out.println();
     }
 }
 public class Solution {
+
     public static void main(String[] args) {
-        BinaryTr tree = new BinaryTr();
+        Heap heap = new Heap(5);
 
-        tree.insert(5);
-        tree.insert(2);
-        tree.insert(4);
-        tree.insert(3);
-        tree.insert(1);
+        heap.insert(5);
+        heap.insert(2);
+        heap.insert(4);
+        heap.insert(3);
+        heap.insert(1);
 
-        tree.preOrderTraversal(tree.root);
-        tree.inOrderTraversal(tree.root);
-        tree.postOrderTraversal(tree.root);
-
+        heap.printHeap();
     }
+    
 }
