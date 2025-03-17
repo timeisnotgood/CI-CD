@@ -1,78 +1,48 @@
 package Practice;
 
-import java.util.Arrays;
-
-class Heaps{
-    int[] heap;
-    int capacity, size;
-
-    Heaps(int cap){
-        this.capacity = cap;
-        this.size = 0;
-        this.heap = new int[capacity];
-    }
-
-    int getparentIndex(int i) {return (i-1)/2;}
-    int getleftIndex(int i) {return 2*i + 1;}
-    int getrightIndex(int i) {return 2*i + 2;}
-
-    Boolean hasParent(int i){ return getparentIndex(i) >= 0;}
-    Boolean hasLeft(int i){ return getleftIndex(i) < size;}
-    Boolean hasRight(int i){ return getrightIndex(i) < size;}
-
-    int parent(int i ){ return heap[getparentIndex(i)];}
-    int left(int i ){ return heap[getleftIndex(i)];}
-    int right(int i ){ return heap[getrightIndex(i)];}
-
-    void hasCapacity(){
-        if (size == capacity) {
-            heap = Arrays.copyOf(heap, capacity * 2);
-            capacity = capacity * 2;
-        }
-    }
-
-    void swap(int parent, int child){
-        int temp = heap[parent];
-        heap[child] = heap[parent];
-        heap[parent] = temp;
-    }
-
-    void heapifyUp(){
-        int index = size - 1;
-
-        while (hasParent(index) && parent(index) > heap[index]) {
-            swap(getparentIndex(index), index);
-            index = getparentIndex(index);
-        }
-    }
-
-    void insert(int val){
-        hasCapacity();
-        heap[size] = val;
-        size++;
-        heapifyUp();
-    }
-
-    // Print the heap
-    public void printHeap() {
-        for (int i = 0; i < size; i++) {
-            System.out.print(heap[i] + " ");
-        }
-        System.out.println();
-    }
-}
 public class Solution {
 
+    private boolean adjMatrix[][];  // Changed Boolean[][] to boolean[][]
+    private int numVertices;
+
+    Solution(int numVertices) {
+        this.numVertices = numVertices;
+        this.adjMatrix = new boolean[this.numVertices][this.numVertices];  // Defaults to false
+    }
+
+    void addEdges(int i, int j) {  // Fixed method name
+        this.adjMatrix[i][j] = true;
+        this.adjMatrix[j][i] = true;
+    }
+
+    void removeEdges(int i, int j) {  // Fixed method name
+        this.adjMatrix[i][j] = false;
+        this.adjMatrix[j][i] = false;
+    }
+
+    // Print the matrix
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        for (int i = 0; i < this.numVertices; i++) {
+            s.append(i + ": ");
+            for (int j = 0; j < this.numVertices; j++) {  // Fixed iteration
+                s.append((this.adjMatrix[i][j] ? 1 : 0) + " ");
+            }
+            s.append("\n");
+        }
+        return s.toString();
+    }
+
     public static void main(String[] args) {
-        Heap heap = new Heap(5);
+        Solution graph = new Solution(4);
 
-        heap.insert(5);
-        heap.insert(2);
-        heap.insert(4);
-        heap.insert(3);
-        heap.insert(1);
+        graph.addEdges(0, 1);
+        graph.addEdges(0, 2);
+        graph.addEdges(1, 2);
+        graph.addEdges(2, 0);
+        graph.addEdges(2, 3);
 
-        heap.printHeap();
+        System.out.print(graph.toString());
     }
     
 }
