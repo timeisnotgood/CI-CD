@@ -1,4 +1,12 @@
 package Practice;
+import java.util.ArrayList;
+class AdjList {
+
+    void addEdjes(ArrayList<ArrayList<Integer>> al, int i, int j){
+        al.get(i).add(j);
+        al.get(j).add(i);
+    }
+}
 
 public class Solution {
 
@@ -34,15 +42,31 @@ public class Solution {
     }
 
     public static void main(String[] args) {
-        Solution graph = new Solution(4);
+        int v = 4;
+        ArrayList<ArrayList<Integer>> am = new ArrayList<ArrayList<Integer>>(v);
 
-        graph.addEdges(0, 1);
-        graph.addEdges(0, 2);
-        graph.addEdges(1, 2);
-        graph.addEdges(2, 0);
-        graph.addEdges(2, 3);
+        for (int i = 0; i < v; i++)
+            am.add(new ArrayList<Integer>());
 
-        System.out.print(graph.toString());
+        AdjList graph = new AdjList();
+
+        graph.addEdjes(am, 0, 1);
+        graph.addEdjes(am, 0, 2);
+        graph.addEdjes(am, 0, 3);
+        graph.addEdjes(am, 1, 2);
+
+        printGraph(am);
     }
+
+      // Print the graph
+  static void printGraph(ArrayList<ArrayList<Integer>> am) {
+    for (int i = 0; i < am.size(); i++) {
+      System.out.println("\nVertex " + i + ":");
+      for (int j = 0; j < am.get(i).size(); j++) {
+        System.out.print(" -> " + am.get(i).get(j));
+      }
+      System.out.println();
+    }
+  }
     
 }
