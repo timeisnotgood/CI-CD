@@ -60,7 +60,7 @@ public class Basic {
 
 
     public static void InsertionSort(int arr[], int n) {
-        for (int i = 1; i < n; i++) {  // Start from index 1
+        for (int i = 1; i < n; i++) {
             int j = i;
             while (j > 0 && arr[j - 1] > arr[j]) {
                 int temp = arr[j - 1];
