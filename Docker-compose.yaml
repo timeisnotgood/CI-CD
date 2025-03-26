@@ -1,5 +1,3 @@
-version: '3'
-
 services:
   Dsa:
     image: bhoopathi1/two:0.0.3
