@@ -89,44 +89,98 @@ public class Basic {
         merge(arr,low,mid,high);
     }
 
-    public void merge(int arr[], int low, int mid, int high){
-        ArrayList<Integer> temp = new ArrayList<>();
+    public void merge(int[] arr, int low, int mid, int high){
+        ArrayList<Integer> list = new ArrayList<>();
         int left = low;
-        int right = mid+1;
+        int right = mid +1;
 
         while (left <= mid && right <= high) {
             if (arr[left] <= arr[right]) {
-                temp.add(arr[left]);
+                list.add(arr[left]);
                 left++;
             }else{
-                temp.add(arr[right]);
+                list.add(arr[right]);
                 right++;
             }
         }
 
         while (left <= mid) {
-            temp.add(arr[left]);
+            list.add(arr[left]);
             left++;
         }
 
         while (right <= high) {
-            temp.add(arr[right]);
+            list.add(arr[right]);
             right++;
         }
 
         for (int i = low; i <= high; i++) {
-            arr[i] = temp.get(i - low);
+            arr[i] = list.get(i - low);
         }
+    }
+
+    public void secondLargest(int[] arr){
+        int max = arr[0];
+        int sec = arr[0];
+        for (int i = 0; i < arr.length; i++) {
+
+            if (arr[i] > max) {
+                sec = max;
+                max = arr[i];
+            }
+
+            if (arr[i] > sec && arr[i] < max) {
+                sec = arr[i];
+            }
+        }
+
+        System.out.println("-----> " + max + sec);
+    }
+
+    public void quickSort(int[] arr, int low, int high){
+        if (low < high) {
+            int privI = precetion(arr, low, high);
+            quickSort(arr, low, privI - 1);
+            quickSort(arr, privI + 1, high);
+        }
+    }
+
+    int precetion(int[] arr, int low, int high){
+        int prev = arr[low];
+        int i = low;
+        int j = high;
+
+        while (i < j) {
+            while (arr[i] <= prev && i <= high - 1) {
+                i++;
+            }
+
+            while (arr[j] > prev && j >= low +1) {
+                j--;
+            }
+
+            if (i < j) {
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+
+        int temp = arr[low];
+        arr[low] = arr[j];
+        arr[j] = temp;
+
+        return j;
     }
 
     public static void main(String[] args) {
 
        Basic algo = new Basic();
-       int selecarr[] = {6,7,2,8,1,4,};
+       int selecarr[] = {6,7,2,8,1,4};
 
 
     //    algo.HashingPrefetching();
-    //    algo.SelectionSort(selecarr, selecarr.length);
+    //    algo.secondLargest(selecarr);
     //    algo.InsertionSort(selecarr, selecarr.length);
 
         System.out.println("Before Sort --> " + Arrays.toString(selecarr));
