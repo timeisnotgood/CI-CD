@@ -1,72 +1,79 @@
 package Practice;
-import java.util.ArrayList;
-class AdjList {
-
-    void addEdjes(ArrayList<ArrayList<Integer>> al, int i, int j){
-        al.get(i).add(j);
-        al.get(j).add(i);
-    }
-}
 
 public class Solution {
 
-    private boolean adjMatrix[][];  // Changed Boolean[][] to boolean[][]
-    private int numVertices;
+    int[] heap;
+    int cap, size;
 
-    Solution(int numVertices) {
-        this.numVertices = numVertices;
-        this.adjMatrix = new boolean[this.numVertices][this.numVertices];  // Defaults to false
+    Solution(int cap){
+        this.cap = cap;
+        this.heap = new int[this.cap];
+        this.size = 0;
     }
 
-    void addEdges(int i, int j) {  // Fixed method name
-        this.adjMatrix[i][j] = true;
-        this.adjMatrix[j][i] = true;
-    }
+    int getparentIndex(int i) {return (i-1)/2;};
+    int getLeftIndex(int i) {return (i*2)+1;};
+    int getRightIndex(int i) {return (i*2)+2;};
 
-    void removeEdges(int i, int j) {  // Fixed method name
-        this.adjMatrix[i][j] = false;
-        this.adjMatrix[j][i] = false;
-    }
+    Boolean hasParent(int i) {return getparentIndex(i) >= 0;};
+    Boolean hasLeft(int i) {return getLeftIndex(i) < size;};
+    Boolean hasRight(int i) {return getRightIndex(i) < size;};
 
-    // Print the matrix
-    public String toString() {
-        StringBuilder s = new StringBuilder();
-        for (int i = 0; i < this.numVertices; i++) {
-            s.append(i + ": ");
-            for (int j = 0; j < this.numVertices; j++) {  // Fixed iteration
-                s.append((this.adjMatrix[i][j] ? 1 : 0) + " ");
-            }
-            s.append("\n");
+    int Parent(int i) {return heap[getparentIndex(i)];};
+    int Left(int i) {return heap[getLeftIndex(i)];};
+    int right(int i) {return heap[getRightIndex(i)];};
+
+    void insert(int val){
+        if (size + 1 == cap) {
+            throw new IllegalStateException("Heap is bull");
         }
-        return s.toString();
+
+        heap[size] = val;
+        size++;
+        heapifyUp();
     }
 
-    public static void main(String[] args) {
-        int v = 4;
-        ArrayList<ArrayList<Integer>> am = new ArrayList<ArrayList<Integer>>(v);
+    void heapifyUp(){
+        int index = size - 1;
 
-        for (int i = 0; i < v; i++)
-            am.add(new ArrayList<Integer>());
-
-        AdjList graph = new AdjList();
-
-        graph.addEdjes(am, 0, 1);
-        graph.addEdjes(am, 0, 2);
-        graph.addEdjes(am, 0, 3);
-        graph.addEdjes(am, 1, 2);
-
-        printGraph(am);
+        while (hasParent(index) && Parent(index) > heap[index]) {
+            swap(getparentIndex(index), index);
+            index = getparentIndex(index);
+        }
     }
 
-      // Print the graph
-  static void printGraph(ArrayList<ArrayList<Integer>> am) {
-    for (int i = 0; i < am.size(); i++) {
-      System.out.println("\nVertex " + i + ":");
-      for (int j = 0; j < am.get(i).size(); j++) {
-        System.out.print(" -> " + am.get(i).get(j));
-      }
-      System.out.println();
+    void swap(int i, int j){
+        int temp = heap[i];
+        heap[i] = heap[j];
+        heap[j] = temp;
     }
-  }
+
+    int extractMin(){
+        if (size  == -1) {
+            throw new IllegalStateException("No element");
+        }
+
+        int deleted = heap[0];
+        heap[0] = heap[size - 1];
+        size--;
+        heapifyDown();
+        return deleted;
+    }
+
+    void heapifyDown(){
+        int index = 0;
+
+        while (hasLeft(index)) {
+            int smallest = getLeftIndex(index);
+            if (hasRight(index) && right(index) < Left(index)) {
+                smallest = getRightIndex(index);
+            }
+
+            if (heap[index] < heap[smallest]) {break;}
+            else{swap(index, smallest);}
+            index = smallest;
+        }
+    }
+
     
 }

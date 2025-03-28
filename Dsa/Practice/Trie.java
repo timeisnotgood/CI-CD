@@ -29,6 +29,18 @@ public class Trie {
         node.isendofWord = true;
     }
 
+    boolean search(String word){
+        TrieNode node = root;
+        for(char ch: word.toCharArray()){
+            int index = ch - 'a';
+            if (node.data[index] == null) {
+                return false;
+            }
+            node = node.data[index];
+        }
+        return node.isendofWord;
+    }
+
     public static void main(String[] args) {
         Trie trie = new Trie();
     }
