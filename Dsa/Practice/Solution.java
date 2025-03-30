@@ -56,6 +56,30 @@ public class Solution {
         return i + 1;
     }
 
+    void reverse(){
+        int[]arr = {-1,-100,3,99};
+        int temp = arr[arr.length - 1];
+        int k = 3;
+
+        for(int j = 0; j <= k - 1; j++){
+            for (int i = arr.length - 1; i >= 0; i--) {
+                if (i == 0) {
+                    arr[i] = temp;
+                    temp = arr[arr.length - 1];
+                    break;
+                }
+                arr[i] = arr[i-1];
+            }
+        }
+
+
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(" " + arr[i]);
+        }
+
+        System.out.println("------->" + k);
+    }
+
 
     public static void main(String[] args) {
 
@@ -65,8 +89,8 @@ public class Solution {
         // System.out.println("Before ---> " + arr.toString());
         // algo.insertionSort(arr, arr.length );
 
-        int[] arr2 = {0,0,1,1,1,2,2,3,3,4};
-        algo.deleteDuplicate(arr2);
+        // int[] arr2 = {0,0,1,1,1,2,2,3,3,4};
+        algo.reverse();
         
     }
 
