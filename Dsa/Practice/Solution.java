@@ -61,7 +61,7 @@ public class Solution {
         int temp = arr[arr.length - 1];
         int k = 3;
 
-        for(int j = 0; j <= k - 1; j++){
+        for(int j = 0; j < k - 1; j++){
             for (int i = arr.length - 1; i >= 0; i--) {
                 if (i == 0) {
                     arr[i] = temp;
