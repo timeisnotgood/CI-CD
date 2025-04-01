@@ -20,6 +20,8 @@ public class Solution {
             if (arr[i] == max) {
                 count ++;
             }
+
+            
         }
 
         System.out.println("dsgfdfg---" + max +  " " + count);
