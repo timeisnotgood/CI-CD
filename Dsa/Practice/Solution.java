@@ -2,6 +2,18 @@ package Practice;
 
 public class Solution {
 
+    public void moveZeroes(int[] nums) {
+        int i = 0;        
+        for(int j = 0; j < nums.length; j++){
+            if(nums[j] != 0){
+                int temp = nums[j];
+                nums[j] = nums[i];
+                nums[i] = temp;
+                i++;
+            }
+        }
+    }
+
     public static void main(String[] args) {
         
         int arr[] = {9,8,5,3,2,1,9,5};
