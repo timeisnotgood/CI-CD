@@ -14,27 +14,29 @@ public class Solution {
         }
     }
 
+    public int TwoSum(int[] arr){
+      int i = 0;
+  
+      for (int j = 1; j < arr.length; j++) {
+            if (arr[i] != arr[j]) {
+                i++;
+                arr[i] = arr[j];
+            }
+        }
+
+      return i +1;
+
+    }
+
     public static void main(String[] args) {
-        
-        int arr[] = {9,8,5,3,2,1,9,5};
+        int[] arr = {1, 1, 2, 2, 3, 4, 4, 5, 6, 6, 6, 7};
 
-        int max = arr[0];
-        int count = 0;
+        Solution sort = new Solution();
+        int i = sort.TwoSum(arr);
 
-
-        for (int i = 1; i < arr.length; i++) {
-            if (arr[i] > max) {
-                max = arr[i];
-            }
+        for (int j = 0; j < i + 1; j++) {
+            System.out.println("--" + arr[j]);
         }
-
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] == max) {
-                count ++;
-            }
-        }
-
-        System.out.println("dsgfdfg---" + max +  " " + count);
     }
     
 }
