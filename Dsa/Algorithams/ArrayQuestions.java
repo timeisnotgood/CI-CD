@@ -31,13 +31,29 @@ public class ArrayQuestions {
 
         return max;
     }
+
+    public void minandmax(int[] arr){
+        int min = arr[0];
+        int max = arr[0];
+
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > max) {
+                max = arr[i];
+            }else if (arr[i] < min) {
+                min = arr[i];
+            }
+        }
+
+
+        System.out.println( "Min -- > " + min + "  max -- > " + max );
+    }
     
     public static void main(String[] args) {
         ArrayQuestions questions = new ArrayQuestions();
 
-        int[] arr = {1,2,4,5};
-        System.out.println(
-            questions.findtheMissing(arr)
-        );
+        int[] arr = {56789};
+        // System.out.println(
+        questions.minandmax(arr);
+        // );
     }
 }
