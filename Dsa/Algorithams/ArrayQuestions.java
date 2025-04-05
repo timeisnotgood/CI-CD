@@ -111,12 +111,37 @@ public class ArrayQuestions {
         return 0;
     }
     
+    public int longestSubarray(int[] arr, int k){
+        Map<Integer, Integer> map = new HashMap<>();
+        int sum = 0, maxLen = 0;
+
+        for (int i = 0; i < arr.length; i++) {
+            sum += arr[i];
+
+            // If the whole array from 0 to i sums to k
+            if (sum == k) {
+                maxLen = i + 1;
+            }
+
+            // If (sum - k) is found, subarray exists
+            if (map.containsKey(sum - k)) {
+                maxLen = Math.max(maxLen, i - map.get(sum - k));
+            }
+
+            // Store the first occurrence of the sum
+            if (!map.containsKey(sum)) {
+                map.put(sum, i);
+            }
+        }
+
+        return maxLen;
+    }
     public static void main(String[] args) {
         ArrayQuestions questions = new ArrayQuestions();
 
         int[] arr = {4,1,2,1,2};
         System.out.println("dfgdfsg---->" +
-        questions.singleElementMap(arr)
+        questions.longestSubarray()
         );
 
     }
