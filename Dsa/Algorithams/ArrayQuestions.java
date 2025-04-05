@@ -1,5 +1,8 @@
 package Algorithams;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ArrayQuestions {
 
     int findtheMissing(int[] arr){
@@ -47,13 +50,74 @@ public class ArrayQuestions {
 
         System.out.println( "Min -- > " + min + "  max -- > " + max );
     }
+
+    public void rotateAnarray(int arr[]){
+        int temp = arr[arr.length - 1];
+
+        for (int i = arr.length-1; i >= 0; i--) {
+            if (i == 0) {
+                arr[i] = temp;
+                break;
+            }
+
+            arr[i] = arr[i-1];
+        }
+
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(" " + arr[i]);
+        }
+    }
+
+    public int singleElement(int nums[]){
+
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
+
+        for (int num : nums) {
+            min = Math.min(min, num);
+            max = Math.max(max, num);
+        }
+
+        int arr[] = new int[max - min + 1];
+
+        for (int i : nums) {
+            arr[i - min]++;
+        }
+
+        for (int i = 0; i < arr.length; i++) {
+            if(arr[i] == 1) return (i + min);
+        }
+
+        return 0;
+
+    }
+
+    public int singleElementMap(int arr[]){
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i : arr) {
+            if (map.containsKey(i)) {
+                map.put(i, map.get(i) + 1);
+            }else{
+                map.put(i, 1);
+            }
+        }
+
+        for(Map.Entry<Integer, Integer> entry : map.entrySet()){
+            if (entry.getValue() == 1) {
+                return entry.getKey();
+            }
+        }
+
+        return 0;
+    }
     
     public static void main(String[] args) {
         ArrayQuestions questions = new ArrayQuestions();
 
-        int[] arr = {56789};
-        // System.out.println(
-        questions.minandmax(arr);
-        // );
+        int[] arr = {4,1,2,1,2};
+        System.out.println("dfgdfsg---->" +
+        questions.singleElementMap(arr)
+        );
+
     }
 }
