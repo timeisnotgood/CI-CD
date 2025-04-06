@@ -136,13 +136,35 @@ public class ArrayQuestions {
 
         return maxLen;
     }
+
+    public void mostWater(){
+        int arr[] = {1,8,6,2,5,4,8,3,7};
+
+        int i = 0;
+        int j = arr.length - 1;
+        int maxval = 0;
+        int maxlength = 0;
+
+        while ( i < j) {
+            int m = arr[i] * arr[j];
+            int l = i - j;
+            if (m > maxlength) {
+                maxval = Math.max(maxval, m);
+                maxlength = Math.max(maxlength, i-j);
+            }
+            i++;
+            j--;
+        }
+
+        System.out.println(maxlength + " ---- " + maxval);
+    }
     public static void main(String[] args) {
         ArrayQuestions questions = new ArrayQuestions();
 
         int[] arr = {4,1,2,1,2};
-        System.out.println("dfgdfsg---->" +
-        questions.longestSubarray()
-        );
+        // System.out.println("dfgdfsg---->" +
+        questions.mostWater();
+        // );
 
     }
 }
