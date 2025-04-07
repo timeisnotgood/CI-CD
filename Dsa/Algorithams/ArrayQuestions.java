@@ -158,12 +158,50 @@ public class ArrayQuestions {
 
         System.out.println(maxlength + " ---- " + maxval);
     }
+
+    public void TwoSum(){
+        int arr[] = {2, 7, 11, 15};
+        int k = 9;
+
+        int i = 0;
+        int j = arr.length - 1;
+
+        while (i < j) {
+            int sum = arr[i] + arr[j];
+            if (sum == k) {
+                System.out.println("----> " + arr[i] + " - " + arr[j] );
+                break;
+            }
+
+            if (sum < k) {
+                i++;
+            }
+
+            if (sum > k ) {
+                j--;
+            }
+        }
+    }
+
+    public void moveZeros(){
+        int arr[] = {0, 1, 0, 3, 12};
+        int i = 0;
+
+        for (int j = 1; j < arr.length; j++) {
+            if (arr[i] == 0 && arr[j] != 0) {
+                int temp = arr[j];
+                arr[j] = arr[i];
+                arr[i] = temp;
+                i++;
+            }
+        }
+    }
     public static void main(String[] args) {
         ArrayQuestions questions = new ArrayQuestions();
 
         int[] arr = {4,1,2,1,2};
         // System.out.println("dfgdfsg---->" +
-        questions.mostWater();
+        questions.moveZeros();
         // );
 
     }
