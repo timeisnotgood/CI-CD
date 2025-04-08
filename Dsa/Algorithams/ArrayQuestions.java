@@ -1,6 +1,8 @@
 package Algorithams;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ArrayQuestions {
@@ -196,12 +198,37 @@ public class ArrayQuestions {
             }
         }
     }
+
+    public void imidateSmallest(){
+        int arr[] = {4, 2, 1, 5, 3};
+        for (int i = 0; i < arr.length - 1; i++) {
+           if (arr[i+1] < arr[i]) {
+            int temp = arr[i];
+            arr[i] = arr[i+1];
+            arr[i+1] = temp;
+           }else{
+            arr[i] = -1;
+           }
+            
+        }
+
+        arr[arr.length - 1] = -1;
+
+        for (int j = 0; j < arr.length; j++) {
+            System.out.print(" " + arr[j]);
+        }
+    }
+
+
+
+
+
     public static void main(String[] args) {
         ArrayQuestions questions = new ArrayQuestions();
 
         int[] arr = {4,1,2,1,2};
         // System.out.println("dfgdfsg---->" +
-        questions.moveZeros();
+        questions.imidateSmallest();
         // );
 
     }
