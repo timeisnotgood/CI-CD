@@ -219,6 +219,31 @@ public class ArrayQuestions {
         }
     }
 
+    public void maxSubArray(){
+        int arr[] = {2, 1, 5, 1, 3, 2};
+        int k = 3;
+
+        int left = 0;
+        int max = 0;
+        int win_max = 0;
+        
+        for (int i = 0; i < k; i++) {
+            win_max += arr[i];
+        }
+
+        max = win_max;
+
+
+        for (int i = k; i < arr.length; i++) {
+            win_max = win_max - arr[left] + arr[i];
+            max = Math.max(win_max, max);
+            left++;
+        }
+
+        System.out.println(" - --> "+ max);
+        
+    }
+
 
 
 
@@ -228,7 +253,7 @@ public class ArrayQuestions {
 
         int[] arr = {4,1,2,1,2};
         // System.out.println("dfgdfsg---->" +
-        questions.imidateSmallest();
+        questions.maxSubArray();
         // );
 
     }
