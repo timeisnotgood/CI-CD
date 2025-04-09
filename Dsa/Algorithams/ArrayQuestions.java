@@ -348,15 +348,46 @@ public class ArrayQuestions {
     }
 
 
+    public void nearestNegative(){
+        int arr[] = {4 ,2, 1, 5, 3};
+
+        int i =0;
+        for (int j = 1; j < arr.length; j++) {
+            if (arr[i] > arr[j]) {
+                arr[i] = arr[j];
+                i++;
+            }else{
+                arr[i] = -1;
+                i++;
+            }
+        }
+
+        arr[arr.length - 1] = -1;
+
+        for (int j = 0; j < arr.length; j++) {
+            System.out.println(" - " + arr[j]);
+        }
+    }
+
+    // public Boolean isPalindrome(int n){
+    //     int original = n;
+    //     int rev = 0;
+
+    //     while (n > 0) {
+    //         int div = n % 10;
+    //         rev = rev * 10 + div;
+    //         n = Math.floor(n / 10);
+    //     }
+    // }
 
 
     public static void main(String[] args) {
         ArrayQuestions questions = new ArrayQuestions();
 
         int[] arr = {4,1,2,1,2};
-        System.out.println("dfgdfsg---->" +
-        questions.binarySearch()
-        ); 
+        // System.out.println("dfgdfsg---->" +
+        questions.nearestNegative();
+        // ); 
 
     }
 }
