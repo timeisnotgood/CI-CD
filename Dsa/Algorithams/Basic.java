@@ -206,6 +206,27 @@ public class Basic {
         return -1;
     }
 
+    int slidingWindaw(int[] arr, int k){
+        int max = 0;
+        int win_max = 0;
+        int left = 0;
+        
+        for(int i = 0; i< k;i++){
+            win_max += arr[i];
+        }
+        
+        max = Math.max(max, win_max);
+        
+        
+        for(int j = k;j<arr.length;j++){
+            win_max = win_max - arr[left] + arr[j];
+             max = Math.max(max, win_max);
+             left++;
+        }
+        
+        return max;
+    }
+
     public static void main(String[] args) {
 
        Basic algo = new Basic();
