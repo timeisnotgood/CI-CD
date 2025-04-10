@@ -59,8 +59,118 @@ public class TwoPointer {
 
     }
 
+    public void mergeSort(int[] arr, int low, int high){
+        if(low >= high) return;
+            int mid = (low + high)/2;
+            mergeSort(arr, low, mid);
+            mergeSort(arr, mid+1, high);
+            merge(arr, low, mid, high);
+        
+    }
+
+    void merge(int[] arr, int low, int mid, int high){
+        int left = low;
+        int right = mid + 1;
+        ArrayList<Integer> list = new ArrayList<>();
+
+        while (left <= mid && right <= high) {
+            if (arr[left] < arr[right]) {
+                list.add(arr[left]);
+                left++;        
+            }else{
+                list.add(arr[right]);
+                right++; 
+            }
+        }
+
+        while (left <= mid) {
+            list.add(arr[left]);
+            left++; 
+        }
+
+        while (right <= high) {
+            list.add(arr[right]);
+            right++; 
+        }
+
+
+        for (int i = low; i <= high; i++) {
+            arr[i] = list.get(i - low);
+        }
+    }
+
+
+    void quickSort(int[] arr, int low, int high){
+        if (low < high) {
+            int prev = precestion(arr, low, high);
+            quickSort(arr, low, prev - 1);
+            quickSort(arr, prev + 1, high);
+        }
+    }
+
+    int precestion(int[] arr, int low, int high){
+        int prev = arr[low];
+        int i = low;
+        int j = high;
+
+        while ( i < j) {
+            while (arr[i] <= prev && i <= high-1) {
+                i++;
+            }
+
+            while (arr[j] > prev && j >= low + 1) {
+                j--;
+            }
+
+            if (i < j) {
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+
+        int temp = arr[low];
+        arr[low] = arr[j];
+        arr[j] = temp;
+
+        return j;
+    }
+
+    void binarySearch(){
+        int arr[] = {1,2,3,4,6};
+        int tar = 6;
+
+        int left=0;
+        int right = arr.length  -1;
+
+        while (left <= right) {
+
+            int mid = left + (right - left) / 2;
+
+            System.out.println(mid);
+
+            if (arr[mid] == tar) {
+                System.out.println(" -- " +arr[mid]);
+                break;
+            }
+
+            if (arr[mid] < tar) {
+                left = mid + 1;
+            }else{
+                right = mid - 1;
+            }
+        }
+    }
+
+
     public static void main(String[] args) {
+       int[] arr = {5,2,6,8,1,3}; 
        TwoPointer pointer = new TwoPointer();
-       pointer.Twopointer();
+    //    pointer.quickSort(arr, 0, arr.length -1);
+    pointer.binarySearch();
+
+    //    for (int i = 0; i < arr.length; i++) {
+    //     System.out.println(" - " + arr[i]);
+    //    }
     }
 }
