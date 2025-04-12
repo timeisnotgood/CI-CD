@@ -173,6 +173,29 @@ public class Basic {
         return j;
     }
 
+    public int[] minAnd2ndMin(int arr[]) {
+        // code here
+        if(arr.length < 2) return new int[]{-1};
+        int fmin = Integer.MAX_VALUE;
+        int smin = Integer.MAX_VALUE;
+        
+        for(int num : arr){
+            if(num < fmin){
+                smin = fmin;
+                fmin = num;
+            }else if(num > fmin && num < smin){
+                smin = num;
+            }
+        }
+        
+        
+        if(smin == Integer.MAX_VALUE){
+            return new int[]{-1};
+        }
+        
+        return new int[]{fmin, smin};
+    }
+
     public boolean isSorted(int[] nums) {
         int count = 0, n = nums.length;
          for (int i = 0; i < n; i++) 
