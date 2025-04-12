@@ -196,6 +196,26 @@ public class Basic {
         return new int[]{fmin, smin};
     }
 
+    public int[] twoSum(int[] numbers, int target) {
+
+        int left = 0, right = numbers.length - 1;
+
+        while (left <= right) {
+            int element = numbers[left] + numbers[right];
+
+            if (element == target) {
+                return new int[] {numbers[left] , numbers[right]};
+            }
+
+            if (element < target) {
+                left++;
+            }else if (element > target) {
+                right--;
+            }
+        }
+        return new int[] {-1, -1};
+    }
+
     public boolean isSorted(int[] nums) {
         int count = 0, n = nums.length;
          for (int i = 0; i < n; i++) 
@@ -253,19 +273,15 @@ public class Basic {
     public static void main(String[] args) {
 
        Basic algo = new Basic();
-       int selecarr[] = {6,7,2,8,1,4};
+       int selecarr[] = {-1,0};
+       int k = -1;
 
 
-    //    algo.HashingPrefetching();
-    //    algo.secondLargest(selecarr);
-    //    algo.InsertionSort(selecarr, selecarr.length);
+        int arr[] = algo.twoSum(selecarr, k);
 
-        System.out.println("Before Sort --> " + Arrays.toString(selecarr));
-        System.out.println();
-        algo.mergeSort(selecarr, 0, selecarr.length - 1);
-        System.out.println();
-        System.out.println("After Sort --> " + Arrays.toString(selecarr));
-
+        for (int i = 0; i < arr.length; i++) {
+            System.out.println(" --> " + arr[i]);
+        }
 
     }
 }
