@@ -4,70 +4,83 @@ package Practice;
 class Node{
     int data;
     Node next;
-
     Node(int data){
         this.data = data;
-        this.next = null;
-    }
-
-    Node(int data, Node next){
-        this.data = data;
-        this.next = next;
     }
 }
 
-class LinkedList{
-    Node convertArrtoLL(int[] arr){
+class LinkedList {
+
+    public Node arrToLinked(int[] arr){
         Node head = new Node(arr[0]);
         Node mover = head;
 
         for (int i = 1; i < arr.length; i++) {
-            Node newNode = new Node(arr[i]);
-            mover.next = newNode;
-            mover = newNode;
+            Node newVal = new Node(arr[i]);
+            mover.next = newVal;
+            mover = newVal;
         }
+
         return head;
     }
 
-    void getList(Node head){
+    public Node insertHead(Node head, int val){
+        Node newVal = new Node(val);
+        newVal.next = head;
+        return newVal;
+    }
+
+    public Node insertEnd(Node head, int val){
+        Node newVal = new Node(val);
         Node temp = head;
 
         while (temp != null) {
-            System.out.println(temp.data);
-            temp = temp.next;
-        }
-    }
-
-    Node insertVal(Node root, int data, int val){
-        if (root == null) {
-            return root;
-        }
-
-        Node temp = root;
-
-        while (temp != null) {
-            Node newVal = new Node(data);
-            if (temp.data == val ) {
-                Node prev = temp;
-                Node next = temp.next;
-                prev.next = newVal;
-                newVal.next = next;
+            if (temp.next == null) {
+                temp.next = newVal;
+                break;
             }
             temp = temp.next;
         }
 
-        return root;
+        return head;
+    }
+
+    public Node insertAnyPoistion(Node head, int prev, int val){
+        Node newVal = new Node(val);
+        Node temp = head;
+
+        while (temp != null) {
+            if (temp.data == prev) {
+                newVal.next = temp.next;
+                temp.next = newVal;
+                break;
+            }
+            temp = temp.next;
+        }
+        return head;
+    }
+
+    public void listTraversal(Node head){
+        Node temp = head;
+
+        while (temp != null) {
+            System.out.print(temp.data + " -> ");
+            temp = temp.next;
+        }
     }
 }
-
 public class Linked {
     public static void main(String[] args) {
         LinkedList list = new LinkedList();
-        int[] arr = {3,6,1,7,8,9};
-        Node head = list.convertArrtoLL(arr);
+        int[] arr = {1,2,3,4,6,7,8};
+        Node head = list.arrToLinked(arr);
+        head = list.insertHead(head, 0);
+        head = list.insertEnd(head, 9);
+        head = list.insertAnyPoistion(head, 4, 5);
+        list.listTraversal(head);
 
-        System.out.println("Print List"+ head);
-        head = list.insertVal(head, 4, 3);
-        list.getList(head);
+        // System.out.println("Print List"+ head);
+        // head = list.insertVal(head, 4, 3);
+        // list.getList(head);
     }
 }

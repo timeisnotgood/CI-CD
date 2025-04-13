@@ -270,18 +270,36 @@ public class Basic {
         return max;
     }
 
+    public int[] twoSumUnsorted(int[] arr, int target){
+        if (arr.length < 2)  return new int[] {-1, -1};
+        int i = 0;
+        while (i < arr.length) {
+            for (int j = i+1; j < arr.length; j++) {
+                int sum = arr[i] + arr[j];
+                if (sum == target) {
+                    System.out.println(arr[i] + " - " + arr[j] +" --> " + sum);
+                    return new int[] {i, j};
+                }
+            }
+            i++;
+        }
+
+        return new int[] {-1, -1};
+    }
+
     public static void main(String[] args) {
 
        Basic algo = new Basic();
-       int selecarr[] = {-1,0};
-       int k = -1;
+       int selecarr[] = {3,3};
+       int k = 6;
 
+       algo.twoSumUnsorted(selecarr, k);
 
-        int arr[] = algo.twoSum(selecarr, k);
+        // int arr[] = algo.twoSum(selecarr, k);
 
-        for (int i = 0; i < arr.length; i++) {
-            System.out.println(" --> " + arr[i]);
-        }
+        // for (int i = 0; i < arr.length; i++) {
+        //     System.out.println(" --> " + arr[i]);
+        // }
 
     }
 }
