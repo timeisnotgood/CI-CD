@@ -61,6 +61,22 @@ public class Basic {
         }
     }
 
+    public void sortColors(int[] nums) {
+        int n = nums.length - 1;
+        for(int i = n;i >= 0; i--){
+            int swap = 0;
+            for(int j = 0;j <= i -1; j++){
+                if(nums[j] > nums[j + 1]){
+                    int temp = nums[j+1];
+                    nums[j+1] = nums[j];
+                    nums[j] = temp;
+                    swap = 1;
+                }
+            }
+            if(swap == 0) return;
+        }
+    }
+
 
     public static void InsertionSort(int arr[], int n) {
         for (int i = 1; i < n; i++) {
