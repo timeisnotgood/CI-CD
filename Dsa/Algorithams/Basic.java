@@ -303,18 +303,49 @@ public class Basic {
         return new int[] {-1, -1};
     }
 
+    public int removeElement(int[] nums, int val){
+        int i = 0;
+        for (int j = 0; j < nums.length; j++) {
+            if (nums[j] != val) {
+                nums[i] = nums[j];
+                i++;
+            }
+        }
+        return i+1;
+    }
+
+    public void joinTwoArray(){
+        int[] arr1 = {1, 2, 3};
+        int[] arr2 = {4, 5, 6};
+
+        // Create a new array big enough to hold both
+        int[] joined = new int[arr1.length + arr2.length];
+
+        for (int i = 0; i < arr1.length; i++) {
+            joined[i] = arr1[i];
+        }
+
+        for (int i = 0; i < arr2.length; i++) {
+            joined[arr1.length + i] = arr2[i];
+        }
+        
+        for (int i : joined) {
+            System.out.println(i +" - ");
+        }
+    }
+
     public static void main(String[] args) {
 
        Basic algo = new Basic();
-       int selecarr[] = {3,3};
-       int k = 6;
+       int selecarr[] = {3,2,2,3};
+       int k = 3;
 
-       algo.twoSumUnsorted(selecarr, k);
+       algo.joinTwoArray();
 
         // int arr[] = algo.twoSum(selecarr, k);
 
-        // for (int i = 0; i < arr.length; i++) {
-        //     System.out.println(" --> " + arr[i]);
+        // for (int i = 0; i < selecarr.length; i++) {
+        //     System.out.println(" --> " + selecarr[i]);
         // }
 
     }
