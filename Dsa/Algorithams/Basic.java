@@ -1,7 +1,10 @@
 package Algorithams;
 
+import java.security.KeyStore.Entry;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Basic {
 
@@ -334,13 +337,38 @@ public class Basic {
         }
     }
 
+    public int majorityElement(int[] nums) {
+        HashMap<Integer, Integer> list = new HashMap<>();
+
+        for (int i = 0; i < nums.length;i++) {
+            if (list.containsKey(nums[i])) {
+                list.put(nums[i], list.get(nums[i]) + 1);
+            }else{
+                list.put(nums[i], 1);
+            }
+
+        }
+
+        int key = 0;
+        int maxfrequency = Integer.MIN_VALUE;
+
+        for (Map.Entry<Integer,Integer> freq : list.entrySet() ) {
+            if (freq.getValue() > maxfrequency) {
+                maxfrequency = Math.max(maxfrequency, freq.getValue());
+                key = freq.getKey();
+            }
+            
+        }
+        return key;
+    } 
+
     public static void main(String[] args) {
 
        Basic algo = new Basic();
-       int selecarr[] = {3,2,2,3};
+       int selecarr[] = {2,2,1,1,1,2,2};
        int k = 3;
 
-       algo.joinTwoArray();
+       algo.majorityElement(selecarr);
 
         // int arr[] = algo.twoSum(selecarr, k);
 
