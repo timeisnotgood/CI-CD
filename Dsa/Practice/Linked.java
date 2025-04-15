@@ -68,6 +68,20 @@ class LinkedList {
             temp = temp.next;
         }
     }
+
+    public Node reverse(Node head){
+        Node prev = null;
+        Node cur = head;
+
+        while (cur != null) {
+            Node next = cur.next;
+            cur.next = prev;
+            prev = cur;
+            cur = next;
+        }
+
+        return prev;
+    }
 }
 public class Linked {
     public static void main(String[] args) {
@@ -78,6 +92,11 @@ public class Linked {
         head = list.insertEnd(head, 9);
         head = list.insertAnyPoistion(head, 4, 5);
         list.listTraversal(head);
+        head = list.reverse(head);
+        System.out.println();
+        list.listTraversal(head);
+
+
 
         // System.out.println("Print List"+ head);
         // head = list.insertVal(head, 4, 3);
