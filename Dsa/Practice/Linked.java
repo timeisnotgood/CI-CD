@@ -93,7 +93,7 @@ class LinkedList {
             maxvalue = Math.max(current, maxvalue);
         }
 
-        return maxvalue;
+        return Integer.MAX_VALUE;
     }
 }
 public class Linked {
@@ -110,6 +110,7 @@ public class Linked {
         // list.listTraversal(head);
 
         int[] nums = {-2,1,-3,4,-1,2,1,-5,4};
+        int[][] queries = { {1, 3}, {0, 4}, {2, 2} };
 
         list.maxSubArray(nums);
 
