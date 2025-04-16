@@ -82,19 +82,36 @@ class LinkedList {
 
         return prev;
     }
+
+    public int maxSubArray(int[] nums) {
+        int maxvalue =nums[0];
+        int current = nums[0];
+
+
+        for (int i = 1; i < nums.length; i++) {
+            current = Math.max(nums[i], current + nums[i]);
+            maxvalue = Math.max(current, maxvalue);
+        }
+
+        return maxvalue;
+    }
 }
 public class Linked {
     public static void main(String[] args) {
         LinkedList list = new LinkedList();
-        int[] arr = {1,2,3,4,6,7,8};
-        Node head = list.arrToLinked(arr);
-        head = list.insertHead(head, 0);
-        head = list.insertEnd(head, 9);
-        head = list.insertAnyPoistion(head, 4, 5);
-        list.listTraversal(head);
-        head = list.reverse(head);
-        System.out.println();
-        list.listTraversal(head);
+        // int[] arr = {1,2,3,4,6,7,8};
+        // Node head = list.arrToLinked(arr);
+        // head = list.insertHead(head, 0);
+        // head = list.insertEnd(head, 9);
+        // head = list.insertAnyPoistion(head, 4, 5);
+        // list.listTraversal(head);
+        // head = list.reverse(head);
+        // System.out.println();
+        // list.listTraversal(head);
+
+        int[] nums = {-2,1,-3,4,-1,2,1,-5,4};
+
+        list.maxSubArray(nums);
 
 
 
