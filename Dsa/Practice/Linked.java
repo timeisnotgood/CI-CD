@@ -116,19 +116,42 @@ class LinkedList {
 
         return Integer.MAX_VALUE;
     }
+
+    public int stock(int[] prices){
+        if (prices.length == 1) {
+            return 0;
+        }
+        int min_val = Integer.MAX_VALUE;
+        int max_val = 0;
+       
+
+
+        for (int i = 0; i < prices.length; i++) {
+            if (prices[i] < min_val) {
+                min_val = prices[i];
+            }else{
+                max_val = Math.max(max_val, prices[i] - max_val);
+            }
+        }
+
+        return max_val;
+
+    }
 }
 public class Linked {
     public static void main(String[] args) {
         LinkedList list = new LinkedList();
-        int[] arr = {1,2,3,4,5,6,7,8};
-        Node head = list.arrToLinked(arr);
+        int[] arr = {7,6,4,3,1};
+        // Node head = list.arrToLinked(arr);
 
-        list.listTraversal(head);
-        System.out.println();
-        System.out.println(
-            "--> " +
-            list.cycleDetection(head)
-        );
+        // list.listTraversal(head);
+        // System.out.println();
+        // System.out.println(
+        //     "--> " +
+        //     list.cycleDetection(head)
+        // );
+
+        list.stock(arr);
 
 
 
