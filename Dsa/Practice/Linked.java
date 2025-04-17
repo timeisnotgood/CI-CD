@@ -83,6 +83,27 @@ class LinkedList {
         return prev;
     }
 
+    public Node cycleDetection( Node head){
+        Node slow = head;
+        Node fast = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+
+            while (slow == fast) {
+                Node entry = head;
+
+                while (entry != slow) {
+                    entry = entry.next;
+                    slow = slow.next;
+                }
+                return entry;
+            }
+        }
+        return null;
+    }
+
     public int maxSubArray(int[] nums) {
         int maxvalue =nums[0];
         int current = nums[0];
@@ -99,25 +120,17 @@ class LinkedList {
 public class Linked {
     public static void main(String[] args) {
         LinkedList list = new LinkedList();
-        // int[] arr = {1,2,3,4,6,7,8};
-        // Node head = list.arrToLinked(arr);
-        // head = list.insertHead(head, 0);
-        // head = list.insertEnd(head, 9);
-        // head = list.insertAnyPoistion(head, 4, 5);
-        // list.listTraversal(head);
-        // head = list.reverse(head);
-        // System.out.println();
-        // list.listTraversal(head);
+        int[] arr = {1,2,3,4,5,6,7,8};
+        Node head = list.arrToLinked(arr);
 
-        int[] nums = {-2,1,-3,4,-1,2,1,-5,4};
-        int[][] queries = { {1, 3}, {0, 4}, {2, 2} };
-
-        list.maxSubArray(nums);
+        list.listTraversal(head);
+        System.out.println();
+        System.out.println(
+            "--> " +
+            list.cycleDetection(head)
+        );
 
 
 
-        // System.out.println("Print List"+ head);
-        // head = list.insertVal(head, 4, 3);
-        // list.getList(head);
     }
 }
