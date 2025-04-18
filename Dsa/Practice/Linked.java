@@ -104,6 +104,20 @@ class LinkedList {
         return null;
     }
 
+    void leftRotate(int arr[], int d) {
+        // code here
+          int temp = arr[0];
+          int a = 0;
+          while(a < d){
+              for(int i = 0; i < arr.length - 1;i++){
+                  arr[i] = arr[i + 1];
+              }
+              arr[arr.length - 1] = temp;
+              temp = arr[0];
+              a++;
+          }
+    }
+
     public int maxSubArray(int[] nums) {
         int maxvalue =nums[0];
         int current = nums[0];
@@ -135,7 +149,6 @@ class LinkedList {
         }
 
         return max_val;
-
     }
 }
 public class Linked {
