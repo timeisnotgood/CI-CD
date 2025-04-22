@@ -1,5 +1,8 @@
 package Practice;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 class Node{
     int data;
@@ -151,30 +154,42 @@ class LinkedList {
         return max_val;
     }
 
-    public void binSort(int[] arr) {
+    public void binSort(int[] arr, int d) {
         // code here
 
-       int i = 0;
-
-       for (int j = 0; j < arr.length; j++) {
-        if (arr[j] == 0) {
-            int temp = arr[j];
-            arr[j] = arr[i];
-            arr[i] = temp;
-            i++;
+        int n = arr.length;
+        for (int a = 0; a < d; a++) {
+            int temp = arr[0];
+            for (int i = 0; i < n - 1; i++) {
+                arr[i] = arr[i + 1];
+            }
+            arr[n - 1] = temp;
         }
-       }
 
        for (int inn : arr) {
-        System.out.println(inn + " ");
+        System.out.print(inn + " ");
        }
 
+    }
+
+    public void countOfElements(){
+        List<Integer> arr = Arrays.asList(10, 1, 2, 8, 4, 5);        
+        int x = 5, cnt = 0;
+
+        for (int i = 0; i < arr.size(); i++) {
+            if (arr.get(i) <= x) {
+                cnt++;
+            }
+        }
+
+        System.out.println("---> " + cnt);
     }
 }
 public class Linked {
     public static void main(String[] args) {
         LinkedList list = new LinkedList();
-        int[] arr = {1, 0, 1, 1, 1, 1, 1, 0, 0, 0};
+        int[] arr = {1, -2, -3, 4, 5, 6, 7};
+        int d = 2;
         // Node head = list.arrToLinked(arr);
 
         // list.listTraversal(head);
@@ -184,7 +199,7 @@ public class Linked {
         //     list.cycleDetection(head)
         // );
 
-        list.binSort(arr);
+        list.countOfElements();
 
 
 
