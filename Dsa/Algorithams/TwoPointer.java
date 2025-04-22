@@ -162,12 +162,29 @@ public class TwoPointer {
         }
     }
 
+    int missingNum(int arr[]) {
+        // code here    
+        int[] hash = new int[arr.length + 2];
+
+        for (int i = 0; i < arr.length; i++) {
+           hash[arr[i]] = 1;
+        }
+
+        for (int i = 1;i < hash.length;i++) {
+
+            if (hash[i] == 0) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
 
     public static void main(String[] args) {
-       int[] arr = {5,2,6,8,1,3}; 
+       int[] arr = {1,2,3,5}; 
        TwoPointer pointer = new TwoPointer();
     //    pointer.quickSort(arr, 0, arr.length -1);
-    pointer.binarySearch();
+        pointer.missingNum(arr);
 
     //    for (int i = 0; i < arr.length; i++) {
     //     System.out.println(" - " + arr[i]);

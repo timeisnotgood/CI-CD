@@ -150,11 +150,31 @@ class LinkedList {
 
         return max_val;
     }
+
+    public void binSort(int[] arr) {
+        // code here
+
+       int i = 0;
+
+       for (int j = 0; j < arr.length; j++) {
+        if (arr[j] == 0) {
+            int temp = arr[j];
+            arr[j] = arr[i];
+            arr[i] = temp;
+            i++;
+        }
+       }
+
+       for (int inn : arr) {
+        System.out.println(inn + " ");
+       }
+
+    }
 }
 public class Linked {
     public static void main(String[] args) {
         LinkedList list = new LinkedList();
-        int[] arr = {7,6,4,3,1};
+        int[] arr = {1, 0, 1, 1, 1, 1, 1, 0, 0, 0};
         // Node head = list.arrToLinked(arr);
 
         // list.listTraversal(head);
@@ -164,7 +184,7 @@ public class Linked {
         //     list.cycleDetection(head)
         // );
 
-        list.stock(arr);
+        list.binSort(arr);
 
 
 
