@@ -184,24 +184,32 @@ class LinkedList {
 
         System.out.println("---> " + cnt);
     }
+
+    public void insertAtIndex(int arr[],int sizeOfArray,int index,int element){
+        //Your code here, Geeks
+        int[] altered = new int[sizeOfArray + 1];
+        int j = 0;
+        for(int i = 0;i < altered.length;i++){
+            if(i == index){
+                 altered[i] = element;
+            }else{
+                altered[i] = arr[j];
+                j++;
+            }
+        }
+    }
 }
 public class Linked {
     public static void main(String[] args) {
         LinkedList list = new LinkedList();
-        int[] arr = {1, -2, -3, 4, 5, 6, 7};
         int d = 2;
-        // Node head = list.arrToLinked(arr);
 
-        // list.listTraversal(head);
-        // System.out.println();
-        // System.out.println(
-        //     "--> " +
-        //     list.cycleDetection(head)
-        // );
+        int[] arr = {1, 2, 3, 4, 5};
+        list.insertAtIndex(arr,arr.length, 0, 6);
 
-        list.countOfElements();
-
-
+        for(int inn : arr){
+            System.out.print(inn + " ");
+        }
 
     }
 }
