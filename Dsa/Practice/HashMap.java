@@ -1,6 +1,9 @@
 package Practice;
 
 import java.security.KeyStore.Entry;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
 
 public class HashMap<K, V> {
@@ -67,24 +70,44 @@ public class HashMap<K, V> {
         list.removeIf(entry -> entry.key.equals(key));
     }
 
+    public void listing(){
+        int[] arr = {1, 2, 5, 3, 1, 2};
+        ArrayList<Integer> list = new ArrayList<>();
+        
+        int max = arr[arr.length - 1];
+        list.add(max);
+
+        for (int i = arr.length - 1; i >=0 ; i--) {
+            if (arr[i] > max) {
+                max = arr[i];
+                list.add(max);
+            }
+        }
+
+        Collections.reverse(list);
+        System.out.println(list);  // Output: [5, 3, 2]
+    }
+
 
 
 
     public static void main(String[] args) {
         HashMap map = new HashMap<>(10);
-        map.put("one", "Bhoop");
-        map.put("two", "liss");
-        map.put("three", "gook");
+        // map.put("one", "Bhoop");
+        // map.put("two", "liss");
+        // map.put("three", "gook");
 
-        System.out.println(" ----- > " + 
-        map.lookUp("three")
-        );
+        // System.out.println(" ----- > " + 
+        // map.lookUp("three")
+        // );
 
-        map.delete("two");
+        // map.delete("two");
 
-        System.out.println(" ----- > " + 
-        map.lookUp("two")
-        );
+        // System.out.println(" ----- > " + 
+        // map.lookUp("two")
+        // );
+
+        map.listing();
     }
 
 
