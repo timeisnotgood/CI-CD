@@ -389,6 +389,10 @@ public class Basic {
         return longest;
     }
 
+    public void insertatIndex(int arr[],int sizeOfArray,int index,int element){
+
+    }
+
     public static void main(String[] args) {
 
        Basic algo = new Basic();
