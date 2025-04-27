@@ -43,6 +43,7 @@ class Stack {
         if (top == -1){
             System.out.println("no value in stack");
             return;
+            
         }
         top = top-1;
     }
