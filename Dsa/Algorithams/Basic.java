@@ -428,8 +428,28 @@ public class Basic {
         System.out.println(" --> " + maxSum);
     }
 
+    public void binarySdearch(){
+        int[] arr = {5,7,7,8,10};
+        int k = 8;
+        int i = 0;
+        int j = arr.length - 1;
 
-    
+        while (i < j) {
+            int mid = i + j /2;
+
+            if (arr[mid] == k) {
+                System.out.println(arr[mid]);
+                break;
+            }else if(arr[mid] < k){
+                i++;
+            }else{
+                j--;
+            }
+        }
+    }
+
+
+
 
     public static void main(String[] args) {
 
@@ -437,7 +457,7 @@ public class Basic {
        int selecarr[] = {2,2,1,1,1,2,2};
        int k = 3;
 
-       algo.kadansalgo();
+       algo.binarySdearch();
 
         // int arr[] = algo.twoSum(selecarr, k);
 
