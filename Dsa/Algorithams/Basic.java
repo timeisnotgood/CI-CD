@@ -389,9 +389,47 @@ public class Basic {
         return longest;
     }
 
-    public void insertatIndex(int arr[],int sizeOfArray,int index,int element){
+    public void insertatIndex(){
+        int[] nums = {2, 4, 1, 3, 5};
+        int[][] queries = {{1, 3}, {0, 4}, {2, 4}};
 
+        int[] prefix = new int[nums.length];
+        prefix[0] = nums[0];
+
+        for (int i = 1; i < nums.length; i++) {
+            prefix[i] = prefix[i - 1] + nums[i];
+        }
+
+        for(int[] querie : queries){
+            int l = querie[0];
+            int r = querie[1];
+            int sum;
+            if (l == 0) {
+                sum = prefix[r];
+            }else{
+                sum = prefix[r] - prefix[l-1]; 
+            }
+
+            System.out.println(sum);
+        }
     }
+
+    public void kadansalgo(){
+        int[] arr = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
+
+        int currentNum = arr[0];
+        int maxSum = arr[0];
+
+        for (int i = 1; i < arr.length; i++) {
+            currentNum = Math.max(maxSum, arr[i] + maxSum);
+            maxSum = Math.max(maxSum, currentNum);
+        }
+
+        System.out.println(" --> " + maxSum);
+    }
+
+
+    
 
     public static void main(String[] args) {
 
@@ -399,7 +437,7 @@ public class Basic {
        int selecarr[] = {2,2,1,1,1,2,2};
        int k = 3;
 
-       algo.majorityElement(selecarr);
+       algo.kadansalgo();
 
         // int arr[] = algo.twoSum(selecarr, k);
 
