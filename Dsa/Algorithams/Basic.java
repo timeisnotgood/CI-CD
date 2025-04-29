@@ -389,30 +389,6 @@ public class Basic {
         return longest;
     }
 
-    public void insertatIndex(){
-        int[] nums = {2, 4, 1, 3, 5};
-        int[][] queries = {{1, 3}, {0, 4}, {2, 4}};
-
-        int[] prefix = new int[nums.length];
-        prefix[0] = nums[0];
-
-        for (int i = 1; i < nums.length; i++) {
-            prefix[i] = prefix[i - 1] + nums[i];
-        }
-
-        for(int[] querie : queries){
-            int l = querie[0];
-            int r = querie[1];
-            int sum;
-            if (l == 0) {
-                sum = prefix[r];
-            }else{
-                sum = prefix[r] - prefix[l-1]; 
-            }
-
-            System.out.println(sum);
-        }
-    }
 
     public void kadansalgo(){
         int[] arr = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
@@ -447,6 +423,7 @@ public class Basic {
             }
         }
     }
+
 
 
 
