@@ -49,14 +49,6 @@ public class HeapPrac {
         heapfyUp();
     }
 
-    // Print the heap
-    public void printHeap() {
-        for (int i = 0; i < size; i++) {
-            System.out.print(heap[i] + " ");
-        }
-        System.out.println();
-    }
-
     public static void main(String[] args) {
         HeapPrac heap = new HeapPrac(10);
 
@@ -65,7 +57,6 @@ public class HeapPrac {
         heap.insert(4);
         heap.insert(3);
 
-        heap.printHeap();
     }
 
 }
