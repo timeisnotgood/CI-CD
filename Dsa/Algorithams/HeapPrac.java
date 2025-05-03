@@ -49,6 +49,28 @@ public class HeapPrac {
         heapfyUp();
     }
 
+    void heapifyDown(){
+        int index = 0;
+        while (hasLeft(index)) {
+            int smallestValue = leftIndex(index);
+            if (hasRight(index) && right(index) < left(index)) {
+                smallestValue = rightIndex(index);
+            }
+            if (heap[index] < heap[smallestValue]) {break;}
+            else{swap(index, smallestValue);}
+            index = smallestValue;
+        }
+    }
+
+    int extractMin(){
+        if (size == 0) throw new IllegalStateException("Heap is Empty");
+        int min = heap[0];
+        heap[0] = heap[size -1];
+        size--;
+        heapifyDown();
+        return min;
+    }
+
     public static void main(String[] args) {
         HeapPrac heap = new HeapPrac(10);
 
