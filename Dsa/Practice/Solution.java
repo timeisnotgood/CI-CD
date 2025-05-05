@@ -80,15 +80,40 @@ public class Solution {
         return j;
     }
 
+    int binarySearch(int arr[], int value){
+        int low = 0;
+        int high = arr.length - 1;
+
+        while (low <= high) {
+            int mid = low + (high - low) /2;
+
+            if (arr[mid] == value) {
+                return arr[mid];
+            }
+
+            if (arr[mid] < value) {
+                low = mid + 1;
+            }else{
+                high = mid - 1;
+            }
+        }
+
+        return 0;
+        
+    }
+
     public static void main(String[] args) {
         Solution obj = new Solution();
 
         int[] arr = {38, 27, 43, 3, 9, 82, 10};
 
-        obj.quickSort(arr, 0, arr.length - 1);
+        System.out.println(
 
-        for(int a : arr){
-            System.out.print(a + " ");
-        }
+            obj.binarySearch(arr, 9)
+        );
+
+        // for(int a : arr){
+        //     System.out.print(a + " ");
+        // }
     }
 }
