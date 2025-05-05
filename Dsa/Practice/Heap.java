@@ -60,6 +60,7 @@ public class Heap {
             if (hasright(index) && right(index) < left(index)) {
                 smallestValue = rightChildIndex(index);
             }
+            
             if (heap[index] < heap[smallestValue]) {break;}
             else{swap(index, smallestValue);}
             index = smallestValue;
