@@ -71,6 +71,21 @@ public class HeapPrac {
         return min;
     }
 
+    void heapfyDown(){
+        int index = 0;
+        while (hasLeft(index)) {
+            int smallestvalue = leftIndex(index);
+            if (hasLeft(index) && right(index) < left(index)) {
+                smallestvalue = rightIndex(index);
+            }
+
+            if (heap[index] < heap[smallestvalue]) {
+                break;
+            }else{
+                swap(index, smallestvalue);
+            }
+        }
+    }
     public static void main(String[] args) {
         HeapPrac heap = new HeapPrac(10);
 

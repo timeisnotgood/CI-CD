@@ -66,6 +66,20 @@ public class Heap {
         }
     }
 
+    void heapfyDoswn(){
+        int index = 0;
+        while (hasLeft(index)) {
+            int smallestValue = leftChildIndex(index);
+            if (hasright(index) && right(index) < left(index)) {
+                smallestValue = rightChildIndex(index);
+            }
+            if(heap[index] < heap[smallestValue]){break;}
+            else{swap(index, smallestValue);};
+            index = smallestValue;
+        }
+    }
+
+
     int extractMin(){
         if (size == 0) throw new IllegalStateException("Heap is Empty");
         int min = heap[0];
