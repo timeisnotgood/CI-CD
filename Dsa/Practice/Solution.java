@@ -1,5 +1,7 @@
 package Practice;
 
+import java.util.PriorityQueue;
+
 public class Solution {
 
     int[] heap;
@@ -79,5 +81,40 @@ public class Solution {
         size--;
         heapfyDown();
         return deleted;
+    }
+
+     public int[] Klargest(int[] arr, int k){
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+        
+        for(int num : arr){
+            minHeap.offer(num);
+            
+            if(minHeap.size() > k){
+                minHeap.poll();
+            }
+        }
+        
+        int[] result = new int[k];
+       int i = 0;
+       
+       for(int num : minHeap){
+           result[i] = num;
+           i++;
+       }
+       
+       return result;
+    }
+
+    public static void main(String[] args) {
+        Solution obj = new Solution(10);
+
+        int[] arr = {0, 5, 20, 100, 70, 30};
+        int k = 3;
+        int[] largest = obj.Klargest(arr, k);
+        
+        System.out.print("Heap element :--> ");
+        for(int num : largest){
+            System.out.print(" " + num);
+        }
     }
 }
