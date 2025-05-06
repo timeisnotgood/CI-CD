@@ -1,94 +1,57 @@
 package Practice;
 
+import java.util.ArrayList;
+
 public class Solution {
 
-    int[] heap;
-    int size, cap;
+    void mergeSort(int arr[], int low, int high){
+        if(low < high){
+            int mid = (low + high) /2;
 
-    Solution(int cap){
-        this.cap = cap;
-        this.size = 0;
-        this.heap = new int[cap];
-    }
-
-    int parentIndex(int i){return (i-1) /2;}
-    int leftIndex(int i){return (i*2) +1;}
-    int rightIndex(int i){return (i*2) + 2;}
-
-    Boolean hasParent(int i){return parentIndex(i) >=0;}
-    Boolean hasLeft(int i){return leftIndex(i) < size;}
-    Boolean hasRight(int i){return rightIndex(i) < size;}
-
-    int parent(int i){return heap[parentIndex(i)];}
-    int left(int i){return heap[leftIndex(i)];}
-    int right(int i){return heap[rightIndex(i)];}
-
-    void swap(int i, int j){
-        int temp = heap[i];
-        heap[i] = heap[j];
-        heap[j] = temp;
-    }
-
-    void heapfyUp(){
-        int index = size - 1;
-
-        while (hasParent(index) && parent(index) > heap[index]) {
-            swap(parentIndex(index), index);
-            index = parentIndex(index);
+            mergeSort(arr, low, mid);
+            mergeSort(arr, mid+1, high);
+            merge(arr, low, mid, high);
         }
     }
 
-    void heapfyDown(){
-        int index = 0;
-
-        while (hasLeft(index)) {
-            int smallestIndex = leftIndex(index);
-
-            if (hasRight(index) && right(index) < left(index)) {
-                smallestIndex = rightIndex(index);
-            }
-
-            if (heap[index] < heap[smallestIndex]) {
-                break;
+    void merge(int arr[], int low, int mid, int high){
+        ArrayList<Integer> list = new ArrayList<>();
+        int left = 0;
+        int right = mid + 1;
+        
+        while (left <= mid && right <= high) {
+            if (arr[left] < arr[right]) {
+                list.add(arr[left]);
+                left++;
             }else{
-                swap(index, smallestIndex);
+                list.add(arr[right]);
+                right++;
             }
-
-            index = smallestIndex;
-        }
-    }
-
-    void insert(int val){
-        if (size == cap) {
-            System.out.println(" Heap is BUll !!");
-            return;
         }
 
-        heap[size] = val;
-        size++;
-        heapfyUp();
-    }
-
-    int extractMin(){
-        if (size == 0) {
-            System.out.println("No element to extract !!");
-            return -1;
+        while (left <= mid) {
+            list.add(arr[left]);
+            left++;
         }
 
-        int deleted = heap[0];
-        heap[0] = heap[size - 1];
-        size--;
-        heapfyDown();
-        return deleted;
-    }
+        while (right <= high) {
+            list.add(arr[right]);
+            right++;
+        }
 
+        for (int i = low; i <= high; i++) {
+            arr[i] = list.get(i - low);
+        }
+    }
 
     public static void main(String[] args) {
-        Solution obj = new Solution(10);
 
-        obj.insert(2);
-        obj.insert(3);
-        obj.insert(4);
-        obj.insert(5);
+        Solution obj = new Solution();
+        int arr[] = {38, 27, 43, 3, 9, 82, 10};
+        obj.mergeSort(arr, 0, arr.length - 1);
+
+        for(int num : arr){
+            System.out.print("--> " + num);
+        }
     }
 }
