@@ -1,127 +1,118 @@
 package Practice;
 
+import java.util.ArrayList;
+
 public class Solution {
 
-    int[] heap;
-    int size, capacity;
-
-    // Constructor
-    public Solution(int capacity) {
-        this.capacity = capacity;
-        this.size = 0;
-        this.heap = new int[capacity];
-    }
-
-    // Helper methods for index calculation
-    int parent(int i) { return (i - 1) / 2; }
-    int left(int i) { return 2 * i + 1; }
-    int right(int i) { return 2 * i + 2; }
-
-    // Swap elements
-    void swap(int i, int j) {
-        int temp = heap[i];
-        heap[i] = heap[j];
-        heap[j] = temp;
-    }
-
-    // Heapify up after insert
-    void heapifyUp() {
-        int index = size - 1;
-        while (index > 0 && heap[parent(index)] > heap[index]) {
-            swap(index, parent(index));
-            index = parent(index);
+    void mergeSort(int arr[], int low, int high){
+        if(low < high){
+            int mid = (low+high) /2;
+            mergeSort(arr, low, mid);
+            mergeSort(arr, mid + 1, high);
+            merge(arr, low, mid, high);
         }
     }
 
-    // Heapify down after remove
-    void heapifyDown() {
-        int index = 0;
+    void merge(int arr[], int low, int mid, int high){
+        ArrayList<Integer> list = new ArrayList<>();
+        int left = low;
+        int right = mid + 1;
 
-        while (left(index) < size) {
-            int smallerChild = left(index);
+        while (left <= mid && right <= high) {
+            if (arr[left] <= arr[right]) {
+                list.add(arr[left]);
+                left++;
+            }else{
+                list.add(arr[right]);
+                right++;
+            }
+        }
 
-            if (right(index) < size && heap[right(index)] < heap[left(index)]) {
-                smallerChild = right(index);
+        while (left <= mid) {
+            list.add(arr[left]);
+            left++;
+        }
+
+        while (right <= high) {
+            list.add(arr[right]);
+            right++;
+        }
+
+
+        for (int i = low; i <= high; i++) {
+            arr[i] = list.get(i-low);
+        }
+    }
+
+    void quickSort(int arr[], int low, int high){
+        if (low < high) {
+            int peviot = partition(arr, low, high);
+            quickSort(arr, low, peviot - 1);
+            quickSort(arr, peviot + 1, high);
+        }
+    }
+
+    int partition(int[] arr, int low, int high){
+        int peviot = arr[high];
+        int i = low;
+        int j = high - 1;
+
+        while (i <= j) {
+            while (arr[i] <= peviot && i <= high - 1) {
+                i++;
             }
 
-            if (heap[index] <= heap[smallerChild]) break;
+            while (arr[j] > peviot && j >= low + 1) {
+                j--;
+            }
 
-            swap(index, smallerChild);
-            index = smallerChild;
-        }
-    }
-
-    // Insert a new value into the heap
-    public void insert(int value) {
-        if (size == capacity) {
-            System.out.println("Heap is full!");
-            return;
+            if (i < j) {
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
         }
 
-        heap[size] = value;
-        size++;
-        heapifyUp();
+        int temp = arr[i];
+        arr[i] = arr[high];
+        arr[high] = temp;
+        return i;
     }
 
-    // Remove and return the minimum value (root)
-    public int poll() {
-        if (size == 0) {
-            System.out.println("Heap is empty!");
-            return -1;
+    void binarySearch(){
+        int arr[] = {2, 5, 8, 12, 16, 23, 38, 56, 72, 91};
+        int k = 12;
+
+        int low = 0;
+        int high = arr.length - 1;
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+
+            if (arr[mid] == k) {
+                System.out.println("mid -> " + mid);
+                break;
+            }
+
+            if (arr[mid] < k) {
+                low = mid + 1;
+            }else{
+                high = mid - 1;
+            }
         }
-
-        int min = heap[0];
-        heap[0] = heap[size - 1];
-        size--;
-        heapifyDown();
-
-        return min;
     }
-
-    // Peek the minimum value without removing it
-    public int peek() {
-        if (size == 0) {
-            System.out.println("Heap is empty!");
-            return -1;
-        }
-        return heap[0];
-    }
-
-    // Check if the heap is empty
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
-    // Print the heap
-    public void printHeap() {
-        for (int i = 0; i < size; i++) {
-            System.out.print(heap[i] + " ");
-        }
-        System.out.println();
-    }
-
 
     public static void main(String[] args) {
+        Solution obj = new Solution();
+        int[] arr= {2, 5, 8, 12, 16, 23, 38, 56, 72, 91};
+        // obj.mergeSort(arr, 0, arr.length - 1);
 
-        Solution pq = new Solution(10);
+        obj.binarySearch();
 
-       int[] arr = {10, 5, 20, 100, 70, 30};
-
-       int k = 3;
-
-
-       for(int num : arr){
-            pq.insert(num);
-            if (pq.size > k) {
-                pq.poll();
-            }
-       }
-
-       int[] result = new int[k];
-       int i = 0;
-       for(int num : pq.heap){
-        result[i] = num;
-       }
         
+        // for(int num : arr){
+        //     System.out.print(" " + num);
+        // }
+
     }
 }
