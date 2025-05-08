@@ -47,7 +47,7 @@ public class Heap {
 
     void heapifyUp(){
         int index = size -1;
-        while (hasParent(index) && parent(index) > heap[index]) {
+        while (hasParent(index) && parent(index) < heap[index]) {
             swap(getparentIndex(index), index);
             index = getparentIndex(index);
         }
@@ -61,7 +61,7 @@ public class Heap {
                 smallestValue = rightChildIndex(index);
             }
             
-            if (heap[index] < heap[smallestValue]) {break;}
+            if (heap[index] > heap[smallestValue]) {break;}
             else{swap(index, smallestValue);}
             index = smallestValue;
         }
@@ -105,19 +105,28 @@ public class Heap {
         System.out.println();
     }
 
+    void findKSmallest(int[] nums, int k){
+        Heap minHeap = new Heap(k);
+
+        for(int num : nums){
+            minHeap.insert(num);
+            if (minHeap.size > k) {
+                minHeap.extractMin();
+            }
+        }
+
+        for(int i = 0; i < minHeap.size; i++){
+            System.out.println("- >  " + minHeap.heap[i]);
+        }
+    }
+
 
     public static void main(String[] args) {
         Heap minHeap = new Heap(10);
 
-        // Insert elements into the heap
-        minHeap.insert(15);
-        minHeap.insert(10);
-        minHeap.insert(20);
-        minHeap.insert(8);
+        int[] arr = {10, 3, 5, 7, 6, 2, 8, 1, 9};
+        int k = 3;
 
-        // Extract the minimum element
-        System.out.println("Extracted Min: " + minHeap.extractMin());
-        System.out.println("Heap after ---->");
-        minHeap.printHeap();
+        minHeap.findKSmallest(arr, k);
     }
 }
