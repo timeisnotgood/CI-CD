@@ -1,67 +1,48 @@
 package Practice;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class Solution {
 
-    int convertZero(int num){
-        if(num == 0 ) return 0;
+    static class Node{
+        int data;
+        Node next;
 
-        int digit = num % 10;
-        if (digit == 0) {
-            digit = 5;
+        Node(int data){
+            this.data = data;
+            this.next = null;
         }
-
-        return convertZero(num / 10) * 10 + digit; 
     }
 
-    int convertion(int num){
-        if (num == 0) {
-            return 5;
+    Node convertArrtoLL(int arr[]){
+        Node head = new Node(arr[0]);
+        Node mover = head;
+
+        for (int i = 1; i < arr.length; i++) {
+            Node newNode = new Node(arr[i]);
+            mover.next = newNode;
+            mover = newNode;
         }
 
-        return convertZero(num);
+        return head;
     }
 
-
-
-    int getOddOccurrence(int[] arr, int n) {
-        // code here
-
-        if (arr.length == 1) {
-            return arr[0];
+    void printLL(Node head){
+        Node temp = head;
+        
+        while (temp != null) {
+            System.out.println("--> " + temp.data);
         }
-
-        HashMap<Integer, Integer> count = new HashMap<>();
-
-        for(int num : arr){
-            if (count.containsKey(num)) {
-                count.put(num, count.get(num) + 1);
-            }else{
-                count.put(num, 1);
-            }
-        }
-
-        for(Map.Entry<Integer, Integer> entry : count.entrySet()){
-            if (entry.getValue() % 2 != 0) {
-                return entry.getKey();
-            }
-        }
-
-        return - 1;
-       
     }
 
-    public static void main(String[] args) {
-        int[] num = {1, 2, 3, 2, 3, 1, 3};
-        Solution obj = new Solution();
+    Node reverse(Node head){
+        Node prev = null;
+        Node cur = head;
 
-        System.out.println("-- > " +
-            obj.getOddOccurrence(num, num.length - 1)
-        );
-
-
-        // System.out.println(" -->  " + );
+        while (cur != null) {
+            Node next = cur.next;
+            cur.next = prev;
+            prev = cur;
+            cur = next;
+        }
+        return prev;
     }
 }
