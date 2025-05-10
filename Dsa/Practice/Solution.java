@@ -73,4 +73,29 @@ public class Solution {
            System.out.println("--> " + num);
        }
     }
+
+    Boolean ls(int[] arr, int num){
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == num) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    void longestSuccessiveElements(int[] arr){
+        int longest = 1;
+
+        for (int i = 0; i < arr.length; i++) {
+            int x = arr[i];
+            int cnt = 1;
+
+            while (ls(arr, x+1) == true) {
+                x = x+1;
+                cnt +=1;
+            }
+
+            longest = Math.max(longest, cnt);
+        }
+    }
 }
