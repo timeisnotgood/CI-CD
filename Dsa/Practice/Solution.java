@@ -45,4 +45,32 @@ public class Solution {
         }
         return prev;
     }
+
+     void maxSumarrayKadan(int arr[]){
+        int maxSum = 0;
+        int currSum = 0;
+        
+        for(int num : arr){
+            currSum += num;
+            maxSum = Math.max(currSum, maxSum);
+         
+             if(currSum < 0){
+                 currSum = 0;
+             }   
+        }
+        
+        System.out.println("-- > " +  maxSum);
+    }
+
+    void maxSumarrayPrefixSum(int arr[], int n){
+       int[] result = new int[n];
+       result[0] = arr[0];
+       for(int i = 1; i < n; i++){
+           result[i] = result[i - 1] + arr[i];
+       }
+       
+       for(int num : result){
+           System.out.println("--> " + num);
+       }
+    }
 }
