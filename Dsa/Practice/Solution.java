@@ -102,31 +102,4 @@ public class Solution {
         }
     }
 
-    public int longestConsecutive(int[] nums) {
-        if (nums == null || nums.length == 0) {
-            return 0;
-        }
-
-        Set<Integer> set = new HashSet<>();
-        for (int num: nums) {
-            set.add(num);
-        }
-
-        int lcs = 0;
-        for (int val: set) {
-            if (!set.contains(val - 1)) {
-                int current = val;
-                int currentStack = 1;
-
-                while (set.contains(current + 1)) {
-                    current += 1;
-                    currentStack++;
-                }
-
-                lcs = Math.max(lcs, currentStack);
-            }
-        }
-
-        return lcs;
-    }
 }
