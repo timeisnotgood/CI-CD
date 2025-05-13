@@ -1,105 +1,42 @@
 package Practice;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
 
 public class Solution {
 
-    static class Node{
-        int data;
-        Node next;
+    ArrayList<ArrayList<Integer>> list;
+    int cap;
 
-        Node(int data){
-            this.data = data;
-            this.next = null;
+    Solution(int cap){
+        this.cap = cap;
+        this.list = new ArrayList<>(cap);
+
+        for (int i = 0; i < cap; i++) {
+            list.add(new ArrayList<>());
         }
     }
 
-    Node convertArrtoLL(int arr[]){
-        Node head = new Node(arr[0]);
-        Node mover = head;
-
-        for (int i = 1; i < arr.length; i++) {
-            Node newNode = new Node(arr[i]);
-            mover.next = newNode;
-            mover = newNode;
-        }
-
-        return head;
+    void addNode(int v, int e){
+        list.get(v).add(e);
+        list.get(e).add(v);
     }
 
-    void printLL(Node head){
-        Node temp = head;
-        
-        while (temp != null) {
-            System.out.println("--> " + temp.data);
+    void printAll(){
+        for (int i = 0; i < cap; i++) {
+            System.out.println(list.get(i));
         }
     }
 
-    Node reverse(Node head){
-        Node prev = null;
-        Node cur = head;
+    public static void main(String[] args) {
+        Solution obj = new Solution(10);
 
-        while (cur != null) {
-            Node next = cur.next;
-            cur.next = prev;
-            prev = cur;
-            cur = next;
-        }
-        return prev;
+        obj.addNode(1, 2);
+        obj.addNode(1, 3);
+        obj.addNode(2, 4);
+        obj.addNode(2, 5);
+        obj.addNode(3, 6);
+        obj.addNode(3, 7);
+
+        obj.printAll();
     }
-
-     void maxSumarrayKadan(int arr[]){
-        int maxSum = 0;
-        int currSum = 0;
-        
-        for(int num : arr){
-            currSum += num;
-            maxSum = Math.max(currSum, maxSum);
-         
-             if(currSum < 0){
-                 currSum = 0;
-             }   
-        }
-        
-        System.out.println("-- > " +  maxSum);
-    }
-
-    void maxSumarrayPrefixSum(int arr[], int n){
-       int[] result = new int[n];
-       result[0] = arr[0];
-       for(int i = 1; i < n; i++){
-           result[i] = result[i - 1] + arr[i];
-       }
-       
-       for(int num : result){
-           System.out.println("--> " + num);
-       }
-    }
-
-    Boolean ls(int[] arr, int num){
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] == num) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    void longestSuccessiveElements(int[] arr){
-        int longest = 1;
-
-        for (int i = 0; i < arr.length; i++) {
-            int x = arr[i];
-            int cnt = 1;
-
-            while (ls(arr, x+1) == true) {
-                x = x+1;
-                cnt +=1;
-            }
-
-            longest = Math.max(longest, cnt);
-        }
-    }
-
 }
