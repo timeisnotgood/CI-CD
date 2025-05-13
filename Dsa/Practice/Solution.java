@@ -1,42 +1,69 @@
 package Practice;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Solution {
 
-    ArrayList<ArrayList<Integer>> list;
-    int cap;
-
-    Solution(int cap){
-        this.cap = cap;
-        this.list = new ArrayList<>(cap);
-
-        for (int i = 0; i < cap; i++) {
-            list.add(new ArrayList<>());
+    static ArrayList<ArrayList<Integer>> matrixRow(ArrayList<ArrayList<Integer>> matrix, int m, int n, int i){
+        for (int j = 0; j < n; j++) {
+            if (matrix.get(i).get(j) != 0) {
+                matrix.get(i).set(j, -1);
+            }
         }
+        return matrix;
     }
 
-    void addNode(int v, int e){
-        list.get(v).add(e);
-        list.get(e).add(v);
-    }
-
-    void printAll(){
-        for (int i = 0; i < cap; i++) {
-            System.out.println(list.get(i));
+    static ArrayList<ArrayList<Integer>> matrixCol(ArrayList<ArrayList<Integer>> matrix, int m, int n, int i){
+        for (int j = 0; j < m; j++) {
+            if (matrix.get(j).get(i) != 0) {
+                matrix.get(j).set(i, -1);
+            }
         }
+        return matrix;
     }
+
+    static ArrayList<ArrayList<Integer>> zeroMatrix( ArrayList<ArrayList<Integer>> matrix, int m, int n){
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (matrix.get(i).get(j) == 0) {
+                    matrixRow(matrix, m, n, i);
+                    matrixCol(matrix, m, n, j);
+                }
+            }
+        }
+
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (matrix.get(i).get(j) == -1) {
+                    matrix.get(i).set(j, 0);
+                }
+            }
+        }
+
+        return matrix;
+     }
 
     public static void main(String[] args) {
-        Solution obj = new Solution(10);
+        ArrayList<ArrayList<Integer>> Matrix = new ArrayList<>();
 
-        obj.addNode(1, 2);
-        obj.addNode(1, 3);
-        obj.addNode(2, 4);
-        obj.addNode(2, 5);
-        obj.addNode(3, 6);
-        obj.addNode(3, 7);
+        Matrix.add(new ArrayList<>(Arrays.asList(1,1,1)));
+        Matrix.add(new ArrayList<>(Arrays.asList(1,0,1)));
+        Matrix.add(new ArrayList<>(Arrays.asList(1,1,1)));
 
-        obj.printAll();
+        int m = Matrix.size();
+        int n = Matrix.get(0).size();
+
+        ArrayList<ArrayList<Integer>> ans = zeroMatrix(Matrix, m, n);
+
+        System.out.println("The Final matrix is: ");
+        System.out.println(" ");
+
+        for (ArrayList<Integer> row : ans) {
+            for (Integer ele : row) {
+                System.out.print(ele + " ");
+            }
+            System.out.println();
+        }
     }
 }
