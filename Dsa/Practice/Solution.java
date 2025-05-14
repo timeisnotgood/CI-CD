@@ -58,6 +58,46 @@ public class Solution {
         return bfs;
     }
 
+    public ArrayList<Integer> dfsGraph(int v, ArrayList<ArrayList<Integer>> adj){
+        boolean[] vis = new boolean[v - 1];
+        ArrayList<Integer> list = new ArrayList<>();
+        dfs(0, vis, adj, list);
+        return list;
+    }
+
+    public void dfs(int node, boolean[] vis, ArrayList<ArrayList<Integer>> adj, ArrayList<Integer> list){
+
+        vis[node] = true;
+        list.add(node);
+
+        for(Integer it : adj.get(node)){
+            if (vis[it] == false) {
+                dfs(it, vis, adj, list);
+            }
+        }
+    }
+
+
+    public void bfs(){
+        ArrayList<Integer> bfs = new ArrayList<>();
+        boolean[] vis = new boolean[this.cap];
+        Queue<Integer> q = new LinkedList<>();
+
+        q.add(0);
+        vis[0] = true;
+
+        while (!q.isEmpty()) {
+            Integer node = q.poll();
+            bfs.add(node);
+            for(Integer it : this.list.get(node)){
+                if (vis[it] == false) {
+                    vis[it] = true;
+                    q.add(it);
+                }
+            }
+        }
+    }
+
     public static void main(String[] args) {
         Solution obj = new Solution(7);
 
@@ -68,9 +108,9 @@ public class Solution {
         obj.addNode(2, 5);
         obj.addNode(2, 6);
 
-        ArrayList<Integer> list = obj.bfsSearch();
-        for(Integer num : list){
-            System.out.println(" -- > " + num);
-        }
+        ArrayList<Integer> list = obj.dfsGraph(obj.cap, obj.list);
+        // for(Integer num : list){
+        //     System.out.println(" -- > " + num);
+        // }
     }
 }
