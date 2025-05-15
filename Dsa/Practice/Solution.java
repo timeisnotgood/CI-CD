@@ -1,116 +1,67 @@
 package Practice;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.List;
 
 public class Solution {
 
-    ArrayList<ArrayList<Integer>> list;
-    int cap;
-
-    Solution(int cap){
-        this.cap = cap;
-        this.list = new ArrayList<>(cap);
-
-        for (int i = 0; i < cap; i++) {
-            list.add(new ArrayList<>());
-        }
-    }
-
-    void addNode(int v, int e){
-        list.get(v).add(e);
-        list.get(e).add(v);
-    }
-
-    void printAdj(ArrayList<ArrayList<Integer>> list){
+    public String longest(List<String> arr) {
+        int max = Integer.MIN_VALUE;
+        int index = 0;
         int i = 0;
-        for(ArrayList<Integer> node : list ){
-            System.out.print(i + " ->  ");
-            for(Integer num : node){
-               System.out.print(num + " ");
+
+        for(String val : arr){
+            int winlen = val.toCharArray().length;
+            if (winlen > max) {
+                max = winlen;
+                index = i;
             }
-            System.out.println();
-            i += 1;
+            i++;
         }
+        
+        return arr.get(index);
     }
 
-    public ArrayList<Integer> bfsSearch(){
-        ArrayList<Integer> bfs = new ArrayList<>();
-        boolean[] vis = new boolean[cap];
-        Queue<Integer> q = new LinkedList<>();
+    int[] getMoreAndLess(int[] arr, int target) {
+        // code here
+        
+        int less = 0;
+        int high = 0;
 
-        q.add(0);
-        vis[0] = true;
+        for(int i = 0; i < arr.length;i++){
+            int sum = arr[i];
 
-        while (!q.isEmpty()) {
-            Integer node = q.poll();
-            bfs.add(node);
-
-            for(Integer it : list.get(node)){
-                if (vis[it] == false) {
-                    vis[it] = true;
-                    q.add(it);
-                }
+            if (sum <= target) {
+                less += 1;
+            }
+            
+            if(sum >= target){
+                high += 1;
             }
         }
 
-        return bfs;
-    }
-
-    public ArrayList<Integer> dfsGraph(int v, ArrayList<ArrayList<Integer>> adj){
-        boolean[] vis = new boolean[v - 1];
-        ArrayList<Integer> list = new ArrayList<>();
-        dfs(0, vis, adj, list);
-        return list;
-    }
-
-    public void dfs(int node, boolean[] vis, ArrayList<ArrayList<Integer>> adj, ArrayList<Integer> list){
-
-        vis[node] = true;
-        list.add(node);
-
-        for(Integer it : adj.get(node)){
-            if (vis[it] == false) {
-                dfs(it, vis, adj, list);
-            }
-        }
-    }
-
-
-    public void bfs(){
-        ArrayList<Integer> bfs = new ArrayList<>();
-        boolean[] vis = new boolean[this.cap];
-        Queue<Integer> q = new LinkedList<>();
-
-        q.add(0);
-        vis[0] = true;
-
-        while (!q.isEmpty()) {
-            Integer node = q.poll();
-            bfs.add(node);
-            for(Integer it : this.list.get(node)){
-                if (vis[it] == false) {
-                    vis[it] = true;
-                    q.add(it);
-                }
-            }
-        }
+        return new int[]{less, high};
     }
 
     public static void main(String[] args) {
-        Solution obj = new Solution(7);
+        
+        List<String> list = new ArrayList<>();
+        list.add("Geek");
+        list.add("Geeks");
+        list.add("Geeksfor");
+        list.add("GeeksforGeek");
+        list.add("GeeksforGeeks");
 
-        obj.addNode(0, 1);
-        obj.addNode(0, 2);
-        obj.addNode(1, 3);
-        obj.addNode(1, 4);
-        obj.addNode(2, 5);
-        obj.addNode(2, 6);
+        int arr[] = {1, 2, 8, 10, 11, 12, 19};
+        int target = 10;
 
-        ArrayList<Integer> list = obj.dfsGraph(obj.cap, obj.list);
-        // for(Integer num : list){
-        //     System.out.println(" -- > " + num);
-        // }
+        Solution obj = new Solution();
+
+        // String val = obj.longest(list);
+        int[] vals = obj.getMoreAndLess(arr, target);
+
+        System.out.println("--> " + "[" + vals[0] + ", " + vals[1] + "]");
+
+
     }
 }
