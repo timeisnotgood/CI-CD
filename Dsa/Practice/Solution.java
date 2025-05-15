@@ -1,67 +1,86 @@
 package Practice;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Solution {
 
-    public String longest(List<String> arr) {
-        int max = Integer.MIN_VALUE;
-        int index = 0;
-        int i = 0;
+    ArrayList<ArrayList<Integer>> adj;
+    int cap;
 
-        for(String val : arr){
-            int winlen = val.toCharArray().length;
-            if (winlen > max) {
-                max = winlen;
-                index = i;
-            }
-            i++;
+    Solution(int cap){
+        this.cap = cap;
+        this.adj = new ArrayList<>(cap);
+
+        for (int i = 0; i < cap; i++) {
+            adj.add(new ArrayList<>());
         }
-        
-        return arr.get(index);
     }
 
-    int[] getMoreAndLess(int[] arr, int target) {
-        // code here
-        
-        int less = 0;
-        int high = 0;
+    void addedges(int v, int e){
+        adj.get(v).add(e);
+        adj.get(e).add(v);
+    }
 
-        for(int i = 0; i < arr.length;i++){
-            int sum = arr[i];
+    public ArrayList<Integer> bfs(ArrayList<ArrayList<Integer>> adj, int cap){
 
-            if (sum <= target) {
-                less += 1;
-            }
-            
-            if(sum >= target){
-                high += 1;
+        ArrayList<Integer> bfss = new ArrayList<>();
+        boolean[] vis = new boolean[cap];
+        Queue<Integer> q = new LinkedList<>();
+
+        q.add(0);
+        vis[0] = true;
+
+        while (!q.isEmpty()) {
+            Integer node = q.poll();
+            bfss.add(node);
+
+            for(Integer it : adj.get(node)){
+                if (vis[it] == false) {
+                    vis[it] = true;
+                    q.add(it);
+                }
             }
         }
 
-        return new int[]{less, high};
+        return bfss;
+
+    }
+
+    public ArrayList<Integer> dfsGraph(ArrayList<ArrayList<Integer>> adj, int v){
+        ArrayList<Integer> list = new ArrayList<>();
+        boolean[] vis = new boolean[v - 1];
+        dfs(0, list, adj, vis);
+        return list;
+    }
+
+    public void dfs(int node, ArrayList<Integer> list, ArrayList<ArrayList<Integer>> adj,  boolean[] vis){
+        vis[node] = true;
+        list.add(node);
+
+        for(Integer it: adj.get(node)){
+            if (vis[it] == false) {
+                dfs(it, list, adj, vis);
+            }
+        }
     }
 
     public static void main(String[] args) {
-        
-        List<String> list = new ArrayList<>();
-        list.add("Geek");
-        list.add("Geeks");
-        list.add("Geeksfor");
-        list.add("GeeksforGeek");
-        list.add("GeeksforGeeks");
 
-        int arr[] = {1, 2, 8, 10, 11, 12, 19};
-        int target = 10;
+        Solution obj = new Solution(7);
+        obj.addedges(0, 1);
+        obj.addedges(0, 2);
+        obj.addedges(1, 3);
+        obj.addedges(1, 4);
+        obj.addedges(2, 5);
+        obj.addedges(2, 6);
 
-        Solution obj = new Solution();
+        ArrayList<Integer> list = obj.dfsGraph(obj.adj, obj.cap);
 
-        // String val = obj.longest(list);
-        int[] vals = obj.getMoreAndLess(arr, target);
-
-        System.out.println("--> " + "[" + vals[0] + ", " + vals[1] + "]");
-
+        for(int val : list){
+            System.out.println("--> " + val);
+        }
 
     }
 }
