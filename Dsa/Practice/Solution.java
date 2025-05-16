@@ -66,21 +66,39 @@ public class Solution {
         }
     }
 
-    public static void main(String[] args) {
+    void Degree(){
+        int[][] matrix = {{1,2,3},{4,5,6},{7,8,9}};
+        int m = matrix.length;
+        int n = matrix[0].length;
+        int[][] rotateMatrix = new int[m][n];
 
-        Solution obj = new Solution(7);
-        obj.addedges(0, 1);
-        obj.addedges(0, 2);
-        obj.addedges(1, 3);
-        obj.addedges(1, 4);
-        obj.addedges(2, 5);
-        obj.addedges(2, 6);
-
-        ArrayList<Integer> list = obj.dfsGraph(obj.adj, obj.cap);
-
-        for(int val : list){
-            System.out.println("--> " + val);
+        for (int i = 0; i < n; i++) {
+            int[] Column = new int[n];
+            for (int j = m -1; j >= 0; j--) {
+                Column[(m - 1) - j] = matrix[j][i];
+            }
+            rotateMatrix[i] = Column;
+        }
+        for (int i = 0; i < m; i++) {
+            matrix[i] = rotateMatrix[i];
         }
 
+        for (int i = 0; i < m; i++) {
+            System.out.print("[ ");
+            for (int j = 0; j < n; j++) {
+                System.out.print(matrix[i][j]);
+                if (j != n - 1) {
+                    System.out.print(" ");
+                }
+            }
+            System.out.print(" ]");
+            System.out.println();
+        }
+    }
+
+    public static void main(String[] args) {
+
+       Solution obj = new Solution(10);
+       obj.Degree();
     }
 }
