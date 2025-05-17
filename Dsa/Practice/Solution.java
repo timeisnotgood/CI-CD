@@ -1,7 +1,9 @@
 package Practice;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class Solution {
@@ -96,9 +98,32 @@ public class Solution {
         }
     }
 
+    void swapKthEle(){
+        List<Integer> arr = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8));
+        int k = 3;
+        int i = 0, j = arr.size() - 1;
+
+
+        while (i < j) {
+            if (i + 1 == k) {
+                int temp = arr.get(i);
+                System.out.println("--> " + arr.get(j));
+                arr.set(i, arr.get(j));
+                arr.set(j, temp);
+                break;
+            }
+            i++;
+            j--;
+        }
+
+        for(int num : arr){
+            System.out.print( num + " ");
+        }
+    }
+
     public static void main(String[] args) {
 
        Solution obj = new Solution(10);
-       obj.Degree();
+       obj.swapKthEle();
     }
 }
