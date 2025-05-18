@@ -20,11 +20,6 @@ public class Solution {
         }
     }
 
-    void addedges(int v, int e){
-        adj.get(v).add(e);
-        adj.get(e).add(v);
-    }
-
     public ArrayList<Integer> bfs(ArrayList<ArrayList<Integer>> adj, int cap){
 
         ArrayList<Integer> bfss = new ArrayList<>();
