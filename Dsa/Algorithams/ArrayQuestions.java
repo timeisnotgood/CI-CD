@@ -370,6 +370,23 @@ public class ArrayQuestions {
         return j;
     }
 
+     public void swapKth(List<Integer> arr, int k) {
+        // code here
+        int i = 0, j = arr.size() - 1;
+
+        while (i < arr.size()) {
+            if (i + 1 == k) {
+                int temp = arr.get(i);
+                arr.set(i, arr.get(j));
+                arr.set(j, temp);
+                break;
+            }
+            i++;
+            j--;
+        }
+
+    }
+
 
     public void nearestNegative(){
         int arr[] = {4 ,2, 1, 5, 3};
