@@ -45,6 +45,26 @@ public class Solution {
 
     }
 
+    public void bfss(ArrayList<ArrayList<Integer>> adj, int cap){
+        ArrayList<Integer> bfs = new ArrayList<>();
+        boolean[] vis = new boolean[cap - 1];
+        Queue<Integer> q = new LinkedList<>();
+
+        q.add(0);
+        vis[0] = true;
+
+        while (!q.isEmpty()) {
+            Integer node = q.poll();
+            bfs.add(node);
+            for(int it : adj.get(node) ){
+                if (vis[it] != true) {
+                    vis[it] = true;
+                    q.add(it);
+                }
+            }
+        }
+    }
+
     public ArrayList<Integer> dfsGraph(ArrayList<ArrayList<Integer>> adj, int v){
         ArrayList<Integer> list = new ArrayList<>();
         boolean[] vis = new boolean[v - 1];
