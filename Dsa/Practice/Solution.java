@@ -1,43 +1,130 @@
 package Practice;
+/**
+ * LinkedList
+ */
+class LinkedLst {
+    int data;
+    LinkedLst next;
 
-import java.util.LinkedList;
-
-public class Solution<k, v> {
-
-    static class Entry<k,v> {
-        k key;
-        v val;
-        Entry(k key, v val){
-            this.key = key;
-            this.val = val;
-        }
+    LinkedLst(int dat){
+        this.data = dat;
+        this.next = null;
     }
 
-    LinkedList<Entry<k,v>>[] bucket;
-    int cap;
+    LinkedLst(int dat, LinkedLst nxt){
+        this.data = dat;
+        this.next = nxt;
+    }
+}
 
-    Solution(int cap){
+
+class stack {
+    int[] stk;
+    int cap, top;
+
+    stack(int cap){
         this.cap = cap;
-        this.bucket = new LinkedList[cap];
-        for (int i = 0; i < bucket.length; i++) {
-            this.bucket[i] = new LinkedList<>();
-        }
+        this.top = 0;
+        this.stk = new int[cap];
     }
 
-    int index(k key){
-        return Math.abs(key.hashCode()) % this.cap;
+    void push(int val){
+        if (top + 1 == cap) {
+            System.out.println("Stack is full");
+            return;
+        }
+
+        stk[top++] = val;
     }
 
-    void addPairs(k key, v val){
-        int i = index(key);
-
-        for(Entry<k, v> entry : bucket[i]){
-            if (entry.key.equals(key)) {
-                entry.val = val;
-                return;
-            }
+    void pop(){
+        if (top == 0) {
+            System.out.println("Stk is empty");
+            return;
         }
-        bucket[i].add(new Entry(key, val));
+        top--;
     }
     
+}
+
+class queue {
+    int[] que;
+    int top, end, cap, size;
+
+    queue(int cap){
+        this.cap = cap;
+        this.top = this.end = -1;
+        this.size = 0;
+        this.que = new int[cap];
+    }
+
+    void push(int val){
+        if (size == cap) {
+            System.out.println("Queue is full");
+            return;
+        }else if (top == -1) {
+            top = end = 0;
+        }else{
+            end = (end + 1 ) % 10;
+        }
+
+        que[end] = val;
+    }
+
+    void pop(){
+        if (size == 0) {
+            System.out.println("queue is empty");
+            return;
+        }
+
+        top++;
+    }
+    
+}
+
+
+class stkLL {
+
+    LinkedLst top;
+    int size = 0;
+
+    void push(int val){
+       LinkedLst newNode = new LinkedLst(val);
+       top.next = newNode;
+       top = newNode;
+       size++;
+    }
+
+    void pop(){
+        if (size == 0) {
+            System.out.println("stk is empty");
+            return;
+        }
+
+        this.top = this.top.next;
+        size--;
+    }
+    
+}
+
+class queueLL {
+    LinkedLst top, end;
+    int size = 0;
+    
+    void push(int val){
+        LinkedLst newNode = new LinkedLst(val);
+
+        if (top == null) {
+            top = end = newNode;
+        }else{
+            end.next = newNode;
+            end = newNode;
+        }
+    }
+}
+public class Solution {
+
+    public static void main(String[] args) {
+        System.out.println("sddgf");
+    }
 }
