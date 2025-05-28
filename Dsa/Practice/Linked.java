@@ -172,6 +172,18 @@ class LinkedList {
 
     }
 
+    public static boolean isPerfect(int[] arr) {
+        // code here
+        for(int i = 0;i < arr.length;i++){
+            int j = (arr.length - 1) - i;
+            if(i == j || i + 1 ==  j) return true;
+            if(arr[i] != arr[j]){
+                return false;
+            }
+        }
+        return false;
+    }
+
     public void countOfElements(){
         List<Integer> arr = Arrays.asList(10, 1, 2, 8, 4, 5);        
         int x = 5, cnt = 0;
