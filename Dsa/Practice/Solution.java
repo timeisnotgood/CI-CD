@@ -35,5 +35,31 @@ public class Solution {
         }
     }
 
+    Node cycleDetection(Node head){
+        Node slow = head;
+        Node fast = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next;
+
+            if (slow == fast) {
+                Node entry = head;
+
+                while (entry != slow) {
+                    entry = entry.next;
+                    slow = slow.next;
+                }
+                return entry;
+            }
+        }
+
+        return null;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("--> Linked List");
+    }
+
 
 }
