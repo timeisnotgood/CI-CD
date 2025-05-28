@@ -1,46 +1,39 @@
 package Practice;
 
-    class Node {
-        int data;
-        Node left, right;
+class Node {
+    int data;
+    Node next;
 
-        Node(int data){
-            this.data = data;
-            this.left = this.right = null;
-        }
+    Node(int val){
+        this.data = val;
+        this.next = null;
     }
+}
 
 public class Solution {
-    Node root;
 
-    void insert(int val){
-        root = insertrec(val, root);
+    void convertarrLL(int[] arr){
+        Node head = new Node(arr[0]);
+        Node mover = head;
+
+        for (int i = 0; i < arr.length; i++) {
+            Node newnode = new Node(i);
+            mover.next = newnode;
+            mover = newnode;
+        }
     }
 
-    Node insertrec(int val, Node root){
-        if (root == null) {
-            return new Node(val);
-        }
+    void reverse(Node head){
+        Node prev = null;
+        Node curr = head;
 
-        if (val < root.data) {
-            root.left = insertrec(val, root.left);
-        }else if (val > root.data) {
-            root.right = insertrec(val, root.right);
-        }
-
-        return root;
-    }
-
-    void PostOrderTraversal(Node root){
-        if (root != null) {
-            PostOrderTraversal(root.left);
-            PostOrderTraversal(root.right);
-            System.out.println("-->" + root.data);
+        while (curr != null) {
+            Node next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
         }
     }
 
 
-    public static void main(String[] args) {
-        System.out.println("Working");
-    }
 }
