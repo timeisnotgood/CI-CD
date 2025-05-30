@@ -434,7 +434,12 @@ public class Basic {
        int selecarr[] = {2,2,1,1,1,2,2};
        int k = 3;
 
-       algo.binarySdearch();
+       int[] arr = {2, 5, 8, 1, 3, 7};
+       algo.quickSort(arr, 0, arr.length - 1);
+
+       for(int num : arr){
+        System.out.print(num + " ");
+       }
 
         // int arr[] = algo.twoSum(selecarr, k);
 
