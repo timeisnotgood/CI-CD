@@ -1,50 +1,50 @@
 package Practice;
+
 import java.util.ArrayList;
 
 public class Solution {
 
-    ArrayList<ArrayList<Integer>> list;
-    int v;
+    public void mergeSort(int[] arr, int low, int high){
+        if ((low < high)) {
+            int mid = (low + high) / 2;
 
-    Solution(int v){
-        this.v = v;
-        this.list = new ArrayList<>();
-        for (int i = 0; i < v; i++) {
-            list.add(new ArrayList<>());
+            mergeSort(arr, low, mid);
+            mergeSort(arr, mid + 1, high);
+            merge(arr, low, mid, high);
         }
     }
 
-    void addEdges(int v, int e){
-        list.get(v).add(e);
-        list.get(e).add(v);
-    }
+    public void merge(int[] arr, int low, int mid, int high){
+        ArrayList<Integer> list = new ArrayList<>();
+        int left = low;
+        int right = mid + 1;
 
-    void removeEdges(int v, int e){
-        list.get(v).add(0);
-        list.get(e).add(0);
-    }
-
-    void printGraph(){
-
-        for (int i = 0; i < v; i++) {
-            System.out.print("Vertex " + i + ":");
-            for(int data: this.list.get(i)){
-                System.out.println(" -- " + data );
+        while (left <= mid && right <= high) {
+            if(arr[left] <= arr[right]) {
+                list.add(arr[left]);
+                left++;
+            }else{
+                list.add(arr[right]);
+                right++;
             }
-            System.out.println();
+        }
+
+        while (left <= mid) {
+             list.add(arr[left]);
+            left++;
+        }
+
+        while (right <= high) {
+            list.add(arr[right]);
+                right++;
+        }
+
+        for(int i = low; i <= high;i++){
+            arr[i] = list.get(i - low);
         }
     }
 
     public static void main(String[] args) {
-        Solution graph = new Solution(6);
-
-        graph.addEdges(0, 1);
-        graph.addEdges(1, 2);
-        graph.addEdges(1, 3);
-        graph.addEdges(2, 4);
-        graph.addEdges(3, 5);
-
-        graph.printGraph();
+        System.out.println("Hello");
     }
-
 }
