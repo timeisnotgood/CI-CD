@@ -1,98 +1,104 @@
 package Practice;
 
-import java.util.ArrayList;
-
 public class Solution {
 
-    public void mergeSort(int[] arr, int low, int high){
-        if ((low < high)) {
-            int mid = (low + high) / 2;
+    int[] heap;
+    int cap, size;
 
-            mergeSort(arr, low, mid);
-            mergeSort(arr, mid + 1, high);
-            merge(arr, low, mid, high);
+    Solution(int cap){
+        this.cap = cap;
+        this.size = 0;
+        this.heap = new int[cap];
+    }
+
+    int getParentIndex(int i) {return (i - 1) /2;}
+    int getLeftIndex(int i) {return 2 * i + 1;}
+    int getRightIndex(int i) {return 2 * i + 2;}
+
+    boolean hasParent(int i){return getParentIndex(i) >= 0;}
+    boolean hasLeft(int i){return getLeftIndex(i) < size;}
+    boolean hasRight(int i){return getRightIndex(i) < size;}
+
+    int Parent(int i){return heap[getParentIndex(i)];}
+    int Left(int i){return heap[getLeftIndex(i)];}
+    int Right(int i){return heap[getRightIndex(i)];}
+
+    void swap(int i, int j){
+        int temp = heap[i];
+        heap[i] = heap[j];
+        heap[j] = temp;
+    }
+
+    void heapfyUp(){
+        int index = size - 1;
+
+        while (hasParent(index) && Parent(index) > heap[index]) {
+            swap(getParentIndex(index), index);
+            index =getParentIndex(index);
         }
     }
 
-    public void merge(int[] arr, int low, int mid, int high){
-        ArrayList<Integer> list = new ArrayList<>();
-        int left = low;
-        int right = mid + 1;
+    void heapfyDown(){
+        int index= 0;
 
-        while (left <= mid && right <= high) {
-            if(arr[left] <= arr[right]) {
-                list.add(arr[left]);
-                left++;
+        while (hasLeft(index)) {
+            int smallest = getLeftIndex(index);
+
+            if (hasRight(index) && Right(index) < Left(index)) {
+                smallest = getRightIndex(index);
+            }
+
+            if (heap[index] < heap[smallest]) {
+                break;
             }else{
-                list.add(arr[right]);
-                right++;
+                swap(index, smallest);
+            }
+            index = smallest;
+        }
+    }
+
+
+    void insert(int val){
+        if (size == cap) {
+            System.out.println("Heap is Bull");
+            return;
+        }
+
+        heap[size] = val;
+        size++;
+        heapfyUp();
+    }
+
+    void extractMin(){
+        if (size == 0) {
+            System.out.println("Heap is Empty !!");
+            return;
+        }
+        heap[0] = heap[size - 1];
+        size--;
+        heapfyDown();
+    }
+
+    void findFsmallest(int[] arr, int k){
+        Solution heap = new Solution(10);
+
+        for (int num : arr) {
+            heap.insert(num);
+            if (heap.size > k) {
+                heap.extractMin();
             }
         }
 
-        while (left <= mid) {
-             list.add(arr[left]);
-            left++;
-        }
-
-        while (right <= high) {
-            list.add(arr[right]);
-                right++;
-        }
-
-        for(int i = low; i <= high;i++){
-            arr[i] = list.get(i - low);
+        for (int i = 0; i < heap.size; i++) {
+            System.out.println("Heap --> " + heap.heap[i]);
         }
     }
-
-public void quickSort(int[] arr, int low, int high){
-    if (low < high) {
-        int prevIndex = partition(arr, low, high);
-        quickSort(arr, low, prevIndex - 1);
-        quickSort(arr, prevIndex + 1, high);
-    }
-}
-
-public int partition(int[] arr, int low, int high){
-    int peviot = arr[low];
-    int i = low;
-    int j = high;
-
-    while (i < j) {
-        while (arr[i] <= peviot && i <= high - 1) {
-            i++;
-        }
-
-        while (arr[j] > peviot && j >= low + 1) {
-            j--;
-        }
-
-        if (i < j) {
-            swap(arr, i, j);
-        }
-    }
-
-    swap(arr, low, j);
-    return j;
-
-}
-
-public void swap(int[] arr, int i, int j){
-    int temp = arr[i];
-    arr[i] = arr[j];
-    arr[j] = temp;
-}
 
     public static void main(String[] args) {
-        System.out.println("Hello");
-
-        int[] arr = {2, 5, 8, 1, 3, 7};
-
-        Solution obj = new Solution();
-
-        obj.quickSort(arr, 0, arr.length - 1);
-
-        for(int num : arr){
-            System.out.print(num + " ");
-        }
+        Solution obj = new Solution(10);
+        int[] arr = {5,3,7,2,1};
+        obj.findFsmallest(arr, 3);
     }
+
+
 }
