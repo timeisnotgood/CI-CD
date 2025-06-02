@@ -69,16 +69,6 @@ public class Solution {
         heapfyUp();
     }
 
-    void extractMin(){
-        if (size == 0) {
-            System.out.println("Heap is Empty !!");
-            return;
-        }
-        heap[0] = heap[size - 1];
-        size--;
-        heapfyDown();
-    }
-
     void findFsmallest(int[] arr, int k){
         Solution heap = new Solution(10);
 
