@@ -84,10 +84,24 @@ public class Solution {
         }
     }
 
+    void leftRotate(int arr[], int k) {
+        for (int j = 0; j <= k; j++) {
+           int num = arr[0];
+           for (int i = 0; i < arr.length; i++) {
+               if(i == arr.length - 1){
+                   arr[i] = num;
+
+                   break;
+               }
+               arr[i] = arr[i + 1];
+           }
+       }
+    }
+
     public static void main(String[] args) {
         Solution obj = new Solution(10);
-        int[] arr = {5,3,7,2,1};
-        obj.findFsmallest(arr, 3);
+        int[] arr = {1,2,3,4,5,6};
+        obj.leftRotate(arr, 2);
     }
 
 
