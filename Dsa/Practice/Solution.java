@@ -75,7 +75,7 @@ public class Solution {
         for (int num : arr) {
             heap.insert(num);
             if (heap.size > k) {
-                heap.extractMin();
+                // heap.extractMin();
             }
         }
 
@@ -96,6 +96,28 @@ public class Solution {
                arr[i] = arr[i + 1];
            }
        }
+    }
+
+
+    void leftRotates(int arr[], int k) {
+        int n = arr.length;
+        k %= n;
+        if (k == 0) return;
+        rev(arr, 0, k - 1);
+        rev(arr, k, n - 1);
+        rev(arr, 0, n - 1);
+    }
+
+    private void rev(int a[], int low, int high) {
+        while (low < high) {
+            swap(a, low++, high--);
+        }
+    }
+
+    private void swap(int a[], int i, int j) {
+        int temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
     }
 
     public static void main(String[] args) {
