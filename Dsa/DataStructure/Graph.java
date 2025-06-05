@@ -1,6 +1,8 @@
 package DataStructure;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import  java.util.Queue;
 
 // AdjacencyMatrix
 class Matrix {
@@ -99,6 +101,47 @@ class weighted {
 
 
 public class Graph {
+
+    ArrayList<Integer> breathFirstSearch(ArrayList<ArrayList<Integer>> adj, int v){
+        ArrayList<Integer> bfs = new ArrayList<>();
+        boolean[] vis = new boolean[v];
+        Queue<Integer> q = new LinkedList<>();
+
+        q.add(0);
+        vis[0] =true;
+
+        while (!q.isEmpty()) {
+            Integer node = q.poll();
+            bfs.add(node);
+
+            for(Integer it : adj.get(node)){
+                if (!vis[node]) {
+                    q.add(it);
+                    vis[it] = true;
+                }
+            }
+        }
+
+        return bfs;
+    }
+
+    void search(int node, ArrayList<Integer> dfs, ArrayList<ArrayList<Integer>> adj, boolean[] vis ){
+        vis[node] = true;
+        dfs.add(node);
+
+        for(Integer it : adj.get(node)){
+            if(vis[it] == false){
+                search(it, dfs, adj, vis);
+            }
+        }
+    }
+
+    ArrayList<Integer> dfs(ArrayList<ArrayList<Integer>> adj, int v){
+        ArrayList<Integer> dfs = new ArrayList<>();
+        boolean[] vis = new boolean[v];
+        search(0, dfs, adj, vis);
+        return dfs;
+    }
     public static void main(String[] args) {
         weighted g = new weighted(5);
 
