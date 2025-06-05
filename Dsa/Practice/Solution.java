@@ -71,35 +71,12 @@ public class Solution {
         arr[j] = temp;
     }
 
-
-    int binarySearch(int[] arr, int k){
-        int left = 0;
-        int right = arr.length;
-
-        while (left < right) {
-            int mid = left + (right - left) / 2;
-            if (arr[mid] == k) {
-                return mid;
-            }
-
-            if(arr[mid] < k){
-                left = mid - 1;
-            }
-
-            if(arr[mid] > k){
-                right = mid + 1;
-            }
-        }
-
-        return - 1;
-    }
-
     public static void main(String[] args) {
         Solution obj = new Solution();
         int[] arr = {1,2,3,4,5,6};
         System.out.println(
 
-            obj.binarySearch(arr, 2)
+            // obj.quickSort(arr, 2)
         );
         
         // for(int num : arr){
