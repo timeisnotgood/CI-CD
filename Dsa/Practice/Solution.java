@@ -71,13 +71,27 @@ public class Solution {
         arr[j] = temp;
     }
 
+    public static int chocolates(int n, int[] arr) {
+        // code here
+        
+        int min = Integer.MAX_VALUE;
+
+        for (int i = 0; i < n; i++) {
+            if (arr[i] < min) {
+                min = arr[i];
+            }
+        }
+        return min;
+        
+    }
+
     public static void main(String[] args) {
         Solution obj = new Solution();
-        int[] arr = {1,2,3,4,5,6};
+        int[] arr = {5 ,3 ,1 ,6 ,9};
         System.out.println(
 
-            // obj.quickSort(arr, 2)
-        );
+            );
+            obj.chocolates(arr.length - 1, arr);
         
         // for(int num : arr){
         //     System.out.print(num + " ");
