@@ -129,7 +129,7 @@ public class Graph {
         vis[node] = true;
         dfs.add(node);
 
-        for(Integer it : adj.get(node)){
+        for(Integer it : adj.get(node)){ 
             if(vis[it] == false){
                 search(it, dfs, adj, vis);
             }
