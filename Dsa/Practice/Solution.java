@@ -1,47 +1,87 @@
 package Practice;
 
 import java.util.ArrayList;
-import java.util.PriorityQueue;
 
+public class Solution {
 
-class Pair {
-    int distance;
-    int node;
-
-    Pair(int distance, int node) {
-        this.distance = distance;
-        this.node = node;
+    void mergeSort(int[] arr, int low, int high){
+        if(low < high){
+            int mid = (low + high) / 2;
+            mergeSort(arr, low, mid);
+            mergeSort(arr, mid + 1, high);
+            merge(arr, low, mid, high);
+        }
     }
-}
 
-class Solution 
-{ 
-    //Function to find the shortest distance of all the vertices 
-    //from the source vertex S. 
-    static int[] dijkstra(int V, ArrayList<ArrayList<ArrayList<Integer>>> adj, int S) { 
-        // min-heap 
-        PriorityQueue<Pair> pq = new PriorityQueue<>((x, y) -> Integer.compare(x.distance, y.distance));
-        int[]dist = new int[V]; 
+    void merge(int[] arr, int low, int mid, int high){
+        ArrayList<Integer> list = new ArrayList<>();
+        int left = low;
+        int right = mid + 1;
 
-        for(int i = 0; i<V;i++) dist[i] = (int)(1e9); 
+        while (left <= mid && right <= high) {
+            if(arr[left] <= arr[right]){
+                list.add(arr[left]);
+                left++;
+            }else{
+                list.add(arr[right]);
+                right++;
+            }
+        }
 
-        dist[S] = 0; 
-        pq.add(new Pair(0,S)); 
+        while (left <= mid) {
+            list.add(arr[left]);
+            left++;
+        }
+        
+        while (right <= high) {
+            list.add(arr[right]);
+            right++;
+        }
 
-        while(pq.size() != 0) { 
-            int dis =  pq.peek().distance; 
-            int node =  pq.peek().node; 
-            pq.remove(); 
-            for(int i = 0; i<adj.get(node).size();i++) { 
-                int edgeWeight = adj.get(node).get(i).get(1); 
-                int adjNode =  adj.get(node).get(i).get(0); 
-                if(dis + edgeWeight < dist[adjNode]) { 
-                    dist[adjNode] = dis + edgeWeight; 
-                    pq.add(new Pair(dist[adjNode], adjNode)); 
-                } 
-            } 
-        } 
-        return dist; 
 
+        for (int i = low; i <= high; i++) {
+            arr[i] = list.get(i - low);
+        }
+    }
+
+
+    void quickSort(int[] arr, int low, int high){
+        if(low < high){
+            int peviotIndex = partetion(arr, low, high);
+            quickSort(arr, low, peviotIndex - 1);
+            quickSort(arr, peviotIndex + 1, high);
+        }
+    }
+
+    int partetion(int[] arr, int low, int high){
+        int peviot = arr[high];
+        int i = low - 1;
+
+        for (int j = low; j < high; j++) {
+            if (arr[j] < peviot) {
+                i++;
+                swap(arr, i, j);
+            }
+        }
+
+        swap(arr, i + 1, high);
+        return i + 1;
+    }
+
+    void swap(int[] arr, int i, int j){
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+
+    public static void main(String[] args) {
+        Solution obj = new Solution();
+        int[] arr= {3,1,5,2,4};
+
+        obj.quickSort(arr, 0, arr.length - 1);
+
+        for(int num : arr){
+            System.out.print(num + " ");
+        }
     }
 }
