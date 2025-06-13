@@ -1,6 +1,8 @@
 package Practice;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Solution {
 
@@ -74,14 +76,30 @@ public class Solution {
         arr[j] = temp;
     }
 
+    public List<Integer> valueEqualToIndex(List<Integer> nums) {
+        // code here
+        List<Integer> list = new ArrayList<>();
+        
+        int i  = 1 ;
+        
+        for(int num : nums){
+            if(num == i){
+                list.add(i);
+            }
+            i++;
+        }
+        return list;
+    }
+
     public static void main(String[] args) {
         Solution obj = new Solution();
-        int[] arr= {3,1,5,2,4};
+        int[] arr= {1,2,3,4,5};
+        List<Integer> liss = Arrays.asList(11, 2, 32, 41,5);
+         List<Integer> val = obj.valueEqualToIndex(liss);
 
-        obj.quickSort(arr, 0, arr.length - 1);
+         for(int num : val){
+            System.out.println("-->" + num);
+         }
 
-        for(int num : arr){
-            System.out.print(num + " ");
-        }
     }
 }
