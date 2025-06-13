@@ -2,7 +2,9 @@ package Practice;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Solution {
 
@@ -91,15 +93,27 @@ public class Solution {
         return list;
     }
 
+    boolean check_elements(int arr[], int n, int A, int B) {
+        Set set = new HashSet<>();
+        for(int num : arr){
+            if(num >= A && num <= B){
+                set.add(num);
+            }
+        }
+
+        for(int i = A; i <= B;i++){
+            if (!set.contains(i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
         Solution obj = new Solution();
-        int[] arr= {1,2,3,4,5};
-        List<Integer> liss = Arrays.asList(11, 2, 32, 41,5);
-         List<Integer> val = obj.valueEqualToIndex(liss);
+        int[] arr= {1, 4, 5, 2, 7, 8, 3};
 
-         for(int num : val){
-            System.out.println("-->" + num);
-         }
+        System.out.println("---> " + obj.check_elements(arr, arr.length, 2, 8));
 
     }
 }
