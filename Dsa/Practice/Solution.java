@@ -109,11 +109,16 @@ public class Solution {
         return true;
     }
 
+    public void insertAtEnd(int arr[], int sizeOfArray, int element) {
+
+        arr[sizeOfArray - 1] = element;
+    }
+
     public static void main(String[] args) {
         Solution obj = new Solution();
         int[] arr= {1, 4, 5, 2, 7, 8, 3};
 
-        System.out.println("---> " + obj.check_elements(arr, arr.length, 2, 8));
+       obj.insertAtEnd(arr, arr.length, 11);
 
     }
 }
