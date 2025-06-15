@@ -1,16 +1,12 @@
 package Practice;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 public class Solution {
 
-    void mergeSort(int[] arr, int low, int high){
-        if(low < high){
-            int mid = (low + high) / 2;
+    public void mergeSort(int[] arr, int low, int high){
+        if (low < high) {
+            int mid = (low + high) / 2; 
             mergeSort(arr, low, mid);
             mergeSort(arr, mid + 1, high);
             merge(arr, low, mid, high);
@@ -23,6 +19,7 @@ public class Solution {
         int right = mid + 1;
 
         while (left <= mid && right <= high) {
+
             if(arr[left] <= arr[right]){
                 list.add(arr[left]);
                 left++;
@@ -36,18 +33,22 @@ public class Solution {
             list.add(arr[left]);
             left++;
         }
-        
+
         while (right <= high) {
             list.add(arr[right]);
             right++;
         }
 
-
-        for (int i = low; i <= high; i++) {
+        for(int i = low; i <= high; i++){
             arr[i] = list.get(i - low);
         }
     }
 
+    void swap(int[] arr, int i, int j){
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
 
     void quickSort(int[] arr, int low, int high){
         if(low < high){
@@ -59,7 +60,8 @@ public class Solution {
 
     int partetion(int[] arr, int low, int high){
         int peviot = arr[high];
-        int i = low - 1;
+        int i = low -1;
+        
 
         for (int j = low; j < high; j++) {
             if (arr[j] < peviot) {
@@ -69,56 +71,18 @@ public class Solution {
         }
 
         swap(arr, i + 1, high);
-        return i + 1;
+        return i+ 1;
     }
-
-    void swap(int[] arr, int i, int j){
-        int temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
-    }
-
-    public List<Integer> valueEqualToIndex(List<Integer> nums) {
-        // code here
-        List<Integer> list = new ArrayList<>();
-        
-        int i  = 1 ;
-        
-        for(int num : nums){
-            if(num == i){
-                list.add(i);
-            }
-            i++;
-        }
-        return list;
-    }
-
-    boolean check_elements(int arr[], int n, int A, int B) {
-        Set set = new HashSet<>();
-        for(int num : arr){
-            if(num >= A && num <= B){
-                set.add(num);
-            }
-        }
-
-        for(int i = A; i <= B;i++){
-            if (!set.contains(i)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public void insertAtEnd(int arr[], int sizeOfArray, int element) {
-
-        arr[sizeOfArray - 1] = element;
-    }
-
     public static void main(String[] args) {
+
         Solution obj = new Solution();
-        int[] arr= {1, 4, 5, 2, 7, 8, 3};
 
-       obj.insertAtEnd(arr, arr.length, 11);
+        int[] arr = {3,2,1,4,7,6,8,9};
+        obj.quickSort(arr, 0, arr.length - 1);
 
+        for(int num : arr){
+            System.out.print(num + " ");
+        }
+        
     }
 }
