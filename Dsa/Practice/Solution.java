@@ -1,6 +1,8 @@
 package Practice;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Solution {
 
@@ -73,6 +75,46 @@ public class Solution {
         swap(arr, i + 1, high);
         return i+ 1;
     }
+
+    void bfs(ArrayList<ArrayList<Integer>> adj, int v){
+        ArrayList<Integer> bfs = new ArrayList<>();
+        Queue<Integer> q = new LinkedList<>();
+        boolean[] vis = new boolean[v];
+
+        vis[0] = true;
+        q.add(0);
+
+        while (!q.isEmpty()) {
+            int node = q.poll();
+            bfs.add(node);
+
+            for(int it : adj.get(node)){
+                if (vis[it] != true) {
+                    vis[it] = true;
+                    q.add(it);
+                }
+            }
+        }
+    }
+
+    void dfsMain(ArrayList<ArrayList<Integer>> adj, int v){
+        ArrayList<Integer> dfs = new ArrayList<>();
+        boolean[] vis = new boolean[v];
+        dfs(0, adj, dfs, vis);
+    }
+
+    void dfs(int node, ArrayList<ArrayList<Integer>> adj,  ArrayList<Integer> dfs,  boolean[] vis){
+        vis[node] = true;
+        dfs.add(node);
+
+        for(int it : adj.get(node)){
+            if(vis[it] != true){
+                dfs(it, adj, dfs, vis);
+            }
+        }
+    }
+
+
     public static void main(String[] args) {
 
         Solution obj = new Solution();
