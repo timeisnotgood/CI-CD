@@ -1,51 +1,60 @@
 package Practice;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.Arrays;
+import java.util.PriorityQueue;
 
+class Pair {
+    int distance;
+    int node;
+    Pair(int distance, int node){
+        this.distance = distance;
+        this.node = node;
+    }
+}
 public class Solution {
 
-    ArrayList<Integer> Bfs(ArrayList<ArrayList<Integer>> adj, int v){
-        ArrayList<Integer> bfs = new ArrayList<>();
-        boolean[] vis = new boolean[v];
-        Queue<Integer> q = new LinkedList<>();
+    static int[] dijkstra(int v, ArrayList<ArrayList<ArrayList<Integer>>> adj, int s ){
+        PriorityQueue<Pair> pq = new PriorityQueue<>((x, y) -> Integer.compare(x.distance, y.distance));
+        int[] vis = new int[v];
 
-        vis[0] = true;
-        q.add(0);
+        for (int i = 0; i < v; i++) {vis[i] = (int)(1e9);}
+        vis[s] = 0;
+        pq.add(new Pair(s, 0));
 
-        while (!q.isEmpty()) {
-            Integer node = q.peek();
-            bfs.add(node);
-            for(int it : adj.get(node)){
-                if(vis[it] != true){
-                    vis[it] = true;
-                    q.add(it);
+        while (pq.size() != 0) {
+            int distance = pq.peek().distance;
+            int node = pq.poll().node;
+
+            for(int i = 0;i < adj.get(node).size(); i++){
+                int adjWeight = adj.get(node).get(i).get(1);
+                int adjnode = adj.get(node).get(i).get(0);
+
+                if (distance + adjWeight < vis[adjnode]) {
+                    vis[adjnode] = distance + adjWeight ;
+                    pq.add(new Pair( vis[adjnode], adjnode));
                 }
             }
         }
-
-        return bfs;
+        return vis;
     }
 
-    ArrayList<Integer> Dfs(ArrayList<ArrayList<Integer>> adj, int v ){
-        ArrayList<Integer> dfs = new ArrayList<>();
-        boolean[] vis = new boolean[v];
-        dfsSearch(0, adj, dfs, vis);
-        return dfs;
-    }
-
-    void dfsSearch(int node, ArrayList<ArrayList<Integer>> adj, ArrayList<Integer> dfs, boolean[] vis){
-        vis[node] = true;
-        dfs.add(node);
-
-        for(int it : adj.get(node)){
-            if (vis[it] != true) {
-                dfsSearch(it, adj, dfs, vis);
-            }
-        }
-    }
     public static void main(String[] args) {
-        System.out.println(("Helo"));
+        System.out.println("hello There ---->");
+        ArrayList<ArrayList<ArrayList<Integer>>> adj = new ArrayList<>();
+
+        for (int i = 0; i < 5; i++) {
+            adj = new ArrayList<>();
+        }
+
+         // Edges
+        adj.get(0).add(new ArrayList<>(Arrays.asList(1, 2)));
+        adj.get(0).add(new ArrayList<>(Arrays.asList(2, 4)));
+        adj.get(1).add(new ArrayList<>(Arrays.asList(2, 1)));
+        adj.get(1).add(new ArrayList<>(Arrays.asList(3, 7)));
+        adj.get(2).add(new ArrayList<>(Arrays.asList(4, 3)));
+        adj.get(3).add(new ArrayList<>(Arrays.asList(4, 1)));
+
+        int[] result = dijkstra(5, adj, 0);
     }
 }
