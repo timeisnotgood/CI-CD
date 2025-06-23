@@ -33,18 +33,15 @@ public class Dijkstra {
             int node =  pq.peek().node; 
             pq.remove(); 
 
-        System.out.println("------->"+adj.get(node).size());
+            System.out.println("------->"+adj.get(node).size());
 
-            for(int i = 0; i< adj.get(node).size();i++) { 
-
+            for(int i = 0; i < adj.get(node).size();i++) { 
                 int edgeWeight = adj.get(node).get(i).get(1); 
                 int adjNode =  adj.get(node).get(i).get(0); 
-
                 if(dis + edgeWeight < dist[adjNode]) { 
                     dist[adjNode] = dis + edgeWeight; 
                     pq.add(new Pair(dist[adjNode], adjNode)); 
                 } 
-
             } 
         } 
         
