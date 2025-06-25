@@ -88,16 +88,27 @@ public class Solution {
        return -1;
     }
 
+    public void maxSubArray(int[] arr){
+        int maxSum =0, winSum = 0;
+
+        for(int i =0; i < arr.length;i++){
+            winSum = Integer.max(arr[i], winSum + arr[i]);
+            maxSum = Integer.max(winSum, maxSum);
+        }
+
+        System.out.println("------> " + maxSum);
+    }
+
     public static void main(String[] args) {
         System.out.println("helo");
-        int[] arr = {1,5,3,6,3};
+        int[] arr = {-2,1,-3,4,-1,2,1,-5,4};
         Solution obj = new Solution();
         // System.out.println("------->" + 
 
         // obj.maxSubArray(arr, 3)
         // );
 
-        obj.firstUniqChar("leetcode");
+        obj.maxSubArray(arr);
     }
 
 }
