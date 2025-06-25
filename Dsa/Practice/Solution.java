@@ -1,6 +1,8 @@
 package Practice;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Solution {
 
@@ -97,6 +99,26 @@ public class Solution {
         }
 
         System.out.println("------> " + maxSum);
+    }
+
+    public int longestSubString(String s){
+        Set<Character> seen = new HashSet<>();
+        int left = 0, right = 0, maxLength = 0;
+
+        while (right < s.length()) {
+            char currentChar = s.charAt(right);
+
+            while (seen.contains(currentChar)) {
+                seen.remove(s.charAt(left));
+                left++;
+            }
+
+            seen.add(currentChar);
+            maxLength = Integer.max(maxLength, right - left + 1);
+            right++;
+        }
+
+        return maxLength;
     }
 
     public static void main(String[] args) {
