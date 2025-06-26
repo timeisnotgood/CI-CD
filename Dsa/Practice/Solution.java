@@ -137,17 +137,30 @@ public class Solution {
         }
     }
 
+    public int searchInsert(int[] nums, int tar) {
+        int low = 0; 
+        int high = nums.length - 1;
+
+        while(low <= high){
+            int mid = (low + high) / 2;
+
+            if(nums[mid] == tar){ return mid;}
+            else if(tar < nums[mid]){high = mid - 1;}
+            else if(tar > nums[mid]){low = mid + 1;}
+        }
+
+        System.out.println("--  " + low + "  --  " + high);
+        return -1;
+    }
+
     public static void main(String[] args) {
         System.out.println("helo");
-        int[][] arr = {
-            {1, 2, 3},
-            {4, 5, 6},
-            {7, 8, 9}
-        };
+        int[] arr = {1,3,5,6};
         Solution obj = new Solution();
 
-
-        obj.matrixRotation(arr, arr.length);
+        System.out.println("---- > " + 
+            obj.searchInsert(arr, 2)
+        );
 
         
     }
