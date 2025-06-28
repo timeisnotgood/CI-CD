@@ -20,31 +20,6 @@ public class Solution {
        return temp;
     }
 
-    public int[] runningSum(int[] nums) {
-        int[] temp = new int[nums.length];
-        temp[0] = nums[0];
-        for(int i = 1; i < nums.length;i++){
-            temp[i] = temp[i-1] + nums[i];
-        }
-        return temp;
-    }
-
-    public int pivotIndex(int[] nums) {
-       int totla = 0;
-       for(int num : nums){ totla += num;}
-
-       int leftSum = 0;
-       for(int i = 0;i < nums.length; i++){
-            if(leftSum == leftSum - totla - nums[i]){
-                return i;
-            }
-            leftSum += nums[i];
-       }
-
-       return -1;
-        
-    }
-
     public static void main(String[] args) {
         // System.out.println("Main -->");
 
