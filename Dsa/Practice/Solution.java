@@ -72,19 +72,29 @@ public class Solution {
        }
     }
 
-    public static void main(String[] args) {
-        // System.out.println("Main -->");
+     public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> list = new ArrayList<>(numRows);
 
-        Solution obj = new Solution();
-        int[] num1 = {1,2,3,0,0,0};
-        int[] num2 = {2,5,6};
-
-        obj.merge(num1, 3, num2, num2.length);
-
-        for(int num : num1){
-            System.out.println("-->" + num);
+        for (int i = 0; i < numRows; i++) {
+            List<Integer> row = new ArrayList<>();
+            for(int j = 0; j<=i; j++){
+                if (i == 0 || j == i || j == 0) {
+                    row.add(1);
+                }else{
+                    row.add(list.get(i - 1).get(j - 1) + list.get(i - 1).get(j));
+                }
+            }
+            list.add(row);
         }
 
-        // System.out.println("---->"+ piv);
+        return list;
+    }
+
+    public static void main(String[] args) {
+
+        Solution obj = new Solution();
+
+        obj.generate(1);        
+
     }
 }
