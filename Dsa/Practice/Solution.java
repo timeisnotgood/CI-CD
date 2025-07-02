@@ -1,5 +1,6 @@
 package Practice;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -90,11 +91,33 @@ public class Solution {
         return list;
     }
 
+    public List<Integer> getRow(int rowIndex) {
+        List<List<Integer>> list = new ArrayList<>();
+
+        for (int i = 0; i < rowIndex + 1; i++) {
+            List<Integer> rowlist = new ArrayList<>();
+            for (int j = 0; j <= i; j++) {
+                if (j == 0 || j == i) {
+                    rowlist.add(1);
+                }else{
+                    rowlist.add(list.get(i - 1).get(j - 1) + list.get(i - 1).get(j) );
+                }
+            }
+            list.add(rowlist);
+
+            if (i == rowIndex) {
+                return rowlist;
+            }
+        }
+
+        return new ArrayList<>();
+    }
+
     public static void main(String[] args) {
 
         Solution obj = new Solution();
 
-        obj.generate(1);        
+        obj.getRow(1);        
 
     }
 }
