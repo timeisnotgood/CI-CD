@@ -113,11 +113,76 @@ public class Solution {
         return new ArrayList<>();
     }
 
+    public int[] prefixSum(int[] arr){
+        int[] prefix = new int[arr.length];
+        prefix[0] = arr[0];
+        for (int i = 1; i < prefix.length; i++) {
+            prefix[i] = prefix[i - 1] + arr[i];
+        }
+
+        return prefix;
+    }
+
+    public int slidingWindow(int[] arr, int k){
+        int winVal = 0, max = 0;
+
+        for (int i = 0; i < k; i++) {
+            winVal += arr[i];
+            max = Integer.max(max, winVal);
+        }
+
+        for (int i = k; i < arr.length; i++) {
+            winVal = winVal - arr[i-k] + arr[i];
+            max = Integer.max(max, winVal);
+        }
+        return max;
+    }
+
+    public void kadanesAlgo(int[] arr){
+        int currentMax = arr[0];
+        int max = arr[0];
+
+        for (int i = 0; i < arr.length; i++) {
+            currentMax = Integer.max(arr[i], currentMax + arr[i]);
+            max = Integer.max(currentMax, max);
+        }
+
+        System.out.println("-->" + max);
+    }
+
+    public int[] twoPointer(int[] nums, int k){
+        int i = 0, j = nums.length - 1;
+
+        while (i < j) {
+            int added = nums[i] + nums[j];
+            if (added == k) {
+                return new int[]{i, j};
+            }
+
+            if (added < k) {
+                i++;
+            }else{
+                j--;
+            }
+        }
+
+        return new int[]{0, 0};
+    }
+
+
     public static void main(String[] args) {
 
         Solution obj = new Solution();
+        int[] arr = {2, 7, 11, 15};
+        int[] val = obj.twoPointer(arr, 9);
 
-        obj.getRow(1);        
+        for(int num : val){
+            System.out.print(num + " ");
+        }
+
+        // for(int num : prev){
+        //     System.out.print(num + " ");
+        // }
 
     }
 }
