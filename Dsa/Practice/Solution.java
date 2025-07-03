@@ -1,7 +1,9 @@
 package Practice;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 import java.util.Queue;
 
 public class Solution {
@@ -120,14 +122,48 @@ public class Solution {
         }
     }
 
+    public boolean containsDuplicate(int[] nums) {
+        int n = nums.length;
+        int[] hashMap = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            if (hashMap[nums[i]] == 0) {
+                hashMap[nums[i]] =1;
+            }else{
+                hashMap[nums[i]] +=1;
+            }
+        }
+
+        for (int i = 0; i < n; i++) {
+            if (hashMap[i] > 1) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean containsDuplicates(int[] nums) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for(int num : nums){
+            if (map.containsKey(num) && map.get(num) > 0) {
+                map.put(num, map.get(num) + 1);
+                return true;
+            }else{
+                map.put(num, 1);
+            }
+        }  
+        return false;     
+    }
+
     public static void main(String[] args) {
-        int[] arr = {2,4,6,1,3,5};
+        int[] arr = {1,2,3,1};
 
         Solution obj = new Solution();
-        obj.mergeSort(arr, 0, arr.length - 1);
+        // System.out.println(
+        //     obj.containsDuplicate(arr)
+        // );
 
-        for (int num : arr) {
-            System.out.println(num);
-        }
+        obj.containsDuplicates(arr);
     }
 }
