@@ -67,11 +67,52 @@ public class Solution {
          return new int[]{i, j};
     }
 
+
+
+
+    static public int[] removeElement(int[] arr, int val){
+
+        int[] temp = new int[arr.length - 1];
+
+
+        int j = 0;
+
+        for (int i = 0; i < arr.length; i++) {
+
+            if (arr[i] != val) {
+                temp[j] = arr[i];
+                j++; 
+            }
+        }
+
+
+        return temp;
+    }
+
+
     public static void main(String[] args) {
         System.out.println("Hello");
-
         Solution obj = new Solution();
-        int[] arr = {2, 1, 5, 1, 3, 2};
-        obj.slidingWindow(arr, 3);
+
+
+        int[] arr =  {1,2,3,4,5};
+        int[] newarr = removeElement(arr, 3); // {1,2,4,5}
+
+
+
+
+
+
+        System.err.print("[ ");
+        for(int num : newarr){
+            System.out.print(num + ", ");
+        }
+        System.out.print("]");
+
+
+        // {1,2,4,5}
+
+        
+
     }
 }
