@@ -1,5 +1,9 @@
 package Practice;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+
 public class Solution {
 
     public void prefixSum(int[] arr, int k){
@@ -88,29 +92,97 @@ public class Solution {
 
         return temp;
     }
+    public static void printNGE(int[] arr) {
+        Stack<Integer> stack = new Stack<>();
+        int[] result = new int[arr.length];
 
 
+        for (int i = arr.length - 1; i >= 0; i--) {
+            while (!stack.isEmpty() && stack.peek() <= arr[i]) {
+                stack.pop();
+            }
+
+            result[i] = stack.isEmpty() ? -1 : stack.peek();
+            stack.push(arr[i]);
+        }
+
+
+
+
+        // Print result
+        for (int val : result) {
+            System.out.print(val + " ");
+        }
+    }
+
+    public List<String> summaryRanges(int[] nums) {
+        List<String> list = new ArrayList<>();
+        String str = "";
+
+        for (int i = 0; i < nums.length; i++) {
+            if(nums.length == 1){
+                String val = Integer.toString(nums[i]);
+                str = str + val;
+                list.add(str);
+                return list;
+            }
+            if (i == nums.length - 1) {
+                char charNumber = (char) (nums[i] + '0');
+                str = nums[i - 1] + 1 == nums[i] ? str + '-' + '>' + charNumber : str + charNumber;
+                list.add(str);
+                str = "";
+                return list;
+            }
+            if(str.isEmpty() && nums[i+1] != nums[i] + 1){
+                char charNumber = (char) (nums[i] + '0');
+                str = str + charNumber;
+                list.add(str);
+                str = "";
+                continue;
+            }
+            if (str.isEmpty() && nums[i+1] == nums[i] + 1) {
+                 char charNumber = (char) (nums[i] + '0');
+                str = str + charNumber;
+            }
+
+            if (nums[i+1] != nums[i] + 1) {
+                char charNumber = (char) (nums[i] + '0');
+                str = str + '-' + '>' + charNumber;
+                list.add(str);
+                str = "";
+            }
+        }
+
+        return list;
+    }
     public static void main(String[] args) {
         System.out.println("Hello");
         Solution obj = new Solution();
 
 
-        int[] arr =  {1,2,3,4,5};
-        int[] newarr = removeElement(arr, 3); // {1,2,4,5}
+        // int[] arr =  {1,2,3,4,5};
+        // int[] newarr = removeElement(arr, 3); // {1,2,4,5}
 
 
 
 
 
 
-        System.err.print("[ ");
-        for(int num : newarr){
-            System.out.print(num + ", ");
-        }
-        System.out.print("]");
+        // System.err.print("[ ");
+        // for(int num : newarr){
+        //     System.out.print(num + ", ");
+        // }
+        // System.out.print("]");
 
 
         // {1,2,4,5}
+
+
+        List<String> list = obj.summaryRanges(new int[]{-1});
+
+        for(String num : list){
+            System.out.println("--> " + num);
+        }
 
         
 
