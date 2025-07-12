@@ -1,10 +1,10 @@
 package Practice;
 
-class TrieNode{
+class TrieNode {
     TrieNode[] data;
     boolean isendofWord;
 
-    TrieNode(){
+    TrieNode() {
         this.data = new TrieNode[26];
         this.isendofWord = false;
     }
@@ -13,13 +13,14 @@ class TrieNode{
 public class Trie {
     private TrieNode root;
 
-    Trie(){
+    Trie() {
         root = new TrieNode();
     }
 
-    void insert(String word){
+    // Insert a word into the trie
+    void insert(String word) {
         TrieNode node = root;
-        for(char ch : word.toCharArray()){
+        for (char ch : word.toCharArray()) {
             int index = ch - 'a';
             if (node.data[index] == null) {
                 node.data[index] = new TrieNode();
@@ -28,10 +29,12 @@ public class Trie {
         }
         node.isendofWord = true;
     }
+    
 
-    boolean search(String word){
+    // Search a word in the trie
+    boolean search(String word) {
         TrieNode node = root;
-        for(char ch: word.toCharArray()){
+        for (char ch : word.toCharArray()) {
             int index = ch - 'a';
             if (node.data[index] == null) {
                 return false;
@@ -41,7 +44,32 @@ public class Trie {
         return node.isendofWord;
     }
 
+    // Check if any word starts with the given prefix
+    boolean startsWith(String prefix) {
+        TrieNode node = root;
+        for (char ch : prefix.toCharArray()) {
+            int index = ch - 'a';
+            if (node.data[index] == null) {
+                return false;
+            }
+            node = node.data[index];
+        }
+        return true;
+    }
+
+    // Test in main
     public static void main(String[] args) {
         Trie trie = new Trie();
+
+        trie.insert("apple");
+        trie.insert("app");
+        trie.insert("bat");
+
+        System.out.println(trie.search("apple"));    // true
+        System.out.println(trie.search("app"));      // true
+        System.out.println(trie.search("appl"));     // false
+        System.out.println(trie.startsWith("app"));  // true
+        System.out.println(trie.startsWith("ba"));   // true
+        System.out.println(trie.startsWith("cat"));  // false
     }
 }
