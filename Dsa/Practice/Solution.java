@@ -1,8 +1,51 @@
 package Practice;
 
+import java.util.ArrayList;
+
 public class Solution {
 
-    public void quickSort(int[] arr, int low, int high){
+    public void divide(int[] arr, int low, int high){
+        if(low < high){
+            int mid = (low+high) / 2;
+            divide(arr, low, mid);
+            divide(arr, mid + 1, high);
+            merge(arr, low, mid, high);
+        }
+    }
+
+    void merge(int[] arr, int low, int mid, int high){
+        ArrayList<Integer> list = new ArrayList<>();
+        int left = low;
+        int right = mid + 1;
+
+
+        while (left <= mid && right <= high) {
+            if(arr[left] <= arr[right]) {
+                list.add(arr[left]);
+                left++;
+            }else{
+                list.add(arr[right]);
+                right++;
+            }
+        }
+
+        while (left <= mid) {
+            list.add(arr[left]);
+            left++;
+        }
+
+        while (right <= high) {
+            list.add(arr[right]);
+            right++;
+        }
+
+        for (int i = low; i <= high; i++) {
+            arr[i] = list.get(i - low);
+        }
+
+    }
+
+    void quickSort(int[] arr, int low, int high){
         if(low < high){
             int peviotIndex = partetion(arr, low, high);
             quickSort(arr, low, peviotIndex - 1);
@@ -10,77 +53,38 @@ public class Solution {
         }
     }
 
-    public int partetion(int[] arr, int low, int high){
+    int partetion(int[] arr, int low, int high){
         int peviot = arr[low];
         int i = low;
         int j = high;
 
         while (i < j) {
-            while (i <= high && arr[i] <= peviot) {
+            while (arr[i] <= peviot && i <= high - 1) {
                 i++;
             }
 
-            while (j >= low && arr[j] > peviot) {
+            while (arr[j] > peviot && j >= low) {
                 j--;
             }
 
-            if (i < j) {
-                swap(arr, i, j);
+            if(i < j){
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
             }
         }
 
-        swap(arr, low, j);
-
+        int temp = arr[low];
+        arr[low] = arr[j];
+        arr[j] = temp;
         return j;
     }
 
-    void swap(int[] arr, int i, int j){
-        int temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
-    }
-
-    void SelectionSort(int[] arr){
-        for (int i = 0; i < arr.length - 1; i++) {
-            int min = i;
-            for (int j = i + 1; j < arr.length; j++) {
-                if (arr[j] < arr[min]) min = j;
-            }
-            swap(arr, i, min);
-        }
-    }
-
-    void bubbleSort(int[] arr){
-        for (int i = arr.length - 1; i >= 0; i--) {
-            for(int j = 0; j <= i - 1; j ++){
-                if (arr[j] > arr[j + 1]) {
-                    swap(arr, j, j + 1);
-                }
-            }
-            
-        }
-    }
-
-    void insertionSort(int[] arr){
-        for (int i = 0; i < arr.length; i++) {
-            int j = i;
-
-            while (j > 0 && arr[j - 1] > arr[j]) {
-                swap(arr, j - 1, j);
-                j--;
-            }
-        }
-    }
-
-
-
     public static void main(String[] args) {
-        System.out.println("hello");
-
-        int[] arr = {2,3,7,5,4,1,6};
+        int[] arr = {3,2,4,1,5,8,7,6};
 
         Solution obj = new Solution();
-        obj.insertionSort(arr);
+        obj.quickSort(arr, 0, arr.length - 1);
 
         for(int num : arr){
             System.out.print(num + " ");
