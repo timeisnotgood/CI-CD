@@ -1,71 +1,55 @@
 package Practice;
 
-class TrieNode {
-    TrieNode[] data;
-    boolean isLastWord;
-    
-    TrieNode(){
-        data = new TrieNode[26];
-        isLastWord = false;
-    }
-}
 public class Solution {
-    TrieNode root;
 
-    Solution(){
-        root = new TrieNode();
-    }
-
-    void insertWord(String val){
-        TrieNode node = root;
-
-        for(char ch : val.toCharArray()){
-            int index = ch - 'a';
-            if(node.data[index] == null){
-                node.data[index] = new TrieNode();
-            }
-            node = node.data[index];
-
+    public void quickSort(int[] arr, int low, int high){
+        if(low < high){
+            int peviotIndex = partetion(arr, low, high);
+            quickSort(arr, low, peviotIndex - 1);
+            quickSort(arr, peviotIndex + 1, high);
         }
-        node.isLastWord = true;
     }
 
-    boolean searchWord(String word){
-        TrieNode node = root;
+    public int partetion(int[] arr, int low, int high){
+        int peviot = arr[low];
+        int i = low;
+        int j = high;
 
-        for(char ch : word.toCharArray()){
-            int index = ch - 'a';
-            if(node.data[index] == null){
-                return false;
+        while (i < j) {
+            while (i <= high && arr[i] <= peviot) {
+                i++;
             }
-            node = node.data[index];
+
+            while (j >= low && arr[j] > peviot) {
+                j--;
+            }
+
+            if (i < j) {
+                swap(arr, i, j);
+            }
         }
 
-        return node.isLastWord;
+        swap(arr, low, j);
+
+        return j;
     }
 
-    boolean prefix(String prefix){
-        TrieNode node = root;
-        for(char ch : prefix.toCharArray()){
-            int index = ch - 'a';
-            if (node.data[index] == null) {
-                return false;
-            }
-            node = node.data[index];
-        }
-        return true;
+    void swap(int[] arr, int i, int j){
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
     }
-
 
     public static void main(String[] args) {
+        System.out.println("hello");
+
+        int[] arr = {2,3,7,5,4,1,6};
+
         Solution obj = new Solution();
+        obj.quickSort(arr, 0, arr.length - 1);
 
-        obj.insertWord("bhoopathi");
-        obj.insertWord("asiwarya");
-
-
-        System.out.println("--> " + obj.searchWord("asiwrya"));
-        System.out.println("--> " + obj.prefix("as"));
-
+        for(int num : arr){
+            System.out.print(num + " ");
+        }
     }
 }
