@@ -22,6 +22,13 @@ public class ArrayQuestions {
         return 0;
     }
 
+    
+    void swap(int[] arr, int low, int high){
+        int temp = arr[low];
+        arr[low] = arr[high];
+        arr[high] = temp;
+    }
+
     public int findMaxConsecutiveOnes(int[] nums) {
         int cnt = 0;
         int max = 0;
@@ -149,7 +156,6 @@ public class ArrayQuestions {
 
         while ( i < j) {
             int m = arr[i] * arr[j];
-            int l = i - j;
             if (m > maxlength) {
                 maxval = Math.max(maxval, m);
                 maxlength = Math.max(maxlength, i-j);
@@ -334,42 +340,36 @@ public class ArrayQuestions {
         }
     }
 
-    public void quickSort(int arr[], int low, int high){
-        if (low < high) {
-            int peviot = percestent(arr, low, high);
-            quickSort(arr, low, peviot);
-            quickSort(arr, peviot + 1, high);
+    public void quickSort(int[] arr, int low, int high){
+        if(low < high){
+            int peviotIdx = partetion(arr, low, high);
+            quickSort(arr, low, peviotIdx - 1); 
+            quickSort(arr, peviotIdx + 1, high); 
         }
     }
 
-    public int percestent(int[] arr, int low, int high){
+    int partetion(int[] arr, int low, int high){
         int peviot = arr[low];
-        int i = low;
-        int j = high ;
-
-        while (i < j) {
-            while (arr[i] <= peviot && i <= high - 1) {
+        int i = low + 1;
+        int j = high;
+        
+        while (i <= j) {
+            while (i <= high && arr[i] <= peviot) {
                 i++;
             }
 
-            while (arr[j] > peviot && j >= low+1) {
+            while (j > low && arr[j] > peviot) {
                 j--;
             }
 
             if (i < j) {
-                int temp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = temp;
+                swap(arr, i, j);
             }
         }
 
-        int temp = arr[low];
-        arr[low] = arr[j];
-        arr[j] = temp;
-
+        swap(arr, low, j);
         return j;
     }
-
      public void swapKth(List<Integer> arr, int k) {
         // code here
         int i = 0, j = arr.size() - 1;

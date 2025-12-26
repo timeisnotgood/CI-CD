@@ -1,7 +1,14 @@
 package Practice;
 
+import java.util.HashSet;
 
 public class Solution {
+
+    void swap(int[] arr, int low, int high){
+        int temp = arr[low];
+        arr[low] = arr[high];
+        arr[high] = temp;
+    }
 
     int maxSubarray(int[] arr, int k){
         int max = 0;
@@ -62,16 +69,51 @@ public class Solution {
         return -1;
     } 
 
+    public void quickSort(int[] arr, int low, int high){
+        if(low < high){
+            int peviotIdx = partetion(arr, low, high);
+            quickSort(arr, low, peviotIdx - 1); 
+            quickSort(arr, peviotIdx + 1, high); 
+        }
+    }
+
+    int partetion(int[] arr, int low, int high){
+        int peviot = arr[low];
+        int i = low + 1;
+        int j = high;
+        
+        while (i <= j) {
+            while (i <= high && arr[i] <= peviot) {
+                i++;
+            }
+
+            while (j > low && arr[j] > peviot) {
+                j--;
+            }
+
+            if (i < j) {
+                swap(arr, i, j);
+            }
+        }
+
+        swap(arr, low, j);
+        return j;
+    }
+
+    void hashing(int[] arr){
+        HashMap<Integer, Integer> hash = new HashMap<>();
+        
+    }
+
     public static void main(String[] args) {
         Solution obj = new Solution();
 
-        int[] arr = {1, 2, 3, 4, 5};
+        int[] arr = {4,9,6,7,3,5,1,8,2};
 
-        int max = obj.binarySearch(arr, 4);
+        obj.quickSort(arr,0, arr.length - 1);
 
-        System.out.println("print --> " + max);
-        // for(int val : arr){
-        //     System.out.print(val + " ");
-        // }
+        for(int val : arr){
+            System.out.print(val + " ");
+        }
     }
 }
