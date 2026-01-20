@@ -1,6 +1,8 @@
 package Practice;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Solution {
 
@@ -101,16 +103,115 @@ public class Solution {
     }
 
     void hashing(int[] arr){
-        HashMap<Integer, Integer> hash = new HashMap<>();
+        HashMap<Integer, Integer> list = new HashMap<>();
+
+        for (int i : arr) {
+            list.put(i, list.getOrDefault(i, 0) + 1);
+        }
         
+        for(Map.Entry<Integer, Integer> e : list.entrySet()){
+            System.out.println(e + " - > ");
+        }
     }
+
+    void selectionSort(int[] arr){
+        for (int i = 0; i < arr.length - 1; i++) {
+            int min = i;
+            for (int j = i; j < arr.length; j++) {
+                if(arr[j] < arr[min]){
+                    min = j;
+                }
+            }
+            swap(arr, min, i);
+        }
+    }
+
+    void bubbleSort(int[] arr){
+        for(int i = arr.length - 1; i >= 0;i--){
+            for (int j = 0; j < arr.length; j++) if(arr[j] > arr[j + 1]) swap(arr, j, i);
+        }
+    }
+
+    void insertionSort(int[] arr){
+        for (int i = 0; i < arr.length; i++) {
+            int j = i;
+            while (j > 0 && arr[j] < arr[j-1]) {
+                swap(arr, j, j-1);
+                j--;
+            }
+        }
+    }
+
+    void mergeSort(int[] arr, int low, int high){
+        if (low < high) {
+            int mid = (high + low) / 2;
+            mergeSort(arr, low, mid);
+            mergeSort(arr, mid + 1, high);
+            merge(arr, low, mid, high);
+        }
+    }
+
+    void merge(int[] arr, int low, int mid, int high){
+        ArrayList<Integer> list = new ArrayList<>();
+        int left = low;
+        int right = mid + 1;
+
+        while (left <= mid && right <= high) {
+            if (arr[left] < arr[right]) {
+                list.add(arr[left]);
+                left++;
+            }else{
+                list.add(arr[right]);
+                right++;
+            }
+        }
+
+        while (left <= mid) {
+            list.add(arr[left]);
+                left++;
+        }
+
+        while (right <= high) {
+                            list.add(arr[right]);
+                right++;
+        }
+
+        for (int i = low; i <= high; i++) {
+            arr[i] = list.get(i - low);
+        }
+    }
+
+    void quickS(int[] arr, int low, int high){
+        if(low < high){
+            int peviotIdx = partetio(arr, low, high);
+            quickSort(arr, low, peviotIdx - 1);
+            quickSort(arr, peviotIdx + 1, high);
+        }
+    }
+
+    int partetio(int[] arr, int low, int high){
+        int peviot = arr[high];
+        int i = low - 1;
+
+        for (int j = low; j < high; j++) {
+            if (arr[j] < peviot) {
+                i++;
+                swap(arr, i, j);
+            }
+        }
+
+        swap(arr, i+1, high);
+        return i + 1;
+    }
+
+
 
     public static void main(String[] args) {
         Solution obj = new Solution();
 
-        int[] arr = {4,9,6,7,3,5,1,8,2};
+        int[] arr = {3,2,5,1,4,7,6};
 
-        obj.quickSort(arr,0, arr.length - 1);
+        obj.quickS(arr, 0, arr.length - 1);
 
         for(int val : arr){
             System.out.print(val + " ");
