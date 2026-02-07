@@ -1,6 +1,6 @@
 package Practice;
 
-
+import java.util.ArrayList;
 
 public class StackLinkedList {
 
@@ -64,6 +64,74 @@ public class StackLinkedList {
         }
 
         return top.data;
+    }
+
+        void mergeSort(int[] arr, int low, int high){
+        if (low < high) {
+            int mid = (high + low) / 2;
+            mergeSort(arr, low, mid);
+            mergeSort(arr, mid + 1, high);
+            merge(arr, low, mid, high);
+        }
+    }
+
+    void merge(int[] arr, int low, int mid, int high){
+        ArrayList<Integer> list = new ArrayList<>();
+        int left = low;
+        int right = mid + 1;
+
+        while (left <= mid && right <= high) {
+            if (arr[left] < arr[right]) {
+                list.add(arr[left]);
+                left++;
+            }else{
+                list.add(arr[right]);
+                right++;
+            }
+        }
+
+        while (left <= mid) {
+            list.add(arr[left]);
+                left++;
+        }
+
+        while (right <= high) {
+                            list.add(arr[right]);
+                right++;
+        }
+
+        for (int i = low; i <= high; i++) {
+            arr[i] = list.get(i - low);
+        }
+    }
+
+    void swap(int[] arr, int low, int high){
+        int temp = arr[low];
+        arr[low] = arr[high];
+        arr[high] = temp;
+    }
+
+    void quickS(int[] arr, int low, int high){
+        if(low < high){
+            int peviotIdx = partetio(arr, low, high);
+            quickS(arr, low, peviotIdx - 1);
+            quickS(arr, peviotIdx + 1, high);
+        }
+    }
+
+    int partetio(int[] arr, int low, int high){
+        int peviot = arr[high];
+        int i = low - 1;
+
+        for (int j = low; j < high; j++) {
+            if (arr[j] < peviot) {
+                i++;
+                swap(arr, i, j);
+            }
+        }
+
+        swap(arr, i+1, high);
+        return i + 1;
     }
 
     public static void main(String[] args) {

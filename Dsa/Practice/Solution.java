@@ -12,64 +12,7 @@ public class Solution {
         arr[high] = temp;
     }
 
-    int maxSubarray(int[] arr, int k){
-        int max = 0;
-        int winmax = 0;
-
-        for(int i = 0; i< k;i++){
-            winmax += arr[i];
-        }
-
-        max = winmax;
-        for (int i = k; i < arr.length; i++) {
-            winmax = arr[i-k] - winmax + arr[i];
-            max = Integer.max(winmax, max);
-        }
-
-        return max;
-    }
-
-    int prefixSum(int[] arr, int l, int r){
-        int[] pre = new int[arr.length];
-        pre[0] = arr[0];
-        for (int i = 1; i < arr.length; i++) {
-            pre[i] = pre[i - 1] + arr[i];
-        }
-
-        return pre[r] - pre[l  -1];
-    }
-
-    int kadanas(int[] arr){
-        int maxSum = arr[0];
-        int currentSum = arr[0];
-
-        for (int i = 1; i < arr.length; i++) {
-            currentSum = Math.max(arr[i], currentSum + arr[i]);
-            maxSum = Math.max(currentSum, maxSum);
-        }
-
-        return maxSum;
-    }
-
-    int binarySearch(int[] arr, int tar){
-        int low = 0, high = arr.length - 1;
-        
-        while (low <= high) {
-            int mid = low + (high - low) / 2;
-
-            if (arr[mid] == tar) {
-                return mid;
-            }
-
-            if (arr[mid] < tar) {
-                low = mid + 1;
-            }else{
-                high = mid - 1;
-            }
-        }
-
-        return -1;
-    } 
+    
 
     public void quickSort(int[] arr, int low, int high){
         if(low < high){
@@ -102,22 +45,13 @@ public class Solution {
         return j;
     }
 
-    void hashing(int[] arr){
-        HashMap<Integer, Integer> list = new HashMap<>();
-
-        for (int i : arr) {
-            list.put(i, list.getOrDefault(i, 0) + 1);
-        }
-        
-        for(Map.Entry<Integer, Integer> e : list.entrySet()){
-            System.out.println(e + " - > ");
-        }
-    }
 
     void selectionSort(int[] arr){
-        for (int i = 0; i < arr.length - 1; i++) {
+        int n = arr.length;
+
+        for(int i = 0; i < n;i++){
             int min = i;
-            for (int j = i; j < arr.length; j++) {
+            for(int j = i;j < n;j++){
                 if(arr[j] < arr[min]){
                     min = j;
                 }
@@ -127,24 +61,32 @@ public class Solution {
     }
 
     void bubbleSort(int[] arr){
-        for(int i = arr.length - 1; i >= 0;i--){
-            for (int j = 0; j < arr.length; j++) if(arr[j] > arr[j + 1]) swap(arr, j, i);
+        int n = arr.length;
+
+        for(int i = n - 1;i > 0;i--){
+            for(int j = 0;j < i;j++){
+                if (arr[j] > arr[i]) {
+                    swap(arr, j, i);
+                }
+            }
         }
     }
 
     void insertionSort(int[] arr){
         for (int i = 0; i < arr.length; i++) {
             int j = i;
-            while (j > 0 && arr[j] < arr[j-1]) {
+
+            while (j > 0 && arr[j] < arr[j - 1]) {
                 swap(arr, j, j-1);
                 j--;
             }
         }
     }
 
+
     void mergeSort(int[] arr, int low, int high){
         if (low < high) {
-            int mid = (high + low) / 2;
+            int mid = (low + high) / 2;
             mergeSort(arr, low, mid);
             mergeSort(arr, mid + 1, high);
             merge(arr, low, mid, high);
@@ -156,12 +98,14 @@ public class Solution {
         int left = low;
         int right = mid + 1;
 
+
         while (left <= mid && right <= high) {
+            
             if (arr[left] < arr[right]) {
                 list.add(arr[left]);
                 left++;
             }else{
-                list.add(arr[right]);
+                list.add(right);
                 right++;
             }
         }
@@ -172,49 +116,75 @@ public class Solution {
         }
 
         while (right <= high) {
-                            list.add(arr[right]);
+            list.add(arr[right]);
                 right++;
         }
 
-        for (int i = low; i <= high; i++) {
+        for(int i = low;i <= high;i++){
             arr[i] = list.get(i - low);
         }
     }
 
-    void quickS(int[] arr, int low, int high){
-        if(low < high){
-            int peviotIdx = partetio(arr, low, high);
-            quickSort(arr, low, peviotIdx - 1);
-            quickSort(arr, peviotIdx + 1, high);
+    void reverseInplace(int[] arr){
+        int n = arr.length;
+        int i = 0, j = n - 1;
+
+        while (i < j) {
+            swap(arr, j, i);
+            i++;
+            j--;
         }
     }
 
-    int partetio(int[] arr, int low, int high){
-        int peviot = arr[high];
-        int i = low - 1;
+    void prefix(int[] arr, int[] qry){
+        int[] prex = new int[arr.length];
 
-        for (int j = low; j < high; j++) {
-            if (arr[j] < peviot) {
-                i++;
-                swap(arr, i, j);
-            }
+        prex[0] = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            prex[i] = prex[i-1] + arr[i];
         }
 
-        swap(arr, i+1, high);
-        return i + 1;
+        int sum = prex[qry[1]] - prex[qry[0] - 1];
+
+        System.out.print("Here ->  "+ sum);
     }
 
+    void maxSubarray(int[] arr, int k){
+        int winval = 0;
+        int max = 0;
+
+        for (int i = 0; i < k; i++) {
+            winval += arr[i];
+        }
+
+        max = winval;
+
+        for (int i = k; i < arr.length; i++) {
+            winval += arr[i] - arr[i-k];
+            max = Math.max(max, winval);
+        }
+
+        System.out.print("Max value -> " + max);
+    }
+
+    void kadanes(int[] arr){
+        int currentSum = arr[0], max = 0;
+
+        for (int i = 1; i < arr.length; i++) {
+            currentSum = Math.max(arr[i], currentSum + arr[i]);
+            max = Math.max(max, currentSum);
+        }
+
+        System.out.print("max ->  " + max);
+    }
 
 
     public static void main(String[] args) {
         Solution obj = new Solution();
 
-        int[] arr = {3,2,5,1,4,7,6};
+        int[] arr = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
 
-        obj.quickS(arr, 0, arr.length - 1);
+        obj.kadanes(arr);
 
-        for(int val : arr){
-            System.out.print(val + " ");
-        }
     }
 }
