@@ -1,12 +1,13 @@
 package Practice;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Solution {
 
-    void swap(int[] arr, int low, int high){
+    static void swap(int[] arr, int low, int high){
         int temp = arr[low];
         arr[low] = arr[high];
         arr[high] = temp;
@@ -178,13 +179,117 @@ public class Solution {
         System.out.print("max ->  " + max);
     }
 
+    int binarySearch(int[] arr, int low, int high, int tar){
+        int left = low, right = high;
+        while (left <= high) {
+            int mid = left + (right - left) / 2;
+
+            if (arr[mid] == tar) {
+                return mid;
+            }else if(arr[mid] < tar){
+                left = mid + 1;
+            }else{
+                right = mid - 1;
+            }
+        }
+
+        return 0;
+    }
+
+    void hash(int[] arr){
+        int[] hash = new int[arr.length];
+
+        for (int i = 0; i < arr.length; i++) {
+            if (hash[arr[i]] == 0) {
+                hash[arr[i]] = 1;
+            }else{
+                hash[arr[i]]++;
+            }
+        }
+
+        for (int i : hash) {
+            System.out.println("has -> " + i);
+        }
+    }
+
+
+    void hashingMap(int[] arr){
+        Map<Integer, Integer> hash = new HashMap<>();
+
+        for (int i = 0; i < arr.length; i++) {
+            
+            if (hash.containsKey(arr[i])) {
+                hash.put(arr[i], hash.get(arr[i]) + 1);
+            }else{
+                hash.put(arr[i], 1);
+            }
+        }
+
+
+        for(Integer vals : hash.keySet()){
+            System.out.println(vals + " ->  " + hash.get(vals));
+        }
+    }
+
+
+    void qsort(int[] arr, int low, int high){
+        if (low < high) {
+            int pivotidx = partetions(arr, low, high);
+            qsort(arr, low, pivotidx );
+            qsort(arr, pivotidx + 1, high);
+        }
+    }
+
+    static int partetions(int[] arr, int low, int high){
+        int pivet = medianIdx(arr, low, high);
+        int i = low - 1;
+        int j = high + 1;
+
+        while (true) {
+            
+            do{
+                i++;
+            }while(arr[i] < pivet);
+
+            do{
+                j--;
+            }while (arr[j] > pivet);
+
+            if (i >= j) {
+                return j;
+            }
+
+            swap(arr, i, j);
+        }
+    }
+
+    static int medianIdx(int[] arr, int low, int high){
+
+        int mid = low + (high - low) /2;
+
+        if (arr[low] > arr[mid]) 
+            swap(arr, low, mid);
+
+        if (arr[low] > arr[high]) 
+            swap(arr, low, high);
+
+        if (arr[mid] > arr[high]) 
+            swap(arr, mid, high);
+
+        swap(arr, low, mid);
+        return arr[low];
+    }
+
 
     public static void main(String[] args) {
         Solution obj = new Solution();
 
-        int[] arr = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
+        int[] arr = {3,5,1,2,7,3};
 
-        obj.kadanes(arr);
+
+        obj.qsort(arr, 0, arr.length - 1);
+
+        System.out.println("--> " + Arrays.toString(arr));
 
     }
 }
