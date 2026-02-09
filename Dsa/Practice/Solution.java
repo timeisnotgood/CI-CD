@@ -280,16 +280,26 @@ public class Solution {
         return arr[low];
     }
 
+    void greedy(int[] arr, int remainder){
+        int count = 0;
+
+        for (int i : arr) {
+            remainder -= i;
+            count++;
+        }
+
+        System.out.println("Coins used = " + count);
+    }
+
 
     public static void main(String[] args) {
         Solution obj = new Solution();
 
-        int[] arr = {3,5,1,2,7,3};
+        int[] arr = {20, 10, 5, 1};
 
 
-        obj.qsort(arr, 0, arr.length - 1);
+        obj.greedy(arr, 36);
 
-        System.out.println("--> " + Arrays.toString(arr));
 
     }
 }
