@@ -292,14 +292,74 @@ public class Solution {
     }
 
 
+
+    void oneTwoarray(){
+        int arr[] = {1,2,3,4,5};
+
+        for (int i = 0; i < arr.length; i++) System.out.print(" " + arr[i]);
+
+        System.out.println();
+        int matrix[][] = {
+            {1,2,3},
+            {4,5,6},
+            {7,8,9}
+        };
+
+        for (int row = 0; row < matrix.length; row ++) {
+            for(int col = 0; col < matrix[row].length; col ++)
+                System.out.print(matrix[row][col] + " ");
+            System.out.println();
+        }
+        
+    }
+
+    void updatearray(){
+
+        int[] arr = new int[6];
+
+        arr[0] = 1;
+        arr[1] = 2;
+        arr[2] = 4;
+        arr[3] = 5;
+        arr[4] = 6;
+
+        int size = 5;
+        int position = 2;
+
+        for (int i = size; i > position; i--) {
+            arr[i] = arr[i - 1];
+        }
+
+        arr[position] = 3;
+        size++;
+
+        for (int i : arr) System.out.print(i + " ");
+    }
+
+    void deletelement(){
+        int[] arr = {1,2,3,4,5};
+
+        int position = 2;
+
+        for (int i = position; i < arr.length; i++) {
+            if(i == arr.length - 1) {
+                arr[i] = 0; 
+                break;
+            }
+            arr[i] = arr[i + 1];
+        }
+
+        for (int i : arr) {
+            System.out.println(i);
+        }
+    }
+
+
+
     public static void main(String[] args) {
         Solution obj = new Solution();
 
-        int[] arr = {20, 10, 5, 1};
-
-
-        obj.greedy(arr, 36);
-
+        obj.deletelement();
 
     }
 }
