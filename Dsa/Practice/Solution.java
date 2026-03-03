@@ -354,6 +354,73 @@ public class Solution {
         }
     }
 
+    void prefixsum(int[] arr, int l, int r){
+        int n = arr.length;
+        int[] prefix = new int[n];
+        prefix[0] = arr[0];
+        for (int i = 1; i < n; i++) {
+            prefix[i] = arr[i] + prefix[i - 1];
+        }
+
+        int count = arr[r];
+
+        if (l == 0) {
+            count = prefix[r];
+        }else{
+            count = prefix[r] - prefix[l - 1];
+        }
+
+        System.out.println("---> " + count);
+    }
+
+    int[] twopointer(int arr[], int tar){
+        int i = 0, j = arr.length - 1;
+
+        while (i < j) {
+            int sum = arr[i] + arr[j];
+            
+            if(sum == tar){
+                return new int[]{i, j};
+            }
+
+            if(sum > tar){
+                j--;
+            }else{
+                i++;
+            }
+
+        }
+        return new int[]{0, 0};
+    }
+
+    void slidingwin(int[] arr, int k){
+        int winmax = 0;
+        int max = 0;
+
+        for(int i =0;i < k;i++){
+            winmax +=arr[i];
+        }
+
+        winmax = max;
+
+        for (int i = k; i < arr.length; i++) {
+            winmax = winmax - arr[i-k]  + arr[i];
+            max = Math.max(max, winmax);
+        }
+
+        System.out.println("--> " + winmax);
+    }
+
+    void kadaanes(int[] arr){
+        int winmax = 0;
+        int max = 0;
+
+        for (int i = 0; i < arr.length; i++) {
+            winmax = Math.max(winmax + arr[i], arr[i]);
+            max = Math.max(max, winmax);
+        }
+    }
+
 
 
     public static void main(String[] args) {
