@@ -421,12 +421,60 @@ public class Solution {
         }
     }
 
+    void dutchFlag(){
+       int[] arr = {5,5,6,6,4,4};
+       
+       int low = 0, mid = 0, high = arr.length - 1;
+
+       while (mid <= high) {
+        if (arr[mid] == 4) {
+            swap(arr, low, mid);
+            low++;
+            mid++;
+        }else if (arr[mid] == 5) {
+            mid++;
+        }else{
+            swap(arr, mid, high);
+            high--;
+        }
+       }
+
+
+       for (int i : arr) {
+        System.out.println("--> " + i);
+       }
+    }
+
+
+    void binarySearch(){
+        int[] arr = {1,3,4,5,5,6};
+        int tar = 5;
+
+        int low = 0, high = arr.length - 1;
+        int ans = 0;
+
+        while (low <= high) {
+         int mid = low + (high - low) / 2;
+         
+         if (arr[mid] == tar) {
+            ans = mid;
+            high = mid - 1;
+         }else if(arr[mid] < tar){
+            low = mid + 1;
+         }else{
+            high = mid - 1;
+         }
+        }
+
+        System.out.println(ans);
+    }
+
 
 
     public static void main(String[] args) {
         Solution obj = new Solution();
 
-        obj.deletelement();
+        obj.binarySearch();
 
     }
 }
