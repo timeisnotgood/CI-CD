@@ -1,6 +1,5 @@
 package Practice;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -215,6 +214,8 @@ public class Linked {
     public static void main(String[] args) {
         LinkedList list = new LinkedList();
         int d = 2;
+
+        list.arrToLinked(new int[]{1, 2, 3, 4, 5});
 
         int[] arr = {1, 2, 3, 4, 5};
         list.insertAtIndex(arr,arr.length, 0, 6);
