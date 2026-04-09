@@ -3,22 +3,22 @@ package Practice;
 import java.util.Arrays;
 import java.util.List;
 
-class Node{
+class ListNode{
     int data;
-    Node next;
-    Node(int data){
+    ListNode next;
+    ListNode(int data){
         this.data = data;
     }
 }
 
-class LinkedList {
+class LinkedListUtil {
 
-    public Node arrToLinked(int[] arr){
-        Node head = new Node(arr[0]);
-        Node mover = head;
+    public ListNode arrToLinked(int[] arr){
+        ListNode head = new ListNode(arr[0]);
+        ListNode mover = head;
 
         for (int i = 1; i < arr.length; i++) {
-            Node newVal = new Node(arr[i]);
+            ListNode newVal = new ListNode(arr[i]);
             mover.next = newVal;
             mover = newVal;
         }
@@ -26,15 +26,15 @@ class LinkedList {
         return head;
     }
 
-    public Node insertHead(Node head, int val){
-        Node newVal = new Node(val);
+    public ListNode insertHead(ListNode head, int val){
+        ListNode newVal = new ListNode(val);
         newVal.next = head;
         return newVal;
     }
 
-    public Node insertEnd(Node head, int val){
-        Node newVal = new Node(val);
-        Node temp = head;
+    public ListNode insertEnd(ListNode head, int val){
+        ListNode newVal = new ListNode(val);
+        ListNode temp = head;
 
         while (temp != null) {
             if (temp.next == null) {
@@ -47,9 +47,9 @@ class LinkedList {
         return head;
     }
 
-    public Node insertAnyPoistion(Node head, int prev, int val){
-        Node newVal = new Node(val);
-        Node temp = head;
+    public ListNode insertAnyPoistion(ListNode head, int prev, int val){
+        ListNode newVal = new ListNode(val);
+        ListNode temp = head;
 
         while (temp != null) {
             if (temp.data == prev) {
@@ -62,8 +62,8 @@ class LinkedList {
         return head;
     }
 
-    public void listTraversal(Node head){
-        Node temp = head;
+    public void listTraversal(ListNode head){
+        ListNode temp = head;
 
         while (temp != null) {
             System.out.print(temp.data + " -> ");
@@ -71,12 +71,12 @@ class LinkedList {
         }
     }
 
-    public Node reverse(Node head){
-        Node prev = null;
-        Node cur = head;
+    public ListNode reverse(ListNode head){
+        ListNode prev = null;
+        ListNode cur = head;
 
         while (cur != null) {
-            Node next = cur.next;
+            ListNode next = cur.next;
             cur.next = prev;
             prev = cur;
             cur = next;
@@ -85,16 +85,16 @@ class LinkedList {
         return prev;
     }
 
-    public Node cycleDetection( Node head){
-        Node slow = head;
-        Node fast = head;
+    public ListNode cycleDetection( ListNode head){
+        ListNode slow = head;
+        ListNode fast = head;
 
         while (fast != null && fast.next != null) {
             slow = slow.next;
             fast = fast.next.next;
 
             while (slow == fast) {
-                Node entry = head;
+                ListNode entry = head;
 
                 while (entry != slow) {
                     entry = entry.next;
@@ -212,7 +212,7 @@ class LinkedList {
 }
 public class Linked {
     public static void main(String[] args) {
-        LinkedList list = new LinkedList();
+        LinkedListUtil list = new LinkedListUtil();
         int d = 2;
 
         list.arrToLinked(new int[]{1, 2, 3, 4, 5});
