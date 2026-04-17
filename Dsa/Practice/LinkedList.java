@@ -74,34 +74,170 @@ class LL {
 
         return prev;
     }
-    
+
+    boolean detectCycle(Node head){
+        Node slow = head;
+        Node fast = head;
+
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+
+            if(slow.data == fast.data){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    Node rev(Node head){
+        Node prev = null;
+        Node curr = head;
+
+        while (curr != null) {
+            Node next = curr.next;
+            curr.next = prev;
+
+            prev = curr;
+            curr = next;
+        }
+
+        return prev;
+    }
+
+    void middle(Node head){
+        Node slow = head;
+        Node fast = head;
+
+        while (fast.next != null && fast.next.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        System.out.println("--->  " + slow.data);
+    }
+
+    Node mergetwo(Node head_1, Node head_2){
+        Node next = head_2;
+        Node mover = head_1;
+        while (mover != null) {
+            if (mover.next == null) {
+                mover.next = next;
+                return head_1;
+            }
+            mover = mover.next;
+        }
+
+        return mover;
+    }
+
+    Node reverseing(Node head){
+        Node prev = null;
+        Node curr = head;
+
+        while (curr != null) {
+            Node next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+
+        return prev;
+    }
+
+    Node Mid(Node head){
+        Node slow = head;
+        Node fast = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        System.out.println("Middle -> " + slow.data);
+        return slow;
+    }
+
+    Boolean detectCyle(Node head){
+        Node slow = head;
+        Node fast = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+
+            if (slow == fast) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    Node start(Node head){
+        Node slow = head;
+        Node fast = head;
+
+        while (true) {
+            slow = slow.next;
+            fast = fast.next.next;
+
+            if (slow == fast) {
+                break;
+            }
+        }
+
+        slow = head;
+
+        while (slow == fast) {
+            slow = slow.next;
+            fast = fast.next;
+        }
+
+        return slow;
+    }
+
+    Node MrgTwo(Node l1, Node l2){
+        Node dummy = new Node( - 1);
+        Node temp = dummy;
+
+        while (temp != null) {
+            if (l1.data < l2.data) {
+                temp.next = l1;
+                l1 = l1.next;
+            }else {
+                temp.next = l2;
+                l2 = l2.next;
+            }
+        }
+
+        temp.next = (l1 != null) ?l1 : l2;
+        
+        return dummy;
+    }
+
+
 }
 
 
 public class LinkedList {
 
     public static void main(String[] args) {
-        int[] arr = {1,4,3,2,5};
+        int[] arr = {5,4,3,2,1};
 
         LL list = new LL();
-
+        
+        // convert array to Linked List
         Node head = list.arrtoLL(arr);
-        list.pristlist(head);
-        System.out.println();
-        System.out.println(" --->  ");
 
-        head = list.deleteVal(head, 1);
+        // Reverse an LinkedList
+        head = list.reverseing(head);
 
-        list.pristlist(head);
-        System.out.println();
-        System.out.println(" --->  ");
+        list.Mid(head);
 
-        head = list.reverseLL(head);
-        list.pristlist(head);
+        System.out.println("-- > " +
 
-        System.out.println();
-        System.out.println(" --->  ");
-        // System.out.println(head);
+        list.detectCyle(head)
+
+        );
     }
 }
 
