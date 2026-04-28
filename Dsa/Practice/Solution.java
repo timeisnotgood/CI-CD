@@ -242,12 +242,33 @@ public class Solution {
         System.out.println("--> " + ans);
     }
 
+    String reverseString(String s){
+
+        char[] chars = s.toCharArray();
+        int i = 0, j = chars.length - 1;
+
+        while (i < j) {
+            char temp = chars[i];
+            chars[i] = chars[j];
+            chars[j] = temp;
+
+            i++;
+            j--;
+        }
+
+        String str = new String(chars);
+        
+        System.out.println("-- >  " + str);
+        return str;
+    }
 
     public static void main(String[] args) {
         Solution obj = new Solution();
 
         int[] arr = {1,2,3,4,4,4,5,6,7};
-        obj.lowerbound(arr, 4);
+        // obj.lowerbound(arr, 4);
+
+        obj.reverseString("liss");
 
         // System.out.println("--> " + val);
     }
